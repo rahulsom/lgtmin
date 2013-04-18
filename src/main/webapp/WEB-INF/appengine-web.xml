@@ -1,0 +1,37 @@
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+    <application>myappid</application>
+    
+    <version>1</version>
+
+    <!-- Enable concurrent requests by default to serve requests in parallel -->
+    <threadsafe>true</threadsafe>
+
+    <!-- If all your templates and groovlets are encoding in UTF-8 -->
+    <!-- Please specify the settings below, otherwise weird characters may appear in your templates -->
+    <system-properties>
+        <property name="file.encoding" value="UTF-8"/>
+        <property name="groovy.source.encoding" value="UTF-8"/>
+        <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
+    </system-properties>
+
+    <!-- Uncomment this section if you want your application to be able to receive XMPP messages -->
+    <!-- And create a file named jabber.groovy in /WEB-INF/groovy -->
+    <!-- Similarily, if you want to receive incoming emails -->
+    <!-- And create a file named email.groovy in /WEB-INF/groovy -->
+    <!--
+    <inbound-services>
+        <service>xmpp_message</service>
+        <service>mail</service>
+    </inbound-services>
+    -->
+
+    <!-- It it advised to keep this parameter to true -->
+    <!-- as per the release of SDK 1.2.8, -->
+    <!-- this should speed up cold startups of applications by 10% -->
+    <precompilation-enabled>true</precompilation-enabled>
+    
+    <static-files>
+        <exclude path="/WEB-INF/**.groovy" />
+        <exclude path="**.gtpl" />
+    </static-files>
+</appengine-web-app>
