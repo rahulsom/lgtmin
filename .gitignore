@@ -5,3 +5,5 @@
 .gradle
 
 build
+
+src/main/webapp/WEB-INF/lib/*.jar
