@@ -5,16 +5,22 @@ String imageUrl = params.imageUrl
 log.info "Image Url saved will be ${imageUrl}"
 
 if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-  def e = new Image()
-  e.imageUrl = imageUrl
+  Image existingImage = Image.findByUrl(imageUrl)
+  if (existingImage) {
+    request.setAttribute('message', 'That image was already uploaded.')
+    redirect "/i/${existingImage.hash}"
+  } else {
+    def newImage = new Image()
+    newImage.imageUrl = imageUrl
 
-  e.save()
+    newImage.save()
 
-  request.setAttribute 'image', e
-  request.setAttribute 'dataUrl', "http://lgtm.in/i/${e.hash}"
+    request.setAttribute 'image', newImage
+    request.setAttribute 'dataUrl', "http://lgtm.in/i/${newImage.hash}"
 
-  response.setHeader("Content-Type", "text/html");
-  redirect "/i/${e.hash}"
+    response.setHeader("Content-Type", "text/html");
+    redirect "/i/${newImage.hash}"
+  }
 } else {
 
   request.setAttribute 'message', "Only http and https urls are valid"

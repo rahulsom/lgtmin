@@ -27,4 +27,10 @@ class Image {
     def theId = Shortener.instance.decode(hash) - 1000
     Image.get(theId)
   }
+
+  static Image findByUrl(String url) {
+    Image.find {
+      where imageUrl == url
+    }
+  }
 }
