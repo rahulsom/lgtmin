@@ -46,7 +46,7 @@ class Image {
   }
 
   @Ignore String getMarkdown() {
-    "[![LGTM](${imageUrl})](${dataUrl})\n" +
+    "[![LGTM](${imageUrl})](${dataUrl})\\n" +
         "[:+1:](${upvoteUrl}) [:-1:](${reportUrl})"
   }
 
