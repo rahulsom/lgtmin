@@ -9,10 +9,10 @@ if (image) {
   response.setHeader("Access-Control-Allow-Credentials", "true");
   if (request.getHeader('Accept').contains('application/json')) {
     response.setHeader("Content-Type", "application/json");
-    log.info "Forwarding to the template"
-    forward '/WEB-INF/pages/show.json.gtpl'
+    out.write(image.toJson())
   } else {
     response.setHeader("Content-Type", "text/html");
+    log.info "Forwarding to the template"
     forward '/WEB-INF/pages/show.html.gtpl'
   }
 } else {
