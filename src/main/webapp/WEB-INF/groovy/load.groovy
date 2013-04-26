@@ -1,5 +1,5 @@
 log.info "Setting attributes"
-def hash = params.hash
+String hash = params.hash
 Image image = Image.findByHash(hash)
 log.info "Image: ${image}"
 if (image) {
