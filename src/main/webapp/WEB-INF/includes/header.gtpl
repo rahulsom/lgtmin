@@ -57,3 +57,18 @@
   <%
     }
   %>
+
+  <div class="row">
+    <div class="span12">
+      <strong>Pro Tip:</strong> Drag this bookmarklet to your favorites bar. You can then LGTM with a
+      click of a bookmarklet. <a
+        href='javascript:(function () {
+            jQuery.getJSON("http://www.lgtm.in/g", function (data) {
+                var oldMessage = jQuery("textarea[name=\"comment[body]\"]").val();
+                var msg = data.markdown;
+                jQuery("textarea[name=\"comment[body]\"]").val(oldMessage + "\n\n" + msg);
+            });
+            })();'>LGTM</a>
+
+    </div>
+  </div>

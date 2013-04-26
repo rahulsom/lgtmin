@@ -19,7 +19,7 @@
         <label>Data Url</label>
         <input type="text" value="<%="http://lgtm.in/i/${image.hash}"%>" class="span7">
         <label>Markdown</label>
-        <input type="text" value="[![LGTM](<%=image.imageUrl%>)](<%="http://lgtm.in/i/${image.hash}"%>)" class="span7">
+        <input type="text" value="<%=image.markdown%>" class="span7">
       </fieldset>
     </form>
   </div>
