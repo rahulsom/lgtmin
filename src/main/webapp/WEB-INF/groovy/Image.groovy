@@ -52,7 +52,6 @@ class Image {
 
   @Ignore String toJson() {
     def props = this.properties.findAll {k,v -> !(k in ['metaClass', '$key', 'class'])}
-    println props.keySet()
     new JsonBuilder(props).toPrettyString()
   }
 }
