@@ -1,29 +1,34 @@
 <% include '/WEB-INF/includes/header.gtpl' %>
-  <h1>Random Picture</h1>
 
-  <p>
-    <%
-      log.info "Fetching the image attr"
-      def image = request.getAttribute('image')
-    %>
+<%
+  log.info "Fetching the image attr"
+  def image = request.getAttribute('image')
+%>
 <div class="row">
-  <div class="span5">
-    <img src="<%=image.imageUrl%>" alt="LGTM" class="span4"/>
+  <div class="span4">
+    <ul class="thumbnails">
+      <li class="span4">
+        <div class="thumbnail">
+          <a href="${image.dataUrl}">
+            <img src="<%=image.imageUrl%>" alt="LGTM"/>
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
-  <div class="span7">
+  <div class="span8">
     <form>
       <fieldset>
         <legend>Picture Info</legend>
         <label>Image Url</label>
-        <input type="text" value="<%=image.imageUrl%>" class="span7">
+        <input type="text" value="<%=image.imageUrl%>" class="span8">
         <label>Data Url</label>
-        <input type="text" value="<%="http://lgtm.in/i/${image.hash}"%>" class="span7">
+        <input type="text" value="<%="http://lgtm.in/i/${image.hash}"%>" class="span8">
         <label>Markdown</label>
-        <input type="text" value="<%=image.markdown%>" class="span7">
+        <input type="text" value="<%=image.markdown%>" class="span8">
       </fieldset>
     </form>
   </div>
 </div>
-  </p>
 <% include '/WEB-INF/includes/footer.gtpl' %>
 

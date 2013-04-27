@@ -6,8 +6,8 @@
   <link rel="icon" href="/images/gaelyk-small-favicon.png" type="image/png">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css"/>
-  <script type="text/javascript" src="/js/jquery-1.7.2.min.js">
-  </script>
+  <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.cookie.js"></script>
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <style type="text/css">
   body {
@@ -22,6 +22,22 @@
     font-size: 72px;
   }
   </style>
+  <script type="text/javascript">
+    \$(function(){
+      var protipCookie = \$.cookie('protip1');
+      console.log ('Protip Cookie: ' + protipCookie);
+      if (!protipCookie) {
+        console.log ('Showing...');
+        \$('#protip1').show();
+        console.log ('...done');
+      }
+
+      \$('#protip1 .close').click(function(){
+        \$.cookie('protip1', 'true');
+      });
+
+    });
+  </script>
 </head>
 
 <body>
@@ -37,9 +53,10 @@
 
       <div class="nav-collapse">
         <ul class="nav">
-          <li class="${request.servletPath == '/WEB-INF/pages/show.html.gtpl' ? 'active' : ''}"><a href="/">Random</a></li>
+          <li class="${request.servletPath == '/WEB-INF/pages/index.gtpl' ? 'active' : ''}"><a href="/">Home</a></li>
+          <li class="${request.requestURI == '/g' ? 'active' : ''}"><a href="/g">Random</a></li>
           <li class="${request.servletPath == '/WEB-INF/pages/upload.gtpl' ? 'active' : ''}"><a
-              href="/g/upload">Upload</a></li>
+              href="/g/upload">Submit</a></li>
         </ul>
       </div>
       <!--/.nav-collapse -->
@@ -60,15 +77,18 @@
 
   <div class="row">
     <div class="span12">
-      <strong>Pro Tip:</strong> Drag this bookmarklet to your favorites bar. You can then LGTM with a
-      click of a bookmarklet. <a
-        href='javascript:(function () {
+      <div class="alert alert-block alert-info hide" id="protip1">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Pro Tip:</strong> Drag this bookmarklet to your favorites bar. You can then LGTM with a
+        click of a bookmarklet. <a
+          href='javascript:(function () {
             jQuery.getJSON("http://www.lgtm.in/g", function (data) {
                 var oldMessage = jQuery("textarea[name=\"comment[body]\"]").val();
                 var msg = data.markdown;
                 jQuery("textarea[name=\"comment[body]\"]").val(oldMessage + "\n\n" + msg);
             });
             })();'>LGTM</a>
+      </div>
 
     </div>
   </div>

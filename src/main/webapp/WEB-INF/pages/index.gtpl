@@ -1,20 +1,82 @@
 <% include '/WEB-INF/includes/header.gtpl' %>
-<div class="hero-unit center">
-  <a href="http://gaelyk.appspot.com">
-    <span id="title"><strong>LGTM</strong>in<em>g</em></span>
-  </a>
-  <br/>
+<div class="row">
+  <div class="span12">
+    <ul class="thumbnails">
+      <%
+        def images = request.getAttribute('imageList')
+        log.info "Images: ${images}"
+      %>
+      <% images.each { %>
+      <li class="span2">
+        <div class="thumbnail">
+          <div class="image" style="height: 162px; overflow-y: hidden; background-color: #F5F5F5;">
+            <a href="${it.dataUrl}">
+              <img alt="" src="${it.imageUrl}" style="max-height: 200px;">
+            </a>
+          </div><!--
+          <p>
+            <span>999</span>
+          </p>
+          <p>
+            <span>
+              <a href="${it.upvoteUrl}">
+                <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/+1.png" alt="Like"
+                     style="height: 16px; width: 16px;"/>
+              </a>
+            </span>
+            <span class="pull-right">
+              <a href="${it.reportUrl}">
+                <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/-1.png" alt="Dislike"
+                     style="height: 16px; width: 16px;"/>
+              </a>
+            </span>
+          </p>-->
 
-  <p>
-    Congratulations, you've just created your first
-    <a href="http://gaelyk.appspot.com">Gaelyk</a> application.
-  </p>
-
-  <p>
-    <a href="/datetime" class="btn btn-primary btn-large">Show current time &raquo;</a>
-  </p>
+        </div>
+      </li>
+      <% } %>
+    </ul>
+  </div>
 </div>
 
+<div class="row">
+  <div class="span6">
+    <h2>What</h2>
+    <p>
+      LGTM is the most popular comment on Github, perhaps. But LGTM is boring. So we spice it up with some images.
+    </p>
+    <div class="row">
+      <div class="span3">
+        <h4>Boring</h4>
+        <img src="/images/text.png" alt="LGTM as text"/>
+      </div>
+      <div class="span3">
+        <h4>Fun</h4>
+        <img src="/images/fun.png" alt="LGTM with fun"/>
+      </div>
+    </div>
+    <h2>Why</h2>
+    <p>
+      Crafting images and picking them works fine on a leisurely day, but at crunch time, it helps to crowdsource
+      your LGTMs.
+    </p>
+  </div>
+  <div class="span6">
+    <h2>Quick and Easy</h2>
+    <p>
+      This is the javascript in the bookmarklet. Feel free to create your own if you don't like
+      the default implementation.
+    </p>
+    <pre>
+\$.getJSON("http://www.lgtm.in/g", function (data) {
+  var oldMessage = \$("textarea[name='comment[body]']").val();
+  var msg = data.markdown;
+  \$("textarea[name='comment[body]']").val(oldMessage + "\\n\\n" + msg);
+});</pre>
+  </div>
+</div>
+
+<!--
 <div class="row">
   <div class="span4">
     <h2>Start Experimenting</h2>
@@ -43,5 +105,6 @@
     <p><a class="btn" href="http://gaelyk.appspot.com/plugins">More about plugins &raquo;</a></p>
   </div>
 </div>
+-->
 <% include '/WEB-INF/includes/footer.gtpl' %>
 

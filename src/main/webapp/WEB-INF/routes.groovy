@@ -1,5 +1,5 @@
 
-get "/", redirect: "/g"
+get "/", forward: "/index.groovy"
 get "/g", forward: "/random.groovy"
 get "/g/upload", forward: "/upload.groovy"
 post "/g/save", forward: "/store.groovy"
