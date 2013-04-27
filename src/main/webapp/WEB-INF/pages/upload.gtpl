@@ -5,7 +5,7 @@
     <fieldset>
       <label for="imageUrl">Image Url</label>
       <input type="text" placeholder="http://i.imgur.com/ABCDEF.png" class="span7" name="imageUrl"
-          value="<%=request.getAttribute('imageUrl')%>">
+          value="<%=request.getAttribute('imageUrl') ?: ''%>">
       <label class="checkbox">
       </label>
       <button type="submit" class="btn">Submit</button>
