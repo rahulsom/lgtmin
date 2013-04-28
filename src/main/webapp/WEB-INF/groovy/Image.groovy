@@ -34,15 +34,15 @@ class Image {
   }
 
   @Ignore String getDataUrl() {
-    "http://lgtm.in/i/${hash}"
+    "http://www.lgtm.in/i/${hash}"
   }
 
   @Ignore String getUpvoteUrl() {
-    "http://lgtm.in/u/${hash}"
+    "http://www.lgtm.in/u/${hash}"
   }
 
   @Ignore String getReportUrl() {
-    "http://lgtm.in/r/${hash}"
+    "http://www.lgtm.in/r/${hash}"
   }
 
   @Ignore String getMarkdown() {
