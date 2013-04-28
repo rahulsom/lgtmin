@@ -38,8 +38,6 @@ dependencies {
      * uncomment following to add GPars support to your Gaelyk project.
      * @see https://github.com/musketyr/gpars-appengine
      */
-    compile 'org.gaelyk:gaelyk-resources:1.1'
-
   // compile 'org.codehaus.gpars:gpars-appengine:0.1'
     
     testCompile 'org.gaelyk:gaelyk-spock:0.3.0.1'
