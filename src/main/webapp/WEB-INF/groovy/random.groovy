@@ -3,14 +3,25 @@ import java.security.SecureRandom
 log.info "Setting attributes"
 def ct = Image.count()
 if (ct) {
-  def r = new SecureRandom().nextInt(ct)
-  def images = Image.findAll {
-    limit 1
-    offset r
+  def random = Math.abs(new SecureRandom().nextGaussian())
+  def theOffset = Math.round(random * (ct -1)).intValue()
+  datastore.withTransaction {
+
+    def images = Image.findAll {
+      sort 'desc' by 'credits'
+      limit 1
+      offset theOffset
+    }
+
+    Image image = images [0]
+    image.impressions ++
+    image.updateCredits()
+    image.save()
+
+    log.info "Images: ${images}"
+    request.setAttribute 'image', image
   }
 
-  log.info "Images: ${images}"
-  request.setAttribute 'image', images[0]
 } else {
   def image = new Image(imageUrl: 'https://f.cloud.github.com/assets/193047/406777/c9e3e3a2-aaba-11e2-8e03-4720321204f7.png')
   request.setAttribute 'image', image

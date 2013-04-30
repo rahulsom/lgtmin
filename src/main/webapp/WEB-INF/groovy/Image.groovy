@@ -1,5 +1,6 @@
 import groovy.json.JsonBuilder
 import groovy.transform.ToString
+import groovyx.gaelyk.GaelykBindings
 import groovyx.gaelyk.datastore.Entity
 import groovyx.gaelyk.datastore.Ignore
 
@@ -10,8 +11,9 @@ import groovyx.gaelyk.datastore.Ignore
  * Time: 8:13 PM
  * To change this template use File | Settings | File Templates.
  */
-@Entity
+@Entity(unindexed=false)
 @ToString
+@GaelykBindings
 class Image {
   String imageUrl
   long impressions = 0
@@ -32,17 +34,21 @@ class Image {
     def newId = (this.id as long) + 1000
     Shortener.instance.encode(newId)
   }
+  
+  @Ignore private String getRoot() {
+    app.env.name.toString() == 'Development' ? 'http://localhost:8080/' : 'http://www.lgtm.in/'
+  }
 
   @Ignore String getDataUrl() {
-    "http://www.lgtm.in/i/${hash}"
+    "${root}/i/${hash}"
   }
 
   @Ignore String getUpvoteUrl() {
-    "http://www.lgtm.in/u/${hash}"
+    "${root}/u/${hash}"
   }
 
   @Ignore String getReportUrl() {
-    "http://www.lgtm.in/r/${hash}"
+    "${root}/r/${hash}"
   }
 
   @Ignore String getMarkdown() {
@@ -53,5 +59,10 @@ class Image {
   @Ignore String toJson() {
     def props = this.properties.findAll {k,v -> !(k in ['metaClass', '$key', 'class'])}
     new JsonBuilder(props).toPrettyString()
+  }
+
+  @Ignore
+  void updateCredits() {
+    credits = 100 - impressions + 10 * likes - 100 * dislikes
   }
 }

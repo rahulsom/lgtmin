@@ -23,17 +23,17 @@
   }
   </style>
   <script type="text/javascript">
-    \$(function(){
-      var protipCookie = \$.cookie('protip1');
+    jQuery(function(){
+      var protipCookie = jQuery.cookie('protip1');
       console.log ('Protip Cookie: ' + protipCookie);
       if (!protipCookie) {
         console.log ('Showing...');
-        \$('#protip1').show();
+        jQuery('#protip1').show();
         console.log ('...done');
       }
 
-      \$('#protip1 .close').click(function(){
-        \$.cookie('protip1', 'true');
+      jQuery('#protip1 .close').click(function(){
+        jQuery.cookie('protip1', 'true');
       });
 
     });
@@ -87,7 +87,7 @@
                 var msg = data.markdown;
                 jQuery("textarea[name=\"comment[body]\"]").val(oldMessage + "\n\n" + msg);
             });
-            })();'>LGTM</a>
+            })();'><span class="label label-info">LGTM</span></a>
       </div>
 
     </div>

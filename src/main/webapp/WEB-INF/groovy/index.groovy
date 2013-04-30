@@ -1,4 +1,5 @@
 def images = Image.findAll {
+  sort 'desc' by 'credits'
   limit 12
 }
 

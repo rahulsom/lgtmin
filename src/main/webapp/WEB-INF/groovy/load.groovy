@@ -2,6 +2,8 @@ log.info "Setting attributes"
 String hash = params.hash
 Image image = Image.findByHash(hash)
 log.info "Image: ${image}"
+log.info "App: ${app.env.name}"
+
 if (image) {
   request.setAttribute 'image', image
   response.setHeader("Access-Control-Allow-Origin", "*");

@@ -16,7 +16,7 @@ if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
     newImage.save()
 
     request.setAttribute 'image', newImage
-    request.setAttribute 'dataUrl', "http://lgtm.in/i/${newImage.hash}"
+    request.setAttribute 'dataUrl', newImage.dataUrl
 
     response.setHeader("Content-Type", "text/html");
     redirect "/i/${newImage.hash}"
