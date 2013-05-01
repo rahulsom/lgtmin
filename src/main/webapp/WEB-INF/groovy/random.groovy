@@ -11,11 +11,7 @@ if (ct) {
   datastore.withTransaction {
 
     log.info "Fetching ${theOffset} of ${ct}"
-    def imageList = Image.findAll {
-      sort 'desc' by 'credits'
-      limit 1
-      offset theOffset
-    }
+    def imageList = Image.listSortedByCredits(1, theOffset)
 
     log.info "Images: ${imageList}"
 

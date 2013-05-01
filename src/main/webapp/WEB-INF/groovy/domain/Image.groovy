@@ -23,15 +23,6 @@ class Image {
   long dislikes = 0
   long credits = 100
 
-  static Image findByHash(String hash) {
-    def theId = Shortener.instance.decode(hash) - 1000
-    Image.get(theId)
-  }
-
-  static Image findByUrl(String url) {
-    Image.find { where imageUrl == url }
-  }
-
   @Ignore String getHash() {
     def newId = (this.id as long) + 1000
     Shortener.instance.encode(newId)
@@ -67,4 +58,22 @@ class Image {
   void updateCredits() {
     credits = 100 - impressions + 10 * likes - 100 * dislikes
   }
+
+  static Image findByHash(String hash) {
+    def theId = Shortener.instance.decode(hash) - 1000
+    Image.get(theId)
+  }
+
+  static Image findByUrl(String url) {
+    Image.find { where imageUrl == url }
+  }
+
+  static Image listSortedByCredits(int max, int theOffset = 0) {
+    Image.findAll {
+      sort 'desc' by 'credits'
+      limit max
+      offset theOffset
+    }
+  }
+
 }
