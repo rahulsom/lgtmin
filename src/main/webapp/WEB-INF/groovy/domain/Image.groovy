@@ -8,13 +8,10 @@ import util.AppUtil
 import util.Shortener
 
 /**
- * Created with IntelliJ IDEA.
- * User: rahulsomasunderam
- * Date: 4/24/13
- * Time: 8:13 PM
- * To change this template use File | Settings | File Templates.
+ * Represents an Image
+ * @author rahulsomasunderam
  */
-@Entity(unindexed=false)
+@Entity(unindexed = false)
 @ToString
 class Image {
   String imageUrl
@@ -23,52 +20,106 @@ class Image {
   long dislikes = 0
   long credits = 100
 
-  @Ignore String getHash() {
+  /**
+   * Gets the hash of the id
+   * @return String representing the hash
+   */
+  @Ignore
+  String getHash() {
     def newId = (this.id as long) + 1000
     Shortener.instance.encode(newId)
   }
-  
-  @Ignore private String getRoot() {
+
+  /**
+   * The root of the server
+   * @return the root
+   */
+  @Ignore
+  private String getRoot() {
     AppUtil.instance.root
   }
 
-  @Ignore String getDataUrl() {
+  /**
+   * The url for data on the image
+   * @return the url (string)
+   */
+  @Ignore
+  String getDataUrl() {
     "${root}/i/${hash}"
   }
 
-  @Ignore String getUpvoteUrl() {
+  /**
+   * The url for upvoting the image
+   * @return the url (string)
+   */
+  @Ignore
+  String getUpvoteUrl() {
     "${root}/u/${hash}"
   }
 
-  @Ignore String getReportUrl() {
+  /**
+   * The url for reporting the image
+   * @return the url (string)
+   */
+  @Ignore
+  String getReportUrl() {
     "${root}/r/${hash}"
   }
 
-  @Ignore String getMarkdown() {
+  /**
+   * The markdown for embedding the image in Github
+   * @return The markdown (String)
+   */
+  @Ignore
+  String getMarkdown() {
     "[![LGTM](${imageUrl})](${dataUrl})\\n" +
         "[:+1:](${upvoteUrl}) [:-1:](${reportUrl})"
   }
 
-  @Ignore String toJson() {
-    def props = this.properties.findAll {k,v -> !(k in ['metaClass', '$key', 'class'])}
+  /**
+   * A json representation of the image
+   * @return json string
+   */
+  @Ignore
+  String toJson() {
+    def props = this.properties.findAll { k, v -> !(k in ['metaClass', '$key', 'class']) }
     new JsonBuilder(props).toPrettyString()
   }
 
+  /**
+   * Updates the credits based on impressions, likes and dislikes
+   */
   @Ignore
   void updateCredits() {
     credits = 100 - impressions + 10 * likes - 100 * dislikes
   }
 
+  /**
+   * Uses a hash to find the Image
+   * @param hash hash representing the id or image
+   * @return the image
+   */
   static Image findByHash(String hash) {
     def theId = Shortener.instance.decode(hash) - 1000
     Image.get(theId)
   }
 
+  /**
+   * Finds image by image url
+   * @param url the image url
+   * @return the image or null
+   */
   static Image findByUrl(String url) {
     Image.find { where imageUrl == url }
   }
 
-  static Image listSortedByCredits(int max, int theOffset = 0) {
+  /**
+   * Lists images sorted by credits
+   * @param max max number of images to return
+   * @param theOffset offset for search
+   * @return a list of images
+   */
+  static List<Image> listSortedByCredits(int max, int theOffset = 0) {
     Image.findAll {
       sort 'desc' by 'credits'
       limit max
