@@ -1,8 +1,11 @@
+package domain
+
 import groovy.json.JsonBuilder
 import groovy.transform.ToString
-import groovyx.gaelyk.GaelykBindings
 import groovyx.gaelyk.datastore.Entity
 import groovyx.gaelyk.datastore.Ignore
+import util.AppUtil
+import util.Shortener
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +16,6 @@ import groovyx.gaelyk.datastore.Ignore
  */
 @Entity(unindexed=false)
 @ToString
-@GaelykBindings
 class Image {
   String imageUrl
   long impressions = 0
@@ -36,7 +38,7 @@ class Image {
   }
   
   @Ignore private String getRoot() {
-    app.env.name.toString() == 'Development' ? 'http://localhost:8080/' : 'http://www.lgtm.in/'
+    AppUtil.instance.root
   }
 
   @Ignore String getDataUrl() {

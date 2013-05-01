@@ -3,10 +3,10 @@
   <div class="span12">
     <ul class="thumbnails">
       <%
-        def images = request.getAttribute('imageList')
-        log.info "Images: ${images}"
+        def imageList = request.getAttribute('imageList')
+        log.info "Images: ${imageList}"
       %>
-      <% images.each { %>
+      <% imageList.each { %>
       <li class="span2">
         <div class="thumbnail">
           <div class="image" style="height: 162px; overflow-y: hidden; background-color: #F5F5F5;">

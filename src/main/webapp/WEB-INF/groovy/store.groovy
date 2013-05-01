@@ -1,3 +1,5 @@
+import domain.Image
+
 log.info "Setting attributes"
 
 log.info "Params: ${params}"

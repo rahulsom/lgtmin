@@ -1,3 +1,5 @@
+import domain.Image
+
 log.info "Setting attributes"
 String hash = params.hash
 Image image = Image.findByHash(hash)

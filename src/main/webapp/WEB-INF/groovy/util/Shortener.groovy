@@ -1,3 +1,5 @@
+package util
+
 @Singleton
 class Shortener {
   def codeSet = [(0..9), ('a'..'z'), ('A'..'Z')].flatten().join('')

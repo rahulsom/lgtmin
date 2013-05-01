@@ -1,4 +1,5 @@
 import groovyx.gaelyk.spock.*
+import util.Shortener
 
 class ShortenerSpec extends ConventionalGaelykUnitSpec {
 

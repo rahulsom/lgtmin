@@ -1,24 +1,29 @@
+import domain.Image
+
 import java.security.SecureRandom
 
 log.info "Setting attributes"
 def ct = Image.count()
 if (ct) {
-  def random = Math.abs(new SecureRandom().nextGaussian())
-  def theOffset = Math.round(random * (ct -1)).intValue()
+  def random = Math.abs(new SecureRandom().nextDouble())
+  log.info "Random: ${random}"
+  def theOffset = Math.floor(random * (ct -1)).intValue()
   datastore.withTransaction {
 
-    def images = Image.findAll {
+    log.info "Fetching ${theOffset} of ${ct}"
+    def imageList = Image.findAll {
       sort 'desc' by 'credits'
       limit 1
       offset theOffset
     }
 
-    Image image = images [0]
+    log.info "Images: ${imageList}"
+
+    Image image = imageList [0]
     image.impressions ++
     image.updateCredits()
     image.save()
 
-    log.info "Images: ${images}"
     request.setAttribute 'image', image
   }
 
