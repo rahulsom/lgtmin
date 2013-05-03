@@ -6,3 +6,6 @@ env:
     - secure: "R/kEvQ5hSLgonzHOQUPhQnQBPOyU3gsBeORgEDABPjT71K2VEEQXIIhPTR6P\naiggVBLZ0aWHvc+pIsPuAMCoFv81qKfpzUWFwwwLgjlqCNiMKqd04tNws5LR\n8PDQ0WgvJUzqc5mc9Um9espu95TflQ4dHiOhsJCy2aQNO117ZSs="
 
 script: ./build.sh
+
+addons:
+  firefox: "17.0"
