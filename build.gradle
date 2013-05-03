@@ -45,7 +45,7 @@ dependencies {
                 "com.google.appengine:appengine-testing:$gaeVersion"
                 
     functionalTestCompile 'org.codehaus.geb:geb-spock:0.7.0',
-                          'org.seleniumhq.selenium:selenium-firefox-driver:2.31.0'
+                          'org.seleniumhq.selenium:selenium-htmlunit-driver:2.31.0'
     gaeSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
 }
 
