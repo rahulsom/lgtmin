@@ -53,6 +53,13 @@ gae {
     downloadSdk = true
     warDir = file('src/main/webapp/')
     optimizeWar = true
+
+    appcfg {
+        email = "${System.env.GAE_USER}"
+        oauth2 = true
+        noCookies = true
+        password = "${System.env.GAE_PASS}"
+    }
 }
 
 gaeExplodeWar.dependsOn gaelykPrecompileGroovlet
