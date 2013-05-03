@@ -2,7 +2,7 @@
 set -e
 
 if [ "$TRAVIS_PULL_REQUEST" = false ]; then
-  gradle test && gradle gaeUpload
+  gradle -q -S test && gradle -q -S gaeUpload
 else
-  gradle test
+  gradle -q -S test
 fi
