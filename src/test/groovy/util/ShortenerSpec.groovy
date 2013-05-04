@@ -1,10 +1,10 @@
 package util
 
-import groovyx.gaelyk.spock.*
+import spock.lang.Specification
 
-class ShortenerSpec extends ConventionalGaelykUnitSpec {
+class ShortenerSpec extends Specification {
 
-  def "the shortener should loyally encode and decode numbers from 1 to 10000"() {
+  def "the Shortener should loyally encode and decode numbers from 1 to 10000"() {
     given: "the initialised groovlet is invoked and data is persisted"
     def shortener = Shortener.instance
 
@@ -16,7 +16,7 @@ class ShortenerSpec extends ConventionalGaelykUnitSpec {
 
   }
 
-  def "the shortener should have certain standard values"() {
+  def "the Shortener should have certain standard values"() {
     expect:
     Shortener.instance.encode(a) == b && Shortener.instance.decode(b) == a
 
