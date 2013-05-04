@@ -2,7 +2,7 @@
 set -e
 
 if [ "$TRAVIS_PULL_REQUEST" = false ]; then
-  gradle -q clean test && gradle gaeUpload || cat build/test-results/*.xml
+  gradle -q clean test && gradle gaeUpload
 else
-  gradle -q clean test || cat build/test-results/*.xml
+  gradle -q clean test
 fi
