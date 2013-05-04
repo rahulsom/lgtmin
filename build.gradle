@@ -56,8 +56,6 @@ gae {
 
     appcfg {
         email = "${System.env.GAE_USER}"
-        oauth2 = true
-        noCookies = true
         password = "${System.env.GAE_PASS}"
     }
 }

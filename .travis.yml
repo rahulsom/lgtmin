@@ -3,7 +3,7 @@ language: groovy
 env:
   global:
     - secure: "DZOSX2GNltNZzZwvFJoyxMA9PULRe9ww1iPDoebKih5R0nrwXyuYAc8YHuNv\nreLX7koa6fKbKyCeD3NIN+mcE4OyQuebc58VaFb9wpRp3CqjalGGLJ8NP/MN\njf8rFsc+y8Z7wbmgGQ0mtCK/CmPP3TeX3sAebf1U6nOfNU7cTkw="
-    - secure: "R/kEvQ5hSLgonzHOQUPhQnQBPOyU3gsBeORgEDABPjT71K2VEEQXIIhPTR6P\naiggVBLZ0aWHvc+pIsPuAMCoFv81qKfpzUWFwwwLgjlqCNiMKqd04tNws5LR\n8PDQ0WgvJUzqc5mc9Um9espu95TflQ4dHiOhsJCy2aQNO117ZSs="
+    - secure: "e5n23BKviDURMAOhE5hFlZDO9Rv0JkoybusjI+W7Nnj4cTjiX/9PMpEwu4eN\nei769XBZPbUGJxTzOxwn8qJ15BqYoakKzVdHhzHqCeSE+KsH5lD1UP24SiB4\nid89MFc4kFSxypeFjFDSeeCEFbx367iGZLOQZ1EgKosiLJaYqk8="
 
 script: ./build.sh
 
