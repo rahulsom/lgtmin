@@ -17,24 +17,24 @@
           <p>
             <span>
               <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/moneybag.png" alt="Credits"
-                   style="height: 16px; width: 16px;"/>
+                   style="height: 16px; width: 16px;" data-toggle="tooltip" title="Credits"/>
               ${it.credits}
             </span>
             <span class="pull-right">
               ${it.impressions}
               <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/octocat.png" alt="Impressions"
-                   style="height: 16px; width: 16px;"/>
+                   style="height: 16px; width: 16px;" data-toggle="tooltip" title="Impressions"/>
             </span>
           </p>
           <p>
             <span>
-              <a href="${it.upvoteUrl}">
+              <a href="${it.upvoteUrl}" data-toggle="tooltip" title="Upvote">
                 <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/+1.png" alt="Like"
                      style="height: 16px; width: 16px;"/>
               </a>
             </span>
             <span class="pull-right">
-              <a href="${it.reportUrl}">
+              <a href="${it.reportUrl}" data-toggle="tooltip" title="Report">
                 <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/-1.png" alt="Report"
                      style="height: 16px; width: 16px;"/>
               </a>
@@ -122,5 +122,8 @@
   </div>
 </div>
 -->
+<script type="text/javascript">
+  \$('[data-toggle="tooltip"]').tooltip();
+</script>
 <% include '/WEB-INF/includes/footer.gtpl' %>
 
