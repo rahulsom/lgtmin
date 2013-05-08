@@ -13,9 +13,18 @@
             <a href="${it.dataUrl}">
               <img alt="" src="${it.imageUrl}" style="max-height: 200px;">
             </a>
-          </div><!--
+          </div>
           <p>
-            <span>999</span>
+            <span>
+              <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/moneybag.png" alt="Credits"
+                   style="height: 16px; width: 16px;"/>
+              ${it.credits}
+            </span>
+            <span class="pull-right">
+              ${it.impressions}
+              <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/octocat.png" alt="Impressions"
+                   style="height: 16px; width: 16px;"/>
+            </span>
           </p>
           <p>
             <span>
@@ -26,11 +35,11 @@
             </span>
             <span class="pull-right">
               <a href="${it.reportUrl}">
-                <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/-1.png" alt="Dislike"
+                <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/-1.png" alt="Report"
                      style="height: 16px; width: 16px;"/>
               </a>
             </span>
-          </p>-->
+          </p>
 
         </div>
       </li>
@@ -73,6 +82,13 @@
   var msg = data.markdown;
   \$("textarea[name='comment[body]']").val(oldMessage + "\\n\\n" + msg);
 });</pre>
+    <h2>Contributing</h2>
+    <p>
+      The project is hosted on Github at
+      <a href="https://github.com/rahulsom/lgtmin">rahulsom/lgtmin</a>. Feel free to fork it and send a Pull Request.
+
+      It also serves as the issue tracking system.
+    </p>
   </div>
 </div>
 
