@@ -122,3 +122,8 @@ task wrapper(type: Wrapper) {
     gradleVersion '1.4'
 }
 
+test {
+  testLogging {
+    exceptionFormat = 'full'
+  }
+}
