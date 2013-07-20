@@ -6,9 +6,6 @@
   <link rel="icon" href="/images/gaelyk-small-favicon.png" type="image/png">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css"/>
-  <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
-  <script type="text/javascript" src="/js/jquery.cookie.js"></script>
-  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <style type="text/css">
   body {
     padding-top: 60px;
@@ -22,22 +19,6 @@
     font-size: 72px;
   }
   </style>
-  <script type="text/javascript">
-    jQuery(function(){
-      var protipCookie = jQuery.cookie('protip1');
-      console.log ('Protip Cookie: ' + protipCookie);
-      if (!protipCookie) {
-        console.log ('Showing...');
-        jQuery('#protip1').show();
-        console.log ('...done');
-      }
-
-      jQuery('#protip1 .close').click(function(){
-        jQuery.cookie('protip1', 'true');
-      });
-
-    });
-  </script>
 </head>
 
 <body>
