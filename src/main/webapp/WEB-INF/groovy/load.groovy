@@ -16,6 +16,7 @@ if (image) {
     out.write(image.toJson())
   } else {
     response.setHeader("Content-Type", "text/html");
+    request.setAttribute('comments', true)
     log.info "Forwarding to the template"
     forward '/WEB-INF/pages/show.html.gtpl'
   }
