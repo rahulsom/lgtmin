@@ -1,4 +1,5 @@
 import domain.Image
+import util.AnalyticsUtil
 
 import java.security.SecureRandom
 
@@ -35,6 +36,7 @@ response.setHeader("Access-Control-Allow-Credentials", "true")
 if (request.getHeader('Accept').contains('application/json')) {
   response.setHeader("Content-Type", "application/json")
   Image image = request.getAttribute('image')
+  AnalyticsUtil.sendInfo(request, "/i/${image.hash}")
   out.write(image.toJson())
 } else {
   response.setHeader("Content-Type", "text/html")
