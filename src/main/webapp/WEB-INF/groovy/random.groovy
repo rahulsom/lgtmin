@@ -6,9 +6,12 @@ import java.security.SecureRandom
 log.info "Setting attributes"
 def ct = Image.count()
 if (ct) {
-  def random = Math.abs(new SecureRandom().nextDouble())
+  def random = Math.abs(new SecureRandom().nextGaussian()/2.5)
   log.info "Random: ${random}"
   def theOffset = Math.floor(random * (ct -1)).intValue()
+  if (theOffset > ct) {
+    theOffset = 0
+  }
   datastore.withTransaction {
 
     log.info "Fetching ${theOffset} of ${ct}"
