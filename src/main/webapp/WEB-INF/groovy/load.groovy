@@ -4,7 +4,7 @@ import domain.Image
 
 log.info "Setting attributes"
 String hash = params.hash
-Image image = AppUtil.instance.getCachedValue(hash) {
+Image image = AppUtil.instance.getCachedValue("/i/${hash}") {
   Image.findByHash(hash)
 }
 

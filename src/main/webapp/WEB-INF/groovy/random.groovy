@@ -20,11 +20,18 @@ if (ct) {
   datastore.withTransaction {
 
     log.info "Fetching ${theOffset} of ${ct}"
-    def imageList = Image.listSortedByCredits(1, theOffset)
-
-    log.info "Images: ${imageList}"
-
-    Image image = imageList [0]
+    Image image = null
+    if (theOffset < 12) {
+      def imageList = AppUtil.instance.getCachedValue(TOP_IMAGES) {
+        Image.listSortedByCredits(12)
+      }
+      image = imageList [theOffset]
+    } else {
+      def imageList = Image.listSortedByCredits(1, theOffset)
+      log.info "Images: ${imageList}"
+      image = imageList [0]
+    }
+    
     image.impressions ++
     image.updateCredits()
     image.save()
