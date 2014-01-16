@@ -3,6 +3,7 @@ import util.AnalyticsUtil
 import util.AppUtil
 
 import java.security.SecureRandom
+import static util.AppUtil.TOP_IMAGES
 
 log.info "Setting attributes"
 

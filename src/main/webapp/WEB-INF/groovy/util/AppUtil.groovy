@@ -26,23 +26,23 @@ class AppUtil {
 	public static final String COUNT = "Count"
 
 	def <T> T getCachedValue(String cacheName, Expiration expiration = new Expiration(24*60*60*1000, true), Closure<T> closure) {
-		AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService();
-		asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+		AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService()
+		asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
 		Future<Object> futureValue = asyncCache.get(cacheName); // read from cache
 
-		T value = futureValue.get();
+		T value = futureValue.get()
 		if (value == null) {
 			log.fine("Missed cache for ${cacheName}")
 			value = closure.call()
-			asyncCache.put(cacheName, value, expiration);
+			asyncCache.put(cacheName, value, expiration)
 		}
 
 		value
 	}
 
 	void evictCache(String cacheName) {
-		AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService();
-		asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
+		AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService()
+		asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
 
 		asyncCache.delete(cacheName)
 	}
