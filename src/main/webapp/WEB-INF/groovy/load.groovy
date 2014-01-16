@@ -1,8 +1,13 @@
+import util.AppUtil
+
 import domain.Image
 
 log.info "Setting attributes"
 String hash = params.hash
-Image image = Image.findByHash(hash)
+Image image = AppUtil.instance.getCachedValue(hash) {
+  Image.findByHash(hash)
+}
+
 log.info "Image: ${image}"
 log.info "App: ${app.env.name}"
 
