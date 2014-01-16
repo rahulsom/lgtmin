@@ -30,7 +30,7 @@ class AppUtil {
 		asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
 		Future<Object> futureValue = asyncCache.get(cacheName); // read from cache
 
-		T value = (byte[]) futureValue.get();
+		T value = futureValue.get();
 		if (value == null) {
 			log.fine("Missed cache for ${cacheName}")
 			value = closure.call()

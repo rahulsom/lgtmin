@@ -33,9 +33,5 @@
     <static-files>
         <exclude path="/WEB-INF/**.groovy" />
         <exclude path="**.gtpl" />
-        <include path="/css/**.css" expiration="5d" />
-        <include path="/images/**.png" expiration="5d" />
-        <include path="/img/**.png" expiration="5d" />
-        <include path="/js/**.js" expiration="5d" />
     </static-files>
 </appengine-web-app>
