@@ -5,6 +5,7 @@ import com.google.api.client.http.HttpRequestInitializer
 import com.google.api.client.http.HttpTransport
 import com.google.api.client.http.javanet.NetHttpTransport
 import domain.Image
+import util.AppUtil
 
 log.info "Setting attributes"
 
@@ -31,6 +32,7 @@ if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
       def newImage = new Image()
       newImage.imageUrl = imageUrl
       newImage.save()
+			AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
       request.setAttribute 'image', newImage
       request.setAttribute 'dataUrl', newImage.dataUrl
       response.setHeader("Content-Type", "text/html");

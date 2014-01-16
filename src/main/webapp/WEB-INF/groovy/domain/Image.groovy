@@ -13,7 +13,7 @@ import util.Shortener
  */
 @Entity(unindexed = false)
 @ToString
-class Image {
+class Image implements Serializable {
   String imageUrl
   long impressions = 0
   long likes = 0
