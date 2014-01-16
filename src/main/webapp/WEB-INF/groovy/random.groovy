@@ -1,10 +1,15 @@
 import domain.Image
 import util.AnalyticsUtil
+import util.AppUtil
 
 import java.security.SecureRandom
 
 log.info "Setting attributes"
-def ct = Image.count()
+
+def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
+	Image.count()
+}
+
 if (ct) {
   def random = Math.abs(new SecureRandom().nextGaussian()/2.5)
   log.info "Random: ${random}"

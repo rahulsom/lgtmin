@@ -23,6 +23,7 @@ class AppUtil {
   }
 
 	public static final String TOP_IMAGES = "TopImages"
+	public static final String COUNT = "Count"
 
 	def <T> T getCachedValue(String cacheName, Expiration expiration = new Expiration(5*60*1000, true), Closure<T> closure) {
 		AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService();
