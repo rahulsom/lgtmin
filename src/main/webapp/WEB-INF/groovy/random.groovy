@@ -5,8 +5,6 @@ import util.AppUtil
 import java.security.SecureRandom
 import static util.AppUtil.TOP_IMAGES
 
-log.info "Setting attributes"
-
 def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
 	Image.count()
 }
@@ -29,7 +27,7 @@ if (ct) {
       image = imageList [theOffset]
     } else {
       def imageList = Image.listSortedByCredits(1, theOffset)
-      log.info "Images: ${imageList}"
+      log.info "Images: ${imageList.join('\n')}"
       image = imageList [0]
     }
     
@@ -56,6 +54,5 @@ if (request.getHeader('Accept')?.contains('application/json')) {
   out.write(image.toJson())
 } else {
   response.setHeader("Content-Type", "text/html")
-  log.info "Forwarding to the template"
   forward '/WEB-INF/pages/show.html.gtpl'
 }
