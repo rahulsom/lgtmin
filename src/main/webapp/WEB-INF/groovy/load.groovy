@@ -16,7 +16,7 @@ if (image) {
   response.setHeader("Access-Control-Allow-Origin", "*");
   response.setHeader("Access-Control-Allow-Methods", "GET");
   response.setHeader("Access-Control-Allow-Credentials", "true");
-  if (request.getHeader('Accept').contains('application/json')) {
+  if (request.getHeader('Accept')?.contains('application/json')) {
     response.setHeader("Content-Type", "application/json");
     out.write(image.toJson())
   } else {
