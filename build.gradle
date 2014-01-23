@@ -121,7 +121,7 @@ def env = System.getenv()
 gae {
 	appcfg {
 		email = env['GAE_USER']
-		passIn = env['GAE_PASS']
+		password = env['GAE_PASS']
 
 		app {
 			id = 'lgtmin'
