@@ -34,4 +34,9 @@
         <exclude path="/WEB-INF/**.groovy" />
         <exclude path="**.gtpl" />
     </static-files>
+
+    <admin-console>
+        <page name="Appstats" url="/appstats" />
+    </admin-console>
+    
 </appengine-web-app>
