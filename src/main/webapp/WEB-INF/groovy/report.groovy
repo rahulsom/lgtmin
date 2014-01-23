@@ -3,9 +3,7 @@ import domain.Image
 
 log.info "Setting attributes"
 String hash = params.hash
-Image image = AppUtil.instance.getCachedValue(hash) {
-  Image.findByHash(hash)
-}
+Image.findByHash(hash)
 log.info "Image: ${image}"
 if (image) {
   datastore.withTransaction {
