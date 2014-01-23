@@ -14,41 +14,49 @@ String imageUrl = params.imageUrl
 log.info "Image Url saved will be ${imageUrl}"
 
 if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-  Image existingImage = Image.findByUrl(imageUrl)
-  if (existingImage) {
-    request.setAttribute('message', 'That image was already uploaded.')
-    redirect "/i/${existingImage.hash}"
-  } else {
-    def HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
+	if (imageUrl.count(':') > 1) {
+		request.setAttribute 'message', "More colons than allowed in url"
+		request.setAttribute 'imageUrl', imageUrl
+		response.setHeader "Content-Type", "text/html"
+		forward '/WEB-INF/pages/upload.gtpl'
+	} else {
 
-    HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
-          @Override
-          public void initialize(HttpRequest request) {
-          }
-        });
+		Image existingImage = Image.findByUrl(imageUrl)
+		if (existingImage) {
+			request.setAttribute('message', 'That image was already uploaded.')
+			redirect "/i/${existingImage.hash}"
+		} else {
+			def HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
-    def ct = requestFactory.buildHeadRequest(new GenericUrl(imageUrl)).execute().contentType
-    if (ct.startsWith('image')) {
-      def newImage = new Image()
-      newImage.imageUrl = imageUrl
-      newImage.save()
-			AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
-			AppUtil.instance.evictCache(AppUtil.COUNT)
-      request.setAttribute 'image', newImage
-      request.setAttribute 'dataUrl', newImage.dataUrl
-      response.setHeader("Content-Type", "text/html");
-      redirect "/i/${newImage.hash}"
-    } else {
-      request.setAttribute 'message', "Resource at specified url was not an image"
-      request.setAttribute 'imageUrl', imageUrl
-      response.setHeader "Content-Type", "text/html"
-      forward '/WEB-INF/pages/upload.gtpl'
-    }
-  }
+			HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
+				@Override
+				public void initialize(HttpRequest request) {
+				}
+			});
+
+			def ct = requestFactory.buildHeadRequest(new GenericUrl(imageUrl)).execute().contentType
+			if (ct.startsWith('image')) {
+				def newImage = new Image()
+				newImage.imageUrl = imageUrl
+				newImage.save()
+				AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
+				AppUtil.instance.evictCache(AppUtil.COUNT)
+				request.setAttribute 'image', newImage
+				request.setAttribute 'dataUrl', newImage.dataUrl
+				response.setHeader("Content-Type", "text/html");
+				redirect "/i/${newImage.hash}"
+			} else {
+				request.setAttribute 'message', "Resource at specified url was not an image"
+				request.setAttribute 'imageUrl', imageUrl
+				response.setHeader "Content-Type", "text/html"
+				forward '/WEB-INF/pages/upload.gtpl'
+			}
+		}
+	}
 } else {
-  request.setAttribute 'message', "Only http and https urls are valid"
-  request.setAttribute 'imageUrl', imageUrl
-  response.setHeader "Content-Type", "text/html"
-  forward '/WEB-INF/pages/upload.gtpl'
+	request.setAttribute 'message', "Only http and https urls are valid"
+	request.setAttribute 'imageUrl', imageUrl
+	response.setHeader "Content-Type", "text/html"
+	forward '/WEB-INF/pages/upload.gtpl'
 }
 
