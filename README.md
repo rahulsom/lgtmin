@@ -35,3 +35,4 @@ Contributing
 ----
 
 [![Build Status](https://travis-ci.org/rahulsom/lgtmin.png?branch=master)](https://travis-ci.org/rahulsom/lgtmin)
+
