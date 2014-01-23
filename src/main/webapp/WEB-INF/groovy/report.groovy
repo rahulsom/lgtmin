@@ -3,7 +3,7 @@ import domain.Image
 
 log.info "Setting attributes"
 String hash = params.hash
-Image.findByHash(hash)
+def image = Image.findByHash(hash)
 log.info "Image: ${image}"
 if (image) {
   datastore.withTransaction {
