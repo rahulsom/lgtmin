@@ -1,11 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'groovy'
-apply plugin: 'gae'
 apply plugin: 'gaelyk'
+apply plugin: 'gae-geb'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-def compatibilityVersion = 1.5
+def compatibilityVersion = 1.7
 sourceCompatibility = compatibilityVersion
 targetCompatibility = compatibilityVersion
 
@@ -15,67 +13,67 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.gradle.api.plugins:gradle-gae-plugin:0.7'
-        classpath 'org.gradle.api.plugins:gradle-gaelyk-plugin:0.3.2'
-        classpath 'eu.appsatori:gradle-fatjar-plugin:0.1.1'
+        classpath 'org.gradle.api.plugins:gradle-gaelyk-plugin:0.4.1'
+        classpath 'org.gradle.api.plugins:gradle-gae-plugin:0.8', {
+            exclude module: "gradle-fatjar-plugin"
+        }
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.2-rc1'
+        classpath 'org.gradle.api.plugins:gradle-gae-geb-plugin:0.3'
     }
 }
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
+/*
+configurations {
+    precompile
+}
+
+gaelykPrecompileGroovlet.runtimeClasspath += project.configurations.precompile
+gaelykPrecompileTemplate.runtimeClasspath += project.configurations.precompile
+*/
+
 dependencies {
-    def gaeVersion = '1.6.6'
-    groovy 'org.codehaus.groovy:groovy-all:1.8.6'
+    def gaeVersion = '1.8.0'
+    def groovyVersion = '2.1.3'
+    groovy "org.codehaus.groovy:groovy-all:${groovyVersion}"
+//    precompile "org.codehaus.groovy:groovy-ant:${groovyVersion}"
+//    precompile "org.ow2.asm:asm:4.0"
+//    precompile "commons-cli:commons-cli:1.2"
+    compile "org.codehaus.groovy:groovy-json:${groovyVersion}"
+    compile "org.codehaus.groovy:groovy-servlet:${groovyVersion}"
     compile "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion",
-            "com.google.appengine:appengine-api-labs:$gaeVersion",
-            'org.codehaus.groovy:groovy-all:1.8.6'
-    compile 'org.gaelyk:gaelyk:1.2'
+            "com.google.appengine:appengine-api-labs:$gaeVersion"
+    compile 'org.gaelyk:gaelyk:2.0'
     compile 'com.google.http-client:google-http-client-appengine:1.17.0-rc'
 
-    /** 
+
+
+    /**
      * To add binary plugin just declare it as a dependency. For example,
      * uncomment following to add GPars support to your Gaelyk project.
      * @see https://github.com/musketyr/gpars-appengine
      */
-  // compile 'org.codehaus.gpars:gpars-appengine:0.1'
+    // compile 'org.codehaus.gpars:gpars-appengine:0.1'
     
-    testCompile 'org.gaelyk:gaelyk-spock:0.3.0.1'
+    /**
+     * Gaelyk console serves as playground or key-hole surgery tool for
+     * your application
+     * @see https://github.com/gaelyk/gaelyk-console
+     */
+    // compile 'org.gaelyk:gaelyk-console:2.0'
+
+    testCompile 'org.gaelyk:gaelyk-spock:0.4'
     testCompile "com.google.appengine:appengine-api-stubs:$gaeVersion",
                 "com.google.appengine:appengine-testing:$gaeVersion"
                 
     functionalTestCompile 'org.codehaus.geb:geb-spock:0.7.0',
-                          'org.seleniumhq.selenium:selenium-firefox-driver:2.31.0'
+                          'org.seleniumhq.selenium:selenium-firefox-driver:2.22.0'
     gaeSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
 }
-
-gae {
-    downloadSdk = true
-    warDir = file('src/main/webapp/')
-    optimizeWar = true
-
-    appcfg {
-        email = "${System.env.GAE_USER}"
-        password = "${System.env.GAE_PASS}"
-    }
-}
-
-gaeExplodeWar.dependsOn gaelykPrecompileGroovlet
-gaeExplodeWar.dependsOn gaelykPrecompileTemplate
-
-clean {
-     delete sourceSets*.output.classesDir
-}
-
-task copyRuntimeLibraries(type: Sync) {
-    def webAppLibDirName = 'src/main/webapp/WEB-INF/lib'
-    description = "Copies runtime libraries to $webAppLibDirName."
-    from configurations.runtime
-    into webAppLibDirName
-}
-
-gaeRun.dependsOn copyRuntimeLibraries
 
 idea {
     project {
@@ -117,14 +115,4 @@ eclipse {
             }
         }
     }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion '1.4'
-}
-
-test {
-  testLogging {
-    exceptionFormat = 'full'
-  }
 }
