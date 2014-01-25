@@ -1,5 +1,11 @@
 package domain
 
+import com.google.api.client.http.GenericUrl
+import com.google.api.client.http.HttpRequest
+import com.google.api.client.http.HttpRequestFactory
+import com.google.api.client.http.HttpRequestInitializer
+import com.google.api.client.http.HttpTransport
+import com.google.api.client.http.javanet.NetHttpTransport
 import groovy.json.JsonBuilder
 import groovy.transform.ToString
 import groovyx.gaelyk.datastore.Entity
@@ -94,6 +100,39 @@ class Image implements Serializable {
     credits = 100 - impressions + 10 * likes - 100 * dislikes
   }
 
+  /**
+   * Updates the credits based on impressions, likes and dislikes
+   */
+  @Ignore
+  boolean validate() {
+		if (imageUrl.count(':') > 1) {
+			throw new RuntimeException("URL cannot have multiple colons")
+		}
+		Image existingImage = Image.findByUrl(imageUrl)
+		if (existingImage) {
+			throw new UniqueConstraintViolatedException(existingImage.hash)
+		}
+
+		def validProtocol = imageUrl.startsWith('http://') || imageUrl.startsWith('https://')
+		if (!validProtocol) {
+			throw new RuntimeException("Only http and https urls allowed")
+		}
+
+		def HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
+		HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(new MyInit());
+		def ct = requestFactory.buildHeadRequest(new GenericUrl(imageUrl)).execute().contentType
+		if (!ct.startsWith('image')) {
+			throw new RuntimeException("Resource at url is not an image.")
+		}
+
+		return true
+  }
+
+	private static class MyInit implements HttpRequestInitializer {
+		@Override
+		public void initialize(HttpRequest request) {
+		}
+	}
   /**
    * Uses a hash to find the Image
    * @param hash hash representing the id or image

@@ -1,10 +1,5 @@
-import com.google.api.client.http.GenericUrl
-import com.google.api.client.http.HttpRequest
-import com.google.api.client.http.HttpRequestFactory
-import com.google.api.client.http.HttpRequestInitializer
-import com.google.api.client.http.HttpTransport
-import com.google.api.client.http.javanet.NetHttpTransport
 import domain.Image
+import domain.UniqueConstraintViolatedException
 import util.AppUtil
 
 log.info "Setting attributes"
@@ -13,50 +8,23 @@ log.info "Params: ${params}"
 String imageUrl = params.imageUrl
 log.info "Image Url saved will be ${imageUrl}"
 
-if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-	if (imageUrl.count(':') > 1) {
-		request.setAttribute 'message', "More colons than allowed in url"
-		request.setAttribute 'imageUrl', imageUrl
-		response.setHeader "Content-Type", "text/html"
-		forward '/WEB-INF/pages/upload.gtpl'
-	} else {
+def newImage = new Image(imageUrl: imageUrl)
+try {
+	newImage.validate()
+	newImage.save()
+	AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
+	AppUtil.instance.evictCache(AppUtil.COUNT)
+	request.setAttribute 'image', newImage
+	request.setAttribute 'dataUrl', newImage.dataUrl
+	response.setHeader("Content-Type", "text/html");
+	redirect "/i/${newImage.hash}"
 
-		Image existingImage = Image.findByUrl(imageUrl)
-		if (existingImage) {
-			request.setAttribute('message', 'That image was already uploaded.')
-			redirect "/i/${existingImage.hash}"
-		} else {
-			def HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-
-			HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(new HttpRequestInitializer() {
-				@Override
-				public void initialize(HttpRequest request) {
-				}
-			});
-
-			def ct = requestFactory.buildHeadRequest(new GenericUrl(imageUrl)).execute().contentType
-			if (ct.startsWith('image')) {
-				def newImage = new Image()
-				newImage.imageUrl = imageUrl
-				newImage.save()
-				AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
-				AppUtil.instance.evictCache(AppUtil.COUNT)
-				request.setAttribute 'image', newImage
-				request.setAttribute 'dataUrl', newImage.dataUrl
-				response.setHeader("Content-Type", "text/html");
-				redirect "/i/${newImage.hash}"
-			} else {
-				request.setAttribute 'message', "Resource at specified url was not an image"
-				request.setAttribute 'imageUrl', imageUrl
-				response.setHeader "Content-Type", "text/html"
-				forward '/WEB-INF/pages/upload.gtpl'
-			}
-		}
-	}
-} else {
-	request.setAttribute 'message', "Only http and https urls are valid"
+} catch (UniqueConstraintViolatedException e) {
+	request.setAttribute('message', 'That image was already uploaded.')
+	redirect "/i/${e.hash}"
+} catch (RuntimeException e) {
+	request.setAttribute 'message', e.message
 	request.setAttribute 'imageUrl', imageUrl
 	response.setHeader "Content-Type", "text/html"
 	forward '/WEB-INF/pages/upload.gtpl'
 }
-
