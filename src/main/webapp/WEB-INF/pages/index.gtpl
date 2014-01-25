@@ -123,7 +123,9 @@
 </div>
 -->
 <script type="text/javascript">
-  \$('[data-toggle="tooltip"]').tooltip();
+	\$(function(){
+    \$('[data-toggle="tooltip"]').tooltip();
+  });
 </script>
 <% include '/WEB-INF/includes/footer.gtpl' %>
 
