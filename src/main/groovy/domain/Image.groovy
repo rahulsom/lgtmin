@@ -78,8 +78,9 @@ class Image implements Serializable {
    */
   @Ignore
   String getMarkdown() {
-    "[![LGTM](${imageUrl})](${dataUrl})\\n" +
-        "[:+1:](${upvoteUrl}) [:-1:](${reportUrl})"
+		"""[![LGTM]($imageUrl)]($dataUrl)
+
+[:+1:]($upvoteUrl) [:-1:]($reportUrl)"""
   }
 
   /**
