@@ -1,9 +1,11 @@
 package domain
 
-/**
- * Created by rahulsomasunderam on 1/23/14.
- */
-class UniqueConstraintViolatedException extends RuntimeException {
+class ValidationException extends RuntimeException {
+	ValidationException(String s) {
+		super(s)
+	}
+}
+class UniqueConstraintViolatedException extends ValidationException {
 	String hash
 
 	UniqueConstraintViolatedException(String hash) {

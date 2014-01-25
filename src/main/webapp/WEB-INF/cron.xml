@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+    <cron>
+        <url>/revalidate</url>
+        <description>Repopulate the cache every 2 minutes</description>
+        <schedule>every 12 hours</schedule>
+    </cron>
+</cronentries>

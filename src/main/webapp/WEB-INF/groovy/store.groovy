@@ -1,5 +1,6 @@
 import domain.Image
 import domain.UniqueConstraintViolatedException
+import domain.ValidationException
 import util.AppUtil
 
 log.info "Setting attributes"
@@ -22,7 +23,7 @@ try {
 } catch (UniqueConstraintViolatedException e) {
 	request.setAttribute('message', 'That image was already uploaded.')
 	redirect "/i/${e.hash}"
-} catch (RuntimeException e) {
+} catch (ValidationException e) {
 	request.setAttribute 'message', e.message
 	request.setAttribute 'imageUrl', imageUrl
 	response.setHeader "Content-Type", "text/html"
