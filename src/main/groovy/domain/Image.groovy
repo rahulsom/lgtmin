@@ -107,7 +107,7 @@ class Image implements Serializable {
   @Ignore
   boolean validate() {
 		if (imageUrl.count(':') > 1) {
-			throw new RuntimeException("URL cannot have multiple colons")
+			throw new ValidationException("URL cannot have multiple colons")
 		}
 		Image existingImage = Image.findByUrl(imageUrl)
 		if (existingImage) {
@@ -116,14 +116,14 @@ class Image implements Serializable {
 
 		def validProtocol = imageUrl.startsWith('http://') || imageUrl.startsWith('https://')
 		if (!validProtocol) {
-			throw new RuntimeException("Only http and https urls allowed")
+			throw new ValidationException("Only http and https urls allowed")
 		}
 
 		def HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 		HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(new MyInit());
 		def ct = requestFactory.buildHeadRequest(new GenericUrl(imageUrl)).execute().contentType
 		if (!ct.startsWith('image')) {
-			throw new RuntimeException("Resource at url is not an image.")
+			throw new ValidationException("Resource at url is not an image.")
 		}
 
 		return true
