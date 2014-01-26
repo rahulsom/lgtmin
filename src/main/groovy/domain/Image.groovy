@@ -105,13 +105,15 @@ class Image implements Serializable {
    * Updates the credits based on impressions, likes and dislikes
    */
   @Ignore
-  boolean validate() {
+  boolean validate(boolean checkDupes = true) {
 		if (imageUrl.count(':') > 1) {
 			throw new ValidationException("URL cannot have multiple colons")
 		}
-		Image existingImage = Image.findByUrl(imageUrl)
-		if (existingImage) {
-			throw new UniqueConstraintViolatedException(existingImage.hash)
+		if (checkDupes) {
+			Image existingImage = Image.findByUrl(imageUrl)
+			if (existingImage) {
+				throw new UniqueConstraintViolatedException(existingImage.hash)
+			}
 		}
 
 		def validProtocol = imageUrl.startsWith('http://') || imageUrl.startsWith('https://')

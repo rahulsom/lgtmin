@@ -1,12 +1,13 @@
 import domain.Image
+import domain.UniqueConstraintViolatedException
 import domain.ValidationException
 
 log.info("Starting cron.revalidate")
 Image.findAll().each { Image i ->
 	try {
-		i.validate()
+		i.validate(false)
 	} catch (ValidationException e) {
-		log.fine("Removing ${i}")
+		log.info("Removing ${i}")
 		i.delete()
 	}
 }
