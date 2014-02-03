@@ -4,6 +4,7 @@ import com.google.api.client.http.GenericUrl
 import com.google.api.client.http.HttpRequest
 import com.google.api.client.http.HttpRequestFactory
 import com.google.api.client.http.HttpRequestInitializer
+import com.google.api.client.http.HttpResponseException
 import com.google.api.client.http.HttpTransport
 import com.google.api.client.http.javanet.NetHttpTransport
 import groovy.json.JsonBuilder
@@ -123,9 +124,13 @@ class Image implements Serializable {
 
 		def HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 		HttpRequestFactory requestFactory = HTTP_TRANSPORT.createRequestFactory(new MyInit());
-		def ct = requestFactory.buildHeadRequest(new GenericUrl(imageUrl)).execute().contentType
-		if (!ct.startsWith('image')) {
-			throw new ValidationException("Resource at url is not an image.")
+		try {
+			def ct = requestFactory.buildHeadRequest(new GenericUrl(imageUrl)).execute().contentType
+			if (!ct.startsWith('image')) {
+				throw new ValidationException("Resource at url is not an image.")
+			}
+		} catch (HttpResponseException e) {
+			throw new ValidationException("Resource at url not found.")
 		}
 
 		return true
