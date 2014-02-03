@@ -35,4 +35,6 @@
         <exclude path="**.gtpl" />
     </static-files>
 
+    <sessions-enabled>true</sessions-enabled>
+
 </appengine-web-app>

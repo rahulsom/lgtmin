@@ -39,6 +39,19 @@
           <li class="${request.servletPath == '/WEB-INF/pages/upload.gtpl' ? 'active' : ''}"><a
               href="/g/upload">Submit</a></li>
         </ul>
+        <ul class="nav pull-right">
+        <%
+          if(session.getAttribute('username')) {
+        %>
+          <li><a href="#"><%=session.getAttribute('username')%></a></li>
+        <%
+          } else {
+        %>
+          <li><a href="/auth/github">Login with github</a></li>
+        <%
+          }
+        %>
+        </ul>
       </div>
       <!--/.nav-collapse -->
     </div>
