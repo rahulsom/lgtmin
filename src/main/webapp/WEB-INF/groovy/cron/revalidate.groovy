@@ -9,6 +9,8 @@ Image.findAll().each { Image i ->
 	} catch (ValidationException e) {
 		log.info("Removing ${i}")
 		i.delete()
+	} catch (Exception e) {
+		log.warning "Unexpected exception: $e for $i"
 	}
 }
 memcache.clearAll()
