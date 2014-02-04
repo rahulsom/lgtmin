@@ -18,11 +18,11 @@ import java.util.logging.Level
 @Singleton
 @Log
 class AppUtil {
-  String getRoot() {
-    app.env.name.toString() == 'Development' ? 'http://localhost:8080' : 'http://www.lgtm.in'
-  }
+    String getRoot() {
+        app.env.name.toString() == 'Development' ? 'http://localhost:8080' : 'http://www.lgtm.in'
+    }
 
-	public static final String TOP_IMAGES = "TopImages"
+    public static final String TOP_IMAGES = "TopImages"
 	public static final String COUNT = "Count"
 
 	def <T> T getCachedValue(String cacheName, Expiration expiration = new Expiration(60*60*1000, true), Closure<T> closure) {
@@ -51,4 +51,21 @@ class AppUtil {
 
 		asyncCache.delete(cacheName)
 	}
+
+    private Properties properties
+
+    private AppUtil() {
+        properties = Properties.newInstance().with {
+            load(this.class.classLoader.getResourceAsStream('oauth.properties'))
+            it
+        }
+    }
+
+    String getClientId() {
+        properties?.getAt('clientId') ?: 'CLIENT_ID'
+    }
+
+    String getClientSecret() {
+        properties?.getAt('clientSecret') ?: 'SECRET'
+    }
 }

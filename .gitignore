@@ -10,3 +10,4 @@ src/main/webapp/WEB-INF/lib/*.jar
 src/main/webapp/WEB-INF/appengine-generated/
 .gradletasknamecache
 src/main/webapp/WEB-INF/classes/
+src/main/resources/oauth.properties
