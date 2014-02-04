@@ -1,10 +1,5 @@
 package domain
 
-class ValidationException extends RuntimeException {
-	ValidationException(String s) {
-		super(s)
-	}
-}
 class UniqueConstraintViolatedException extends ValidationException {
 	String hash
 
