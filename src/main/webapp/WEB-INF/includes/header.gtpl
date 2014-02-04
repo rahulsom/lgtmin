@@ -64,15 +64,19 @@
 </div>
 
 <div class="container">
-  <%
-    if(request.getAttribute('message')) {
-  %>
+  <% if(request.getAttribute('message')) { %>
     <div class="alert">
       <%=request.getAttribute('message')%>
     </div>
-  <%
-    }
-  %>
+  <% } %>
+  <% if(session.getAttribute('message')) { %>
+    <div class="alert">
+      <%=session.getAttribute('message')%>
+      <%
+          session.removeAttribute('message')
+      %>
+    </div>
+  <% } %>
 
   <div class="row">
     <div class="span12">
