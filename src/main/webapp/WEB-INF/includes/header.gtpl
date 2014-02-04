@@ -41,9 +41,14 @@
         </ul>
         <ul class="nav pull-right">
         <%
-          if(session.getAttribute('username')) {
+          if(session?.getAttribute('githubUsername')) {
         %>
-          <li><a href="#"><%=session.getAttribute('username')%></a></li>
+          <li>
+            <a href="#">
+                <img src="<%=session?.getAttribute('githubAvatar')%>" height="18px" />
+                <%=session?.getAttribute('githubUsername')%>
+            </a>
+          </li>
         <%
           } else {
         %>
