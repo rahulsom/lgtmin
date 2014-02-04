@@ -69,11 +69,11 @@
       <%=request.getAttribute('message')%>
     </div>
   <% } %>
-  <% if(session.getAttribute('message')) { %>
+  <% if(session?.getAttribute('message')) { %>
     <div class="alert">
-      <%=session.getAttribute('message')%>
+      <%=session?.getAttribute('message')%>
       <%
-          session.removeAttribute('message')
+          session?.removeAttribute('message')
       %>
     </div>
   <% } %>
