@@ -12,6 +12,7 @@ import groovy.transform.ToString
 import groovyx.gaelyk.datastore.Entity
 import groovyx.gaelyk.datastore.Ignore
 import util.AppUtil
+import util.MyInit
 import util.Shortener
 
 /**
@@ -136,11 +137,6 @@ class Image implements Serializable {
 		return true
   }
 
-	private static class MyInit implements HttpRequestInitializer {
-		@Override
-		public void initialize(HttpRequest request) {
-		}
-	}
   /**
    * Uses a hash to find the Image
    * @param hash hash representing the id or image
