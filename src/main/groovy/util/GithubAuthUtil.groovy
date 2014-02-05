@@ -45,7 +45,7 @@ class GithubAuthUtil {
 
     void forceAuthentication() {
         def params = [
-                client_id: AppUtil.instance.clientId,
+                client_id: clientId,
                 redirect_uri: "${AppUtil.instance.root}/auth/me",
                 state: UUID.randomUUID().toString()
         ]
@@ -79,8 +79,8 @@ class GithubAuthUtil {
             def oAuthTokenResponse = requestFactory.buildPostRequest(
                     new GenericUrl('https://github.com/login/oauth/access_token'),
                     new UrlEncodedContent([
-                            client_id: AppUtil.instance.clientId,
-                            client_secret: AppUtil.instance.clientSecret,
+                            client_id: clientId,
+                            client_secret: clientSecret,
                             code: params.code
                     ])
             ).execute()
@@ -108,4 +108,24 @@ class GithubAuthUtil {
 
     }
 
+    private static final Properties properties = Properties.newInstance().with {
+        load(this.class.classLoader.getResourceAsStream('oauth.properties'))
+        it
+    }
+
+    /**
+     * Client ID for OAuth
+     * @return
+     */
+    String getClientId() {
+        properties?.getAt('clientId') ?: 'CLIENT_ID'
+    }
+
+    /**
+     * Client Secret for OAuth
+     * @return
+     */
+    String getClientSecret() {
+        properties?.getAt('clientSecret') ?: 'SECRET'
+    }
 }
