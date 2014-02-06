@@ -109,7 +109,7 @@ class GithubAuthUtil {
     }
 
     private static final Properties properties = Properties.newInstance().with {
-        load(this.class.classLoader.getResourceAsStream('oauth.properties'))
+        load(GithubAuthUtil.classLoader.getResourceAsStream('oauth.properties'))
         it
     }
 
