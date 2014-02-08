@@ -115,10 +115,5 @@
   </div>
 </div>
 -->
-<script type="text/javascript">
-	\$(function(){
-    \$('[data-toggle="tooltip"]').tooltip();
-  });
-</script>
 <% include '/WEB-INF/includes/footer.gtpl' %>
 

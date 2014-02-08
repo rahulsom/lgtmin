@@ -4,6 +4,8 @@
     <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       jQuery(function(){
+				jQuery('[data-toggle="tooltip"]').tooltip();
+
         var protipCookie = jQuery.cookie('protip1');
         console.log ('Protip Cookie: ' + protipCookie);
         if (!protipCookie) {
