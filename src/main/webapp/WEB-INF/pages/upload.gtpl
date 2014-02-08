@@ -2,14 +2,16 @@
   <h1>Upload</h1>
 
   <form action="/g/save" method="post">
-    <fieldset>
-      <label for="imageUrl">Image Url</label>
-      <input type="text" placeholder="http://i.imgur.com/ABCDEF.png" class="span7" name="imageUrl"
-          value="<%=request.getAttribute('imageUrl') ?: ''%>">
-      <label class="checkbox">
-      </label>
-      <button type="submit" class="btn">Submit</button>
-    </fieldset>
+  	<div class="form-group>
+
+		<label for="imageUrl">Image Url</label>
+		<input type="url"
+		placeholder="http://i.imgur.com/ABCDEF.png" class="form-control" name="imageUrl"
+				value="<%=request.getAttribute('imageUrl') ?: ''%>">
+		<label class="checkbox">
+		</label>
+		</div>
+		<button type="submit" class="btn btn-default">Submit</button>
   </form>
   <p>
     <%

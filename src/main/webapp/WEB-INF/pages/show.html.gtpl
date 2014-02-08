@@ -1,38 +1,34 @@
 <% include '/WEB-INF/includes/header.gtpl' %>
-
-<%
-  log.info "Fetching the image attr"
-  def image = request.getAttribute('image')
-%>
+<% def image = request.getAttribute('image') %>
 <div class="row">
-  <div class="span4">
-    <ul class="thumbnails">
-      <li class="span4">
+  <div class="col-md-4">
         <div class="thumbnail">
           <a href="${image.dataUrl}">
             <img src="${image.imageUrl}" alt="LGTM"/>
           </a>
         </div>
-      </li>
-    </ul>
   </div>
-  <div class="span8">
+  <div class="col-md-8">
     <form>
-      <fieldset>
-        <legend>Picture Info</legend>
-        <label>Image Url</label>
-        <input type="text" value="${image.imageUrl}" class="span8">
-        <label>Data Url</label>
-        <input type="text" value="${image.dataUrl}" class="span8">
-        <label>Markdown</label>
-        <textarea class="span8" rows="4">${image.markdown.replace("\\n", '\n')}</textarea>
-      </fieldset>
+  		<div class="form-group>
+        <label for="imageUrl">Image Url</label>
+        <input type="text" value="${image.imageUrl}" class="form-control" id="imageUrl" name="imageUrl">
+			</div>
+  		<div class="form-group>
+        <label for="dataUrl">Data Url</label>
+        <input type="text" value="${image.dataUrl}" class="form-control" id="dataUrl" name="dataUrl">
+			</div>
+  		<div class="form-group>
+        <label for="markdown">Markdown</label>
+        <textarea class="form-control" rows="4" id="markdown" name="markdown"
+        		>${image.markdown.replace("\\n", '\n')}</textarea>
+			</div>
     </form>
   </div>
 </div>
 <% if(request.getAttribute('comments')) { %>
 <div class="row">
-  <div class="span12">
+  <div class="col-md-12">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
       /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
