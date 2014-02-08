@@ -9,32 +9,32 @@
 					<img alt="" src="${it.imageUrl}" style="max-height: 200px;">
 				</a>
 			</div>
-			<p>
-				<span>
+			<div class="row">
+				<div class="col-md-6">
 					<img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/moneybag.png" alt="Credits"
 							 style="height: 16px; width: 16px;" data-toggle="tooltip" title="Credits"/>
 					${it.credits}
-				</span>
-				<span class="pull-right">
+				</div>
+				<div class="col-md-6" style="text-align: right;">
 					${it.impressions}
 					<img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/octocat.png" alt="Impressions"
 							 style="height: 16px; width: 16px;" data-toggle="tooltip" title="Impressions"/>
-				</span>
-			</p>
-			<p>
-				<span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
 					<a href="${it.upvoteUrl}" data-toggle="tooltip" title="Upvote">
 						<img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/+1.png" alt="Like"
 								 style="height: 16px; width: 16px;"/>
 					</a>
-				</span>
-				<span class="pull-right">
+				</div>
+				<div class="col-md-6" style="text-align: right;">
 					<a href="${it.reportUrl}" data-toggle="tooltip" title="Report">
 						<img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/-1.png" alt="Report"
 								 style="height: 16px; width: 16px;"/>
 					</a>
-				</span>
-			</p>
+				</div>
+			</div>
 
 		</div>
 	</div>
