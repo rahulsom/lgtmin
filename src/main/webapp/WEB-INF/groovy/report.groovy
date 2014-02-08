@@ -16,7 +16,6 @@ if (hash) {
                 image.save()
             }
             AppUtil.instance.evictCache("/i/${hash}")
-            AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
             redirect("/i/${hash}")
         }
     } else {
