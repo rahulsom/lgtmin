@@ -2,7 +2,7 @@
 <div class="row">
 	<% def imageList = request.getAttribute('imageList') %>
 	<% imageList.each { %>
-	<div class="col-md-2">
+	<div class="col-md-2 col-sm-3 col-xs-6">
 		<div class="thumbnail">
 			<div class="image" style="height: 162px; overflow-y: hidden; background-color: #F5F5F5;">
 				<a href="${it.dataUrl}">
