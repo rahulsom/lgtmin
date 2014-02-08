@@ -10,7 +10,7 @@
         console.log ('Protip Cookie: ' + protipCookie);
         if (!protipCookie) {
           console.log ('Showing...');
-          jQuery('#protip1').show();
+          jQuery('#protip1').removeClass('hide');
           console.log ('...done');
         }
 
