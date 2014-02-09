@@ -1,6 +1,6 @@
     </div>
-    <script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
     <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       jQuery(function(){
