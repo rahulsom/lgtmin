@@ -5,6 +5,7 @@
   <link rel="shortcut icon" href="/images/gaelyk-small-favicon.png" type="image/png">
   <link rel="icon" href="/images/gaelyk-small-favicon.png" type="image/png">
   <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
+  <link rel="author" href="/humans.txt" />
   <style type="text/css">
   body {
     padding-top: 60px;
