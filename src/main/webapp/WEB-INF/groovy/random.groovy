@@ -14,11 +14,8 @@ def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
 if (ct) {
   def random = Math.abs(new SecureRandom().nextGaussian()/2.5)
   log.info "Random: ${random}"
-  if (random >= 1) {
-    random = 0
-  }
   def theOffset = Math.floor(random * (ct -1)).intValue()
-  if (theOffset > ct) {
+  if (theOffset > ct-1) {
     theOffset = 0
   }
 
