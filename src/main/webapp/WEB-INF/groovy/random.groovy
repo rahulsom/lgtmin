@@ -3,6 +3,8 @@ import util.AnalyticsUtil
 import util.AppUtil
 
 import java.security.SecureRandom
+import java.util.logging.Level
+
 import static util.AppUtil.TOP_IMAGES
 
 def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
@@ -16,27 +18,31 @@ if (ct) {
   if (theOffset > ct) {
     theOffset = 0
   }
-  datastore.withTransaction {
 
-    log.info "Fetching ${theOffset} of ${ct}"
-    Image image = null
-    if (theOffset < 12) {
-      def imageList = AppUtil.instance.getCachedValue(TOP_IMAGES) {
-        Image.listSortedByCredits(12)
-      }
-      image = imageList [theOffset]
-    } else {
-      def imageList = Image.listSortedByCredits(1, theOffset)
-      log.info "Images: ${imageList.join('\n')}"
-      image = imageList [0]
+  log.info "Fetching ${theOffset} of ${ct}"
+  Image image = null
+  if (theOffset < 12) {
+    def imageList = AppUtil.instance.getCachedValue(TOP_IMAGES) {
+      Image.listSortedByCredits(12)
     }
-    
-    image.impressions ++
-    image.updateCredits()
-    image.save()
-
-    request.setAttribute 'image', image
+    image = imageList [theOffset]
+  } else {
+    def imageList = Image.listSortedByCredits(1, theOffset)
+    log.info "Images: ${imageList.join('\n')}"
+    image = imageList [0]
   }
+
+  try {
+    datastore.withTransaction {
+      image.impressions ++
+      image.updateCredits()
+      image.save()
+    }
+  } catch (Exception e) {
+    log.log(Level.WARNING ,"Exception updating impressions on image", e)
+  }
+
+  request.setAttribute 'image', image
 
 } else {
   def image = new Image(imageUrl: 'https://f.cloud.github.com/assets/193047/406777/c9e3e3a2-aaba-11e2-8e03-4720321204f7.png')
