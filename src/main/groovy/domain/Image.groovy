@@ -74,13 +74,17 @@ class Image implements Serializable {
     "${root}/r/${hash}"
   }
 
+  @Ignore
+  String getTrackableImageUrl() {
+    "${root}/p/${hash}"
+  }
   /**
    * The markdown for embedding the image in Github
    * @return The markdown (String)
    */
   @Ignore
   String getMarkdown() {
-		"""[![LGTM]($imageUrl)]($dataUrl)
+		"""[![LGTM]($trackableImageUrl)]($dataUrl)
 
 [:+1:]($upvoteUrl) [:-1:]($reportUrl)"""
   }
