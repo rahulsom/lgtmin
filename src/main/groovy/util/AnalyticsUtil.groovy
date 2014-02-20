@@ -1,6 +1,9 @@
 package util
 
+import groovy.util.logging.Log
+
 import javax.servlet.http.HttpServletRequest
+import java.util.logging.Level
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletRequest
  * Time: 9:25 PM
  * To change this template use File | Settings | File Templates.
  */
+@Log
 class AnalyticsUtil {
   static def sendInfo(HttpServletRequest theRequest, String hash = null) {
 
@@ -39,8 +43,12 @@ class AnalyticsUtil {
     writer.close()
     connection.connect()
 
-    def recaptchaResponse = new InputStreamReader(connection.inputStream).text
-    println(recaptchaResponse)
+    try {
+      def recaptchaResponse = new InputStreamReader(connection.inputStream).text
+      println(recaptchaResponse)
+    } catch (Exception e) {
+      log.log(Level.WARNING ,"Exception occurred while sending analytics to GA", e)
+    }
 
   }
 
