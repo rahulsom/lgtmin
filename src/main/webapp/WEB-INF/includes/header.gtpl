@@ -54,7 +54,11 @@
         <%
           } else {
         %>
-          <li><a href="/auth/github">Login with github</a></li>
+          <li>
+            <a href="/auth/github">
+              Login with <img src="/images/GitHub_Logo.png" alt="Github" height="20px" style="margin-top: -2px;"/>
+            </a>
+          </li>
         <%
           }
         %>
