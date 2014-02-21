@@ -82,6 +82,13 @@
 
       It also serves as the issue tracking system.
     </p>
+    <h2>Community</h2>
+    <ul>
+       <li>
+           <a href="https://chrome.google.com/webstore/detail/lgtm/oeacdmeoegfagkmiecjjikpfgebmalof">Google Chrome Extension</a>
+           from <a href="https://github.com/monochromegane/LGTM">monochromegane</a>
+       </li>
+    </ul>
   </div>
 </div>
 
