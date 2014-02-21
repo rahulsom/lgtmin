@@ -6,6 +6,7 @@ import java.security.SecureRandom
 import java.util.logging.Level
 
 import static util.AppUtil.TOP_IMAGES
+import com.google.appengine.api.memcache.Expiration
 
 def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
 	Image.count()
@@ -20,23 +21,22 @@ if (ct) {
   }
 
   log.info "Fetching ${theOffset} of ${ct}"
-  Image image = null
-  if (theOffset < 12) {
-    def imageList = AppUtil.instance.getCachedValue(TOP_IMAGES) {
-      Image.listSortedByCredits(12)
-    }
-    image = imageList [theOffset]
-  } else {
-    def imageList = Image.listSortedByCredits(1, theOffset)
-    log.info "Images: ${imageList.join('\n')}"
-    image = imageList [0]
+  def imageList = AppUtil.instance.getCachedValue(
+      "AllImages", 
+      new Expiration(1 * 60 * 60 * 1000, true)
+  ) {
+    Image.listSortedByCredits(ct)
   }
+
+  Image image = null
+  image = imageList [theOffset]
 
   try {
     datastore.withTransaction {
-      image.impressions ++
-      image.updateCredits()
-      image.save()
+      def image1 = Image.findByHash(image.hash) 
+      image1.impressions ++
+      image1.updateCredits()
+      image1.save()
     }
   } catch (Exception e) {
     log.log(Level.WARNING ,"Exception updating impressions on image", e)
