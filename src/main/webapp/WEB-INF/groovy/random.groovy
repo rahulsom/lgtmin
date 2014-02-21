@@ -5,7 +5,7 @@ import util.AppUtil
 import java.security.SecureRandom
 import java.util.logging.Level
 
-import static util.AppUtil.TOP_IMAGES
+import static util.AppUtil.ALL_IMAGES
 import com.google.appengine.api.memcache.Expiration
 
 def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
@@ -21,10 +21,7 @@ if (ct) {
   }
 
   log.info "Fetching ${theOffset} of ${ct}"
-  def imageList = AppUtil.instance.getCachedValue(
-      "AllImages", 
-      new Expiration(1 * 60 * 60 * 1000, true)
-  ) {
+  def imageList = AppUtil.instance.getCachedValue(AppUtil.ALL_IMAGES) {
     Image.listSortedByCredits(ct)
   }
 

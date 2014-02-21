@@ -32,6 +32,7 @@ class AppUtil {
     }
 
     public static final String TOP_IMAGES = "TopImages"
+    public static final String ALL_IMAGES = "AllImages"
 	public static final String COUNT = "Count"
 
     /**
