@@ -95,10 +95,14 @@ class Image implements Serializable {
    */
   @Ignore
   String toJson() {
-    def props = this.properties.findAll { k, v -> !(k in ['metaClass', '$key', 'class']) }
+    def hiddenProperties = [
+        'metaClass', '$key', 'class', 'datastoreIndexedProperties', 'datastoreUnindexedProperties',
+        'datastoreKey'
+    ]
+    def props = this.properties.findAll { k, v -> !(k in hiddenProperties) }
     props.actualImageUrl = props.imageUrl
     props.imageUrl = trackableImageUrl
-    new JsonBuilder(props).toPrettyString()
+    new JsonBuilder(props).toString()
   }
 
   /**
