@@ -45,7 +45,7 @@ class AppUtil {
      */
 	public <T> T getCachedValue(
             String cacheName,
-            Expiration expiration = new Expiration(HOUR, true),
+            Expiration expiration = Expiration.byDeltaMillis(HOUR),
             Closure<T> closure
     ) {
 		AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService()
