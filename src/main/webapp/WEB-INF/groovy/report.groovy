@@ -9,7 +9,7 @@ if (hash) {
     def image = Image.findByHash(hash)
     log.info "Image: ${image}"
     if (image) {
-        githubAuthUtil.withValidUser ("/r/${hash}") {
+        githubAuthUtil.withValidUser("/r/${hash}") {
             datastore.withTransaction {
                 image.dislikes++
                 image.updateCredits()

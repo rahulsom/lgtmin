@@ -34,7 +34,7 @@ class AppUtil {
 
     public static final String TOP_IMAGES = "TopImages"
     public static final String ALL_IMAGES = "AllImages"
-	public static final String COUNT = "Count"
+    public static final String COUNT = "Count"
 
     /**
      * Returns a value from cache if possible, evaluates otherwise
@@ -43,39 +43,39 @@ class AppUtil {
      * @param closure The eval for cached value
      * @return The value
      */
-	public <T> T getCachedValue(
+    public <T> T getCachedValue(
             String cacheName,
             Expiration expiration = Expiration.byDeltaMillis(HOUR),
             Closure<T> closure
     ) {
-		AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService()
-		asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
-		Future<Object> futureValue = asyncCache.get(cacheName); // read from cache
+        AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService()
+        asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
+        Future<Object> futureValue = asyncCache.get(cacheName); // read from cache
 
-		T value
-		try {
-			value = futureValue.get()
-		} catch (Exception e) {
-			value = null
-		}
-		if (value == null) {
-			log.fine("Missed cache for ${cacheName}")
-			value = closure.call()
-			asyncCache.put(cacheName, value, expiration)
-		}
+        T value
+        try {
+            value = futureValue.get()
+        } catch (Exception e) {
+            value = null
+        }
+        if (value == null) {
+            log.fine("Missed cache for ${cacheName}")
+            value = closure.call()
+            asyncCache.put(cacheName, value, expiration)
+        }
 
-		value
-	}
+        value
+    }
 
     /**
      * Evicts value from cache
      * @param cacheName name of cached value
      */
-	void evictCache(String cacheName) {
-		AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService()
-		asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
+    void evictCache(String cacheName) {
+        AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService()
+        asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
 
-		asyncCache.delete(cacheName)
-	}
+        asyncCache.delete(cacheName)
+    }
 
 }
