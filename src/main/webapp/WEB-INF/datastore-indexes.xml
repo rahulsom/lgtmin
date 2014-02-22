@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datastore-indexes>
+  <datastore-index kind="Image">
+    <property name="url" direction="asc" />
+  </datastore-index>
+  <datastore-index kind="Image">
+    <property name="credits" direction="desc" />
+  </datastore-index>
+</datastore-indexes>
