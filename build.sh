@@ -9,7 +9,7 @@ clientSecret=${LGTM_SECRET}
 EOF
 
 if [ "$TRAVIS_PULL_REQUEST" = false ]; then
-  gradle -q clean test && gradle -q gaeUpdateAll
+  gradle -q check && gradle -q gaeUpdateAll
 else
-  gradle -q clean test
+  gradle -q check
 fi
