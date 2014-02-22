@@ -2,6 +2,7 @@ apply plugin: 'gaelyk'
 apply plugin: 'gae-geb'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'groovy'
 
 def compatibilityVersion = 1.7
 sourceCompatibility = compatibilityVersion
@@ -13,11 +14,11 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.gradle.api.plugins:gradle-gaelyk-plugin:0.4.1'
-        classpath 'org.gradle.api.plugins:gradle-gae-plugin:0.8', {
+        classpath 'org.gradle.api.plugins:gradle-gaelyk-plugin:0.5'
+        classpath 'org.gradle.api.plugins:gradle-gae-plugin:0.9', {
             exclude module: "gradle-fatjar-plugin"
         }
-        classpath 'eu.appsatori:gradle-fatjar-plugin:0.2-rc1'
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.2'
         classpath 'org.gradle.api.plugins:gradle-gae-geb-plugin:0.3'
     }
 }
@@ -70,8 +71,8 @@ dependencies {
     testCompile "com.google.appengine:appengine-api-stubs:$gaeVersion",
                 "com.google.appengine:appengine-testing:$gaeVersion"
                 
-    functionalTestCompile 'org.codehaus.geb:geb-spock:0.7.0',
-                          'org.seleniumhq.selenium:selenium-firefox-driver:2.22.0'
+    functionalTestCompile 'org.codehaus.geb:geb-spock:0.7.2',
+                          'org.seleniumhq.selenium:selenium-firefox-driver:2.35.0'
     gaeSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
 }
 
