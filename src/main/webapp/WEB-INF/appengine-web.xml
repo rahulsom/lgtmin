@@ -33,6 +33,7 @@
     <static-files>
         <exclude path="/WEB-INF/**.groovy" />
         <exclude path="**.gtpl" />
+        <include path="/images/**.png" expiration="7d" />
     </static-files>
 
     <sessions-enabled>true</sessions-enabled>
