@@ -97,7 +97,7 @@ class Image implements Serializable {
   String toJson() {
     def hiddenProperties = [
         'metaClass', '$key', 'class', 'datastoreIndexedProperties', 'datastoreUnindexedProperties',
-        'datastoreKey'
+        'datastoreKey', 'datastoreParent'
     ]
     def props = this.properties.findAll { k, v -> !(k in hiddenProperties) }
     props.actualImageUrl = props.imageUrl
