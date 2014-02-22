@@ -5,9 +5,6 @@ import util.AppUtil
 import java.security.SecureRandom
 import java.util.logging.Level
 
-import static util.AppUtil.ALL_IMAGES
-import com.google.appengine.api.memcache.Expiration
-
 def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
 	Image.count()
 }

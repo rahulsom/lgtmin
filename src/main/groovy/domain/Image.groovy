@@ -96,6 +96,8 @@ class Image implements Serializable {
   @Ignore
   String toJson() {
     def props = this.properties.findAll { k, v -> !(k in ['metaClass', '$key', 'class']) }
+    props.actualImageUrl = props.imageUrl
+    props.imageUrl = trackableImageUrl
     new JsonBuilder(props).toPrettyString()
   }
 
