@@ -31,9 +31,11 @@
     <precompilation-enabled>true</precompilation-enabled>
     
     <static-files>
-        <exclude path="/WEB-INF/**.groovy" />
-        <exclude path="**.gtpl" />
-        <include path="/images/**.png" expiration="7d" />
+      <include path="/images/" expiration="7d">
+        <http-header name="Cache-control" value="public"/>
+      </include>
+      <exclude path="/WEB-INF/**.groovy" />
+      <exclude path="**.gtpl" />
     </static-files>
 
     <sessions-enabled>true</sessions-enabled>
