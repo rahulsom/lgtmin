@@ -62,19 +62,20 @@
       Crafting images and picking them works fine on a leisurely day, but at crunch time, it helps to crowdsource
       your LGTMs.
     </p>
-  </div>
-  <div class="col-md-6">
-    <h2>Quick and Easy</h2>
-    <p>
-      This is the javascript in the bookmarklet. Feel free to create your own if you don't like
-      the default implementation.
-    </p>
+      <h2>Quick and Easy</h2>
+      <p>
+          This is the javascript in the bookmarklet. Feel free to create your own if you don't like
+          the default implementation.
+      </p>
     <pre>
 \$.getJSON("http://www.lgtm.in/g", function (data) {
   var old = \$("textarea[name='comment[body]']").val();
   var msg = data.markdown;
   \$("textarea[name='comment[body]']").val(old + "\\n\\n" + msg);
 });</pre>
+  </div>
+  <div class="col-md-6">
+
     <h2>Contributing</h2>
     <p>
       The project is hosted on Github at
@@ -89,6 +90,11 @@
            from <a href="https://github.com/monochromegane/LGTM">monochromegane</a>
        </li>
     </ul>
+    <h2>On Twitter</h2>
+    <a class="twitter-timeline" href="https://twitter.com/search?q=LGTM.in" data-widget-id="439281581404852225">Tweets about "LGTM.in"</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
   </div>
 </div>
 
