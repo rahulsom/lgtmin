@@ -8,3 +8,7 @@ env:
     - secure: "ZAJ6714sXlImCR3f0/StKnkGckJvqRZATC7fwBWOLyZBfwZxnDVULqkI7qo253zdY3lsWHYZwMO4mIqzMCHPnKj8FtNY5OA8Z+QeczwPvBsi+mo5EEMskix1PeZC14qE0MCFef/+HyXCdq1d/nTQ4V/kvjk7QzdA274MBpXQZS0="
 
 script: ./build.sh
+
+cache:
+  directories:
+  - $HOME/.m2

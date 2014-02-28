@@ -5,6 +5,7 @@
     <link rel="shortcut icon" href="/images/gaelyk-small-favicon.png" type="image/png">
     <link rel="icon" href="/images/gaelyk-small-favicon.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
     <link rel="author" href="/humans.txt" />
     <style type="text/css">
         body {
@@ -17,6 +18,9 @@
 
         span#title {
             font-size: 72px;
+        }
+        h1,h2,h3,h4,h5,h6,a.navbar-brand {
+            font-family: 'Cabin Sketch', cursive;
         }
     </style>
 </head>

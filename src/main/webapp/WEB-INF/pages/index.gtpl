@@ -71,9 +71,9 @@
     </p>
     <pre>
 \$.getJSON("http://www.lgtm.in/g", function (data) {
-  var oldMessage = \$("textarea[name='comment[body]']").val();
+  var old = \$("textarea[name='comment[body]']").val();
   var msg = data.markdown;
-  \$("textarea[name='comment[body]']").val(oldMessage + "\\n\\n" + msg);
+  \$("textarea[name='comment[body]']").val(old + "\\n\\n" + msg);
 });</pre>
     <h2>Contributing</h2>
     <p>
