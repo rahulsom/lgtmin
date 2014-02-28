@@ -151,6 +151,9 @@ class Image implements Serializable {
      * @return the image
      */
     static Image findByHash(String hash) {
+        if (hash.contains('.')) {
+            hash = hash.split('\\.')[0]
+        }
         def theId = Shortener.instance.decode(hash) - 1000
         Image.get(theId)
     }
