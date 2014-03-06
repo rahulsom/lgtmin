@@ -44,4 +44,21 @@
     <sessions-enabled>true</sessions-enabled>
     <async-session-persistence enabled="true" />
 
+    <pagespeed>
+        <domain-to-rewrite>i.imgur.com</domain-to-rewrite>
+        <domain-to-rewrite>cdn.memegenerator.net</domain-to-rewrite>
+        <domain-to-rewrite>f.cloud.github.com</domain-to-rewrite>
+        <domain-to-rewrite>i.qkme.me</domain-to-rewrite>
+        <domain-to-rewrite>*.media.tumblr.com</domain-to-rewrite>
+        <!--
+        <url-blacklist>http://*/*.svg</url-blacklist>
+        <url-blacklist>http://secure.foo.com/*</url-blacklist>
+        -->
+        <enabled-rewriter>CollapseWhitespace</enabled-rewriter>
+        <!--
+        <disabled-rewriter>CombineJs</disabled-rewriter>
+        <disabled-rewriter>ProxyImages</disabled-rewriter>
+        -->
+    </pagespeed>
+
 </appengine-web-app>
