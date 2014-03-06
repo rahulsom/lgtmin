@@ -34,10 +34,14 @@
       <include path="/**.png" expiration="7d">
         <http-header name="Cache-control" value="public"/>
       </include>
+      <include path="/**.css" expiration="7d">
+        <http-header name="Cache-control" value="public"/>
+      </include>
       <exclude path="/WEB-INF/**.groovy" />
       <exclude path="**.gtpl" />
     </static-files>
 
     <sessions-enabled>true</sessions-enabled>
+    <async-session-persistence enabled="true" />
 
 </appengine-web-app>
