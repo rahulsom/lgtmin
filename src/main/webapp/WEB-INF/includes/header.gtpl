@@ -11,16 +11,11 @@
         body {
             padding-top: 60px;
         }
-
-        .center {
-            text-align: center;
-        }
-
-        span#title {
-            font-size: 72px;
-        }
         h1,h2,h3,h4,h5,h6,a.navbar-brand {
             font-family: 'Cabin Sketch', cursive;
+        }
+        .github {
+            margin-top: -2px;
         }
     </style>
 </head>
@@ -61,8 +56,7 @@
                 <% } else { %>
                 <li>
                     <a href="/auth/github">
-                        Login with <img src="/images/GitHub_Logo.png" alt="Github" height="20px"
-                                        style="margin-top: -2px;"/>
+                        Login with <img src="/images/GitHub_Logo.png" alt="Github" height="20px" class="github"/>
                     </a>
                 </li>
                 <% } %>
