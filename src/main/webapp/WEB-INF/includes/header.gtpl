@@ -2,12 +2,27 @@
 <html>
 <head>
     <title>LGTM.in/g</title>
-    <link rel="shortcut icon" href="/images/gaelyk-small-favicon.png" type="image/png">
-    <link rel="icon" href="/images/gaelyk-small-favicon.png" type="image/png">
-    <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/app.css"/>
+    <link rel="shortcut icon" href="/images/gaelyk-small-favicon.png" type="image/png" />
+    <link rel="icon" href="/images/gaelyk-small-favicon.png" type="image/png" />
     <link rel="author" href="/humans.txt" />
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cabin+Sketch'/>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
+    <style>
+        body {
+            padding-top: 60px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        span#title {
+            font-size: 72px;
+        }
+        h1,h2,h3,h4,h5,h6,a.navbar-brand {
+            font-family: 'Cabin Sketch', cursive;
+        }
+    </style>
 </head>
 
 <body>
