@@ -10,7 +10,14 @@
     <link rel="shortcut icon" href="/images/gaelyk-small-favicon.png" type="image/png" />
     <link rel="icon" href="/images/gaelyk-small-favicon.png" type="image/png" />
     <link rel="author" href="/humans.txt" />
-    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cabin+Sketch'/>
+    <style>
+        @font-face {
+            font-family: 'Cabin Sketch';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Cabin Sketch Regular'), local('CabinSketch-Regular'), url(http://themes.googleusercontent.com/static/fonts/cabinsketch/v6/d9fijO34zQajqQvl3YHRCaRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+        }
+    </style>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
 
     <style>
