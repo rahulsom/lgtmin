@@ -1,25 +1,44 @@
         </div>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script defer type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
-        <script defer type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         <script defer type="text/javascript">
-            jQuery(function () {
-                jQuery('[data-toggle="tooltip"]').tooltip();
-
-                var protipCookie = jQuery.cookie('protip1');
-                console.log('Protip Cookie: ' + protipCookie);
-                if (!protipCookie) {
-                    console.log('Showing...');
-                    jQuery('#protip1').removeClass('hide');
-                    console.log('...done');
+            (function() {
+                function getScript(url,success){
+                    var script=document.createElement('script');
+                    script.src=url;
+                    var head=document.getElementsByTagName('head')[0],
+                            done=false;
+                    script.onload=script.onreadystatechange = function(){
+                        if ( !done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') ) {
+                            done=true;
+                            success();
+                            script.onload = script.onreadystatechange = null;
+                            head.removeChild(script);
+                        }
+                    };
+                    head.appendChild(script);
                 }
+                getScript('http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js',function(){
+                getScript('http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js',function(){
+                getScript('http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js',function(){
+                    jQuery(function () {
+                        jQuery('[data-toggle="tooltip"]').tooltip();
 
-                jQuery('#protip1 .close').click(function () {
-                    jQuery.cookie('protip1', 'true');
+                        var protipCookie = jQuery.cookie('protip1');
+                        console.log('Protip Cookie: ' + protipCookie);
+                        if (!protipCookie) {
+                            console.log('Showing...');
+                            jQuery('#protip1').removeClass('hide');
+                            console.log('...done');
+                        }
+
+                        jQuery('#protip1 .close').click(function () {
+                            jQuery.cookie('protip1', 'true');
+                        });
+                    });
                 });
-            });
-        </script>
-        <script>
+                });
+                });
+            })();
+
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
