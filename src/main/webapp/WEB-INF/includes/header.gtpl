@@ -13,7 +13,7 @@
     <link rel="author" href="/humans.txt" />
     <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cabin+Sketch'/>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/app.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/app.css"/>
 </head>
 
 <body>
