@@ -7,30 +7,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
     <title>LGTM.in/g</title>
+
     <link rel="shortcut icon" href="/images/gaelyk-small-favicon.png" type="image/png" />
     <link rel="icon" href="/images/gaelyk-small-favicon.png" type="image/png" />
     <link rel="author" href="/humans.txt" />
-    <style>
-        @font-face {
-            font-family: 'Cabin Sketch';
-            font-style: normal;
-            font-weight: 400;
-            src: local('Cabin Sketch Regular'), local('CabinSketch-Regular'), url(http://themes.googleusercontent.com/static/fonts/cabinsketch/v6/d9fijO34zQajqQvl3YHRCaRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
-        }
-    </style>
+    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cabin+Sketch'/>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
-
-    <style>
-        body {
-            padding-top: 60px;
-        }
-        h1,h2,h3,h4,h5,h6,a.navbar-brand {
-            font-family: 'Cabin Sketch', cursive;
-        }
-        .github {
-            margin-top: -2px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/app.css"/>
 </head>
 
 <body>
