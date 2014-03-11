@@ -45,7 +45,8 @@
   <div class="col-md-6">
     <h2>What</h2>
     <p>
-      LGTM is the most popular comment on Github, perhaps. But LGTM is boring. So we spice it up with some images.
+      Looks good to me <em>(LGTM)</em> is the most popular comment on Github, perhaps. But LGTM is boring. So we
+        spice it up with some images.
     </p>
     <div class="row">
       <div class="col-md-6">
