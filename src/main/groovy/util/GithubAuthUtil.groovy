@@ -85,13 +85,13 @@ class GithubAuthUtil {
                     ])
             ).execute()
             def oAuthJson = new JsonSlurper().parse(oAuthTokenResponse.content.newReader())
-            log.info "User was: ${oAuthJson}"
             session.setAttribute GITHUB_TOKEN, oAuthJson.access_token
 
             def userResponse = requestFactory.buildGetRequest(
                     new GenericUrl("https://api.github.com/user?access_token=${oAuthJson.access_token}")
             ).execute()
             def userJson = new JsonSlurper().parse(userResponse.content.newReader())
+            log.info "User was: ${userJson}"
             session.setAttribute GITHUB_USERNAME, userJson.login
             session.setAttribute GITHUB_AVATAR, userJson.avatar_url
 
