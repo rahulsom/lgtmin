@@ -1,5 +1,6 @@
+apply plugin: 'war'
 apply plugin: 'gaelyk'
-apply plugin: 'gae-geb'
+apply plugin: 'appengine-geb'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'groovy'
@@ -10,62 +11,32 @@ targetCompatibility = compatibilityVersion
 
 buildscript {
     repositories {
+        jcenter()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'org.gradle.api.plugins:gradle-gaelyk-plugin:0.5'
-        classpath 'org.gradle.api.plugins:gradle-gae-plugin:0.9', {
-            exclude module: "gradle-fatjar-plugin"
-        }
-        classpath 'eu.appsatori:gradle-fatjar-plugin:0.2'
-        classpath 'org.gradle.api.plugins:gradle-gae-geb-plugin:0.3'
+        classpath 'org.gradle.api.plugins:gradle-gaelyk-plugin:0.6'
+        classpath 'org.gradle.api.plugins:gradle-appengine-geb-plugin:0.4'
     }
 }
 
 repositories {
+    maven { url 'http://dl.bintray.com/gaelyk/groovy-patches' }
     mavenCentral()
     mavenLocal()
 }
 
-/*
-configurations {
-    precompile
-}
-
-gaelykPrecompileGroovlet.runtimeClasspath += project.configurations.precompile
-gaelykPrecompileTemplate.runtimeClasspath += project.configurations.precompile
-*/
-
 dependencies {
-    def gaeVersion = '1.8.0'
-    def groovyVersion = '2.1.3'
+    def gaeVersion = '1.9.1'
+    def groovyVersion = '2.1.10'
     compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
-//    precompile "org.codehaus.groovy:groovy-ant:${groovyVersion}"
-//    precompile "org.ow2.asm:asm:4.0"
-//    precompile "commons-cli:commons-cli:1.2"
-    compile "org.codehaus.groovy:groovy-json:${groovyVersion}"
-    compile "org.codehaus.groovy:groovy-servlet:${groovyVersion}"
+
     compile "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion",
             "com.google.appengine:appengine-api-labs:$gaeVersion"
-    compile 'org.gaelyk:gaelyk:2.0'
+    compile 'org.gaelyk:gaelyk:2.1'
     compile 'com.google.http-client:google-http-client-appengine:1.17.0-rc'
 
-
-
-    /**
-     * To add binary plugin just declare it as a dependency. For example,
-     * uncomment following to add GPars support to your Gaelyk project.
-     * @see https://github.com/musketyr/gpars-appengine
-     */
-    // compile 'org.codehaus.gpars:gpars-appengine:0.1'
-    
-    /**
-     * Gaelyk console serves as playground or key-hole surgery tool for
-     * your application
-     * @see https://github.com/gaelyk/gaelyk-console
-     */
-    // compile 'org.gaelyk:gaelyk-console:2.0'
 
     testCompile 'org.gaelyk:gaelyk-spock:0.4'
     testCompile "com.google.appengine:appengine-api-stubs:$gaeVersion",
@@ -73,7 +44,7 @@ dependencies {
                 
     functionalTestCompile 'org.codehaus.geb:geb-spock:0.7.2',
                           'org.seleniumhq.selenium:selenium-firefox-driver:2.35.0'
-    gaeSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
+    appengineSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
 }
 
 idea {
@@ -119,7 +90,7 @@ eclipse {
 }
 
 def env = System.getenv()
-gae {
+appengine {
 	appcfg {
 		email = env['GAE_USER']
 		password = env['GAE_PASS']
