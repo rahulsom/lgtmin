@@ -41,9 +41,10 @@ dependencies {
     testCompile 'org.gaelyk:gaelyk-spock:0.4'
     testCompile "com.google.appengine:appengine-api-stubs:$gaeVersion",
                 "com.google.appengine:appengine-testing:$gaeVersion"
-                
-    functionalTestCompile 'org.codehaus.geb:geb-spock:0.7.2',
-                          'org.seleniumhq.selenium:selenium-firefox-driver:2.35.0'
+
+    functionalTestCompile 'org.seleniumhq.selenium:selenium-firefox-driver:2.40.0'
+    functionalTestCompile 'org.gebish:geb-spock:0.9.2'
+
     appengineSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
 }
 
