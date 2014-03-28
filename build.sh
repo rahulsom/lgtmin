@@ -10,10 +10,10 @@ EOF
 
 if [ "$TRAVIS_PULL_REQUEST" = false ]; then
   if [ "$TRAVIS_BRANCH" = "master" ]; then
-    gradle clean check && gradle gaeUpdateAll
+    gradle clean test && gradle gaeUpdateAll
   else
-    gradle clean check
+    gradle clean test
   fi
 else
-  gradle clean check
+  gradle clean test
 fi
