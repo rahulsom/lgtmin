@@ -2,8 +2,8 @@ language: groovy
 
 env:
   global:
-    - secure: "DZOSX2GNltNZzZwvFJoyxMA9PULRe9ww1iPDoebKih5R0nrwXyuYAc8YHuNv\nreLX7koa6fKbKyCeD3NIN+mcE4OyQuebc58VaFb9wpRp3CqjalGGLJ8NP/MN\njf8rFsc+y8Z7wbmgGQ0mtCK/CmPP3TeX3sAebf1U6nOfNU7cTkw="
-    - secure: "e5n23BKviDURMAOhE5hFlZDO9Rv0JkoybusjI+W7Nnj4cTjiX/9PMpEwu4eN\nei769XBZPbUGJxTzOxwn8qJ15BqYoakKzVdHhzHqCeSE+KsH5lD1UP24SiB4\nid89MFc4kFSxypeFjFDSeeCEFbx367iGZLOQZ1EgKosiLJaYqk8="
+    - secure: "cwCKO92XimwdUULJ+t1BDh4dfYm6dadI7GbpdjpCJjFjEmsMc0o2EeWMMMzFx2Oa5bT07KnDOruEgoUcln0b+8LpW1e1G2rLM5qv3WEudCEyYWzYYY8TP619e8CwZFotd3fLe+L331C44twds4MF2GrOY5EN/veA4p9qfR3eNPw="
+    - secure: "Gg7AOrLNyUrhNTHC4QAqMrpLBqLa12qLgmNzg/mR2xOFVL6uMB9fVHlgNBRy4rI6EruF58Uhyfts8jO/iLM2k7sGj7EdcujGjjfBZ1tYJs7uwnK5XgEU1rgHYeDNwiVY65dc8wymDxx+FuCZcihSnFivrS7rlZCupWlyZLXQSs0="
     - secure: "JNoctVCwvPYibVT4pijsVrEHPbW8PlhX1ASWCxERhKc7u9s0pWYXCecIszKmupyjUyf4yhe6uXbDarYcsP3COpzuxmCq0BLdQ9KfnVcCaxNwvHgcRcMf4SZSX3k2nP3GO3TEte+6xJ+RpZHbdF4WAfu35tUxmr5G34+rrZFiyKM="
     - secure: "ZAJ6714sXlImCR3f0/StKnkGckJvqRZATC7fwBWOLyZBfwZxnDVULqkI7qo253zdY3lsWHYZwMO4mIqzMCHPnKj8FtNY5OA8Z+QeczwPvBsi+mo5EEMskix1PeZC14qE0MCFef/+HyXCdq1d/nTQ4V/kvjk7QzdA274MBpXQZS0="
 
