@@ -34,7 +34,7 @@ dependencies {
 
     compile "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion",
             "com.google.appengine:appengine-api-labs:$gaeVersion"
-    compile 'org.gaelyk:gaelyk:2.1'
+    compile 'org.gaelyk:gaelyk:2.1.1'
     compile 'com.google.http-client:google-http-client-appengine:1.17.0-rc'
 
 
