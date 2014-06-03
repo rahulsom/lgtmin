@@ -45,7 +45,8 @@
                 <% if (session?.getAttribute('githubUsername')) { %>
                 <li>
                     <a href="/auth/logout">
-                        <img src="<%=session?.getAttribute('githubAvatar')%>" height="18px"/>
+                        <img src="<%=session?.getAttribute('githubAvatar')%>" height="50px" 
+                                style="margin-top: -18px;margin-bottom: -16px;"/>
                         <%=session?.getAttribute('githubUsername')%>
                     </a>
                 </li>
