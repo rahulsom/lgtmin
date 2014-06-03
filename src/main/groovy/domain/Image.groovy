@@ -72,6 +72,15 @@ class Image implements Serializable {
         "${root}/r/${hash}"
     }
 
+    /**
+     * The url for deleting the image
+     * @return the url (string)
+     */
+    @Ignore
+    String getDeleteUrl() {
+        "${root}/d/${hash}"
+    }
+
     @Ignore
     String getTrackableImageUrl() {
         "${root}/p/${hash}"

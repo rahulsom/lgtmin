@@ -24,6 +24,10 @@
         		>${image.markdown.replace("\\n", '\n')}</textarea>
 			</div>
     </form>
+    <br/><br/>
+    <% if (session?.getAttribute('githubUsername') == 'rahulsom') { %>
+      <a class="btn btn-danger" href="${image.deleteUrl}">Delete</a>
+    <% } %>
   </div>
 </div>
 <% if(request.getAttribute('comments')) { %>
