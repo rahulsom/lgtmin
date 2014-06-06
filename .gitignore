@@ -11,4 +11,4 @@ src/main/webapp/WEB-INF/appengine-generated/local_db.bin
 src/main/webapp/WEB-INF/appengine-generated/datastore-indexes-auto.xml
 .gradletasknamecache
 src/main/webapp/WEB-INF/classes/
-src/main/resources/oauth.properties
+data-backup

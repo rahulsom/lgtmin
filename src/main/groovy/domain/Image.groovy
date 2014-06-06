@@ -25,6 +25,7 @@ class Image implements Serializable {
     long likes = 0
     long dislikes = 0
     long credits = 100
+    boolean isDeleted = false
 
     /**
      * Gets the hash of the id
@@ -184,6 +185,7 @@ class Image implements Serializable {
      */
     static List<Image> listSortedByCredits(int max, int theOffset = 0) {
         Image.findAll {
+            where isDeleted == false
             sort 'desc' by 'credits'
             limit max
             offset theOffset
