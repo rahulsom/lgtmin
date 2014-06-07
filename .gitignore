@@ -6,6 +6,7 @@
 .idea
 
 build
+classes/
 
 src/main/webapp/WEB-INF/lib/*.jar
 src/main/webapp/WEB-INF/appengine-generated/local_db.bin
