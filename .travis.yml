@@ -15,3 +15,7 @@ cache:
 
 addons:
   firefox: "28.0"
+
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
