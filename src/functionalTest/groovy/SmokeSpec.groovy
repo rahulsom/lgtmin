@@ -8,4 +8,60 @@ class SmokeSpec extends GebSpec {
         then:
         title == 'LGTM.in/g'
     }
+
+
+    void "try submitting an image"() {
+        when:
+        go '/g/upload'
+
+        then:
+        !$('#dataUrl')
+
+        when:
+        go '/g/upload'
+        $('input[name="imageUrl"]') << 'https://31.media.tumblr.com/f52054aeea9d0f09cfadf47bd6c19992/tumblr_n6kdd61jx81qjmcfmo1_500.gif'
+        $('button[type="submit"]').click()
+
+        then:
+        $('#dataUrl').text() != null
+
+        when:
+        go '/g/upload'
+
+        then:
+        !$('#dataUrl')
+
+        when:
+        $('input[name="imageUrl"]') << 'http://i.imgur.com/cSq6WCj.png'
+        $('button[type="submit"]').click()
+
+        then:
+        $('#dataUrl').text() != null
+
+        when:
+        go '/g/upload'
+
+        then:
+        !$('#dataUrl')
+
+        when:
+        $('input[name="imageUrl"]') << 'http://i.imgur.com/caopBHC.jpg'
+        $('button[type="submit"]').click()
+
+        then:
+        $('#dataUrl').text() != null
+
+        when:
+        go '/g'
+
+        then:
+        $('#dataUrl')
+        $('#imageUrl').text() in [
+                'https://31.media.tumblr.com/f52054aeea9d0f09cfadf47bd6c19992/tumblr_n6kdd61jx81qjmcfmo1_500.gif',
+                'http://i.imgur.com/cSq6WCj.png',
+                'http://i.imgur.com/caopBHC.jpg'
+        ]
+
+
+    }
 }

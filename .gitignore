@@ -3,6 +3,7 @@
 *.iws
 
 .gradle
+.idea
 
 build
 
