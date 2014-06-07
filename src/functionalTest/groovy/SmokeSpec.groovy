@@ -56,7 +56,7 @@ class SmokeSpec extends GebSpec {
 
         then:
         $('#dataUrl')
-        $('#imageUrl').text() in [
+        $('#imageUrl').value() in [
                 'https://31.media.tumblr.com/f52054aeea9d0f09cfadf47bd6c19992/tumblr_n6kdd61jx81qjmcfmo1_500.gif',
                 'http://i.imgur.com/cSq6WCj.png',
                 'http://i.imgur.com/caopBHC.jpg'
