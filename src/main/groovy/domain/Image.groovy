@@ -25,7 +25,7 @@ class Image implements Serializable {
     long likes = 0
     long dislikes = 0
     long credits = 100
-    boolean isDeleted = false
+    Boolean isDeleted = false
 
     /**
      * Gets the hash of the id
@@ -189,6 +189,18 @@ class Image implements Serializable {
             sort 'desc' by 'credits'
             limit max
             offset theOffset
+        }
+    }
+
+    /**
+     * Lists images sorted by credits
+     * @param max max number of images to return
+     * @param theOffset offset for search
+     * @return a list of images
+     */
+    static int countNotDeleted() {
+        Image.count {
+            where isDeleted == false
         }
     }
 
