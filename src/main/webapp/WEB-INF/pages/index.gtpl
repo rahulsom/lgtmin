@@ -99,7 +99,8 @@
            from <a href="https://github.com/kumabook">kumabook</a>
        </li>
        <li>
-           <a href="https://github.com/geckotang/alfred-lgtmin-workflow">On Alfred 2</a> by gectotang
+           <a href="https://github.com/geckotang/alfred-lgtmin-workflow">On Alfred 2</a>
+	   by <a href="https://github.com/geckotang">GeckoTang</a>
        </li>
         <li>
             <a href="http://lgtm.herokuapp.com/">LGTM on Heroku</a> kicks ass if you want to generate gifs with
