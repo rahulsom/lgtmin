@@ -8,8 +8,8 @@ EOF
 
 if [ "$TRAVIS_PULL_REQUEST" = false ]; then
   if [ "$TRAVIS_BRANCH" = "master" ]; then
-    # gradle clean check && gradle appengineUpdateAll 
-    ./gradlew clean check && cat ./build/exploded-app/WEB-INF/appengine-generated/datastore-indexes-auto.xml
+    # gradle clean check && gradle appengineUpdateAll
+    ./gradlew clean test && ./gradlew appengineUpdateAll
   else
     gradle clean check
   fi
