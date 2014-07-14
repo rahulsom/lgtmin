@@ -84,11 +84,15 @@
 
       It also serves as the issue tracking system.
     </p>
+      <p>
+      There is the occasional porn/hatespeech/whatever else that makes this community look bad. If you see that,
+        please send a tweet out to <a href="http://twitter.com/rahulsom">me</a>, and I'll exercise the kill switch.
+    </p>
     <h2>Community</h2>
     <ul>
        <li>
-           <a href="https://chrome.google.com/webstore/detail/lgtm/oeacdmeoegfagkmiecjjikpfgebmalof">Google Chrome Extension</a>
-           from <a href="https://github.com/monochromegane/LGTM">monochromegane</a>
+           <a href="https://chrome.google.com/webstore/detail/lgtm/oeacdmeoegfagkmiecjjikpfgebmalof">Google Chrome
+               Extension</a> from <a href="https://github.com/monochromegane/LGTM">monochromegane</a>
        </li>
        <li>
            <a href="https://addons.mozilla.org/en-US/firefox/addon/lgtm-for-firefox/?src=cb-dl-created">Firefox Add-on</a>
@@ -97,6 +101,10 @@
        <li>
            <a href="https://github.com/geckotang/alfred-lgtmin-workflow">On Alfred 2</a> by gectotang
        </li>
+        <li>
+            <a href="http://lgtm.herokuapp.com/">LGTM on Heroku</a> kicks ass if you want to generate gifs with
+               our words embedded in them. <a href="https://github.com/negipo/lgtm">Source</a>
+        </li>
     </ul>
     <h2>On Twitter</h2>
     <a class="twitter-timeline" href="https://twitter.com/search?q=LGTM.in" data-widget-id="439281581404852225">Tweets about "LGTM.in"</a>
@@ -107,4 +115,3 @@
 </div>
 
 <% include '/WEB-INF/includes/footer.gtpl' %>
-

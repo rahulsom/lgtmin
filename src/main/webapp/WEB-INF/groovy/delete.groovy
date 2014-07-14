@@ -1,4 +1,3 @@
-import com.google.appengine.api.memcache.Expiration
 import util.AppUtil
 
 import domain.Image
@@ -11,7 +10,8 @@ if (session?.getAttribute('githubUsername') == 'rahulsom') {
     log.info "Image: ${image}"
 
     if (image) {
-        image.delete()
+        image.isDeleted = true
+        image.save()
         AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
         AppUtil.instance.evictCache(AppUtil.COUNT)
         AppUtil.instance.evictCache("/i/${hash}")

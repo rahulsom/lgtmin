@@ -6,7 +6,7 @@ import java.security.SecureRandom
 import java.util.logging.Level
 
 def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
-    Image.count()
+    Image.countNotDeleted()
 }
 
 if (ct) {
