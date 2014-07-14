@@ -90,6 +90,13 @@
            <a href="https://chrome.google.com/webstore/detail/lgtm/oeacdmeoegfagkmiecjjikpfgebmalof">Google Chrome Extension</a>
            from <a href="https://github.com/monochromegane/LGTM">monochromegane</a>
        </li>
+       <li>
+           <a href="https://addons.mozilla.org/en-US/firefox/addon/lgtm-for-firefox/?src=cb-dl-created">Firefox Add-on</a>
+           from <a href="https://github.com/kumabook">kumabook</a>
+       </li>
+       <li>
+           <a href="https://github.com/geckotang/alfred-lgtmin-workflow">On Alfred 2</a> by gectotang
+       </li>
     </ul>
     <h2>On Twitter</h2>
     <a class="twitter-timeline" href="https://twitter.com/search?q=LGTM.in" data-widget-id="439281581404852225">Tweets about "LGTM.in"</a>
