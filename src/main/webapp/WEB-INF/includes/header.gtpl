@@ -8,8 +8,8 @@
 
     <title>LGTM.in/g</title>
 
-    <link rel="shortcut icon" href="/images/gaelyk-small-favicon.png" type="image/png" />
-    <link rel="icon" href="/images/gaelyk-small-favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="/images/gaelyk-small-favicon.png?q=1" type="image/png" />
+    <link rel="icon" href="/images/gaelyk-small-favicon.png?q=1" type="image/png" />
     <link rel="author" href="/humans.txt" />
     <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cabin+Sketch'/>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
@@ -45,7 +45,7 @@
                 <% if (session?.getAttribute('githubUsername')) { %>
                 <li>
                     <a href="/auth/logout">
-                        <img src="<%=session?.getAttribute('githubAvatar')%>" height="50px" 
+                        <img src="<%=session?.getAttribute('githubAvatar')%>" height="50px"
                                 style="margin-top: -18px;margin-bottom: -16px;"/>
                         <%=session?.getAttribute('githubUsername')%>
                     </a>
