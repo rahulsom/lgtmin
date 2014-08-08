@@ -14,6 +14,8 @@
     <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cabin+Sketch'/>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/app.css"/>
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/fagoekogpjjhmdnmpgpnahioapbeaajp" />
+
 </head>
 
 <body>
@@ -78,18 +80,16 @@
 
     <div class="row">
         <div class="col-md-12">
+          <div class="chrome">
             <div class="alert alert-block alert-info hide" id="protip1">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <strong>Pro Tip:</strong> Drag this bookmarklet to your favorites bar. You can then LGTM with a
-                click of a bookmarklet. <a
-                    href='javascript:(function () {
-            jQuery.getJSON("http://www.lgtm.in/g", function (data) {
-                var oldMessage = jQuery("textarea[name=\"comment[body]\"]").val();
-                var msg = data.markdown;
-                jQuery("textarea[name=\"comment[body]\"]").val(oldMessage + "\n\n" + msg);
-            });
-            })();'><span class="label label-info">LGTM</span></a>
+                <strong>Pro Tip:</strong>
+                Install <a href="javascript:void(0);" onclick="chrome.webstore.install()">
+                  <span class="label label-info">LGTM</span></a> as a Google Chrome Extension.
+                  You can then LGTM with a
+                click of a button.
             </div>
+          </div>
 
         </div>
     </div>

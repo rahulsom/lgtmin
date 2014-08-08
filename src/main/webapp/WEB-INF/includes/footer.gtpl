@@ -13,45 +13,34 @@
                 </p>
             </div>
         </div>
-        <script defer type="text/javascript">
-            (function() {
-                function getScript(url,success){
-                    var script=document.createElement('script');
-                    script.src=url;
-                    var head=document.getElementsByTagName('head')[0],
-                            done=false;
-                    script.onload=script.onreadystatechange = function(){
-                        if ( !done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete') ) {
-                            done=true;
-                            success();
-                            script.onload = script.onreadystatechange = null;
-                            head.removeChild(script);
-                        }
-                    };
-                    head.appendChild(script);
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/detectizr/1.5.0/detectizr.min.js"></script>
+        <script type="text/javascript">
+            jQuery(function () {
+                Modernizr.Detectizr.detect({detectScreen:false});
+
+                if (Modernizr.Detectizr.device.browser === 'chrome' &&
+                        Modernizr.Detectizr.device.type === 'desktop') {
+                  jQuery('[data-toggle="tooltip"]').tooltip();
+
+                  var protipCookie = jQuery.cookie('protip1');
+                  console.log('Protip Cookie: ' + protipCookie);
+                  if (!protipCookie) {
+                      console.log('Showing...');
+                      jQuery('#protip1').removeClass('hide');
+                      console.log('...done');
+                  }
+
+                  jQuery('#protip1 .close').click(function () {
+                      jQuery.cookie('protip1', 'true');
+                  });
+
                 }
-                getScript('http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js',function(){
-                getScript('http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js',function(){
-                getScript('http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js',function(){
-                    jQuery(function () {
-                        jQuery('[data-toggle="tooltip"]').tooltip();
 
-                        var protipCookie = jQuery.cookie('protip1');
-                        console.log('Protip Cookie: ' + protipCookie);
-                        if (!protipCookie) {
-                            console.log('Showing...');
-                            jQuery('#protip1').removeClass('hide');
-                            console.log('...done');
-                        }
-
-                        jQuery('#protip1 .close').click(function () {
-                            jQuery.cookie('protip1', 'true');
-                        });
-                    });
-                });
-                });
-                });
-            })();
+            });
 
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
