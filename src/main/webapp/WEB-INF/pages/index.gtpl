@@ -99,12 +99,16 @@
            from <a href="https://github.com/kumabook">kumabook</a>
        </li>
        <li>
-           <a href="https://github.com/geckotang/alfred-lgtmin-workflow">On Alfred 2</a>
-	   by <a href="https://github.com/geckotang">GeckoTang</a>
+           <a href="https://github.com/geckotang/alfred-lgtmin-workflow">On Alfred 2</a> by
+           <a href="https://github.com/geckotang">GeckoTang</a>
        </li>
         <li>
             <a href="http://lgtm.herokuapp.com/">LGTM on Heroku</a> kicks ass if you want to generate gifs with
                our words embedded in them. <a href="https://github.com/negipo/lgtm">Source</a>
+        </li>
+        <li>
+            <a href="http://lgtmin-gh-bmlt.herokuapp.com/">LGTM GT BMLT</a> by
+            <a href="https://github.com/yukihr/lgtmin-github-bookmarklet">yukihr</a>
         </li>
     </ul>
     <h2>On Twitter</h2>
