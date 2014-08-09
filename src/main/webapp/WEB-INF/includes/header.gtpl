@@ -42,15 +42,23 @@
                 <li class="${request.servletPath == '/WEB-INF/pages/upload.gtpl' ? 'active' : ''}">
                     <a href="/g/upload">Submit</a>
                 </li>
+                <li class="${request.servletPath == '/WEB-INF/pages/browse.gtpl' ? 'active' : ''}">
+                    <a href="/g/browse">Browse</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <% if (session?.getAttribute('githubUsername')) { %>
-                <li>
-                    <a href="/auth/logout">
+                <li class="dropdown">
+                    <a href="#"  class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<%=session?.getAttribute('githubAvatar')%>" height="50px"
                                 style="margin-top: -18px;margin-bottom: -16px;"/>
                         <%=session?.getAttribute('githubUsername')%>
                     </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">My List</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/auth/logout">Logout</a></li>
+                    </ul>
                 </li>
                 <% } else { %>
                 <li>
