@@ -2,14 +2,13 @@ package domain
 
 import groovy.transform.ToString
 import groovyx.gaelyk.datastore.Entity
-import groovyx.gaelyk.datastore.Ignore
 
 /**
  * Created by rahulsomasunderam on 8/9/14.
  */
 @Entity(unindexed = false)
 @ToString
-class UserList {
+class UserList implements Serializable {
     String username
     List<String> hashes
 
