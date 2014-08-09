@@ -99,6 +99,7 @@ class GithubAuthUtil {
             response.sendRedirect '/'
         }
 
+        log.info "'${session.getAttribute(GITHUB_USERNAME)}' logged in."
         if (session.getAttribute(POST_LOGIN_URI)) {
             def postLoginUri = session.getAttribute(POST_LOGIN_URI)
             session.removeAttribute POST_LOGIN_URI
