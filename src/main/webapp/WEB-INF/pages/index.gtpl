@@ -107,7 +107,7 @@
                our words embedded in them. <a href="https://github.com/negipo/lgtm">Source</a>
         </li>
         <li>
-            <a href="http://lgtmin-gh-bmlt.herokuapp.com/">LGTM GT BMLT</a> by
+            <a href="http://lgtmin-gh-bmlt.herokuapp.com/">LGTMin GH BMLT</a> by
             <a href="https://github.com/yukihr/lgtmin-github-bookmarklet">yukihr</a>
         </li>
     </ul>
