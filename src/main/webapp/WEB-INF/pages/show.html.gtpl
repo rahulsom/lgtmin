@@ -13,21 +13,36 @@
   		<div class="form-group>
         <label for="imageUrl">Image Url</label>
         <input type="text" value="${image.imageUrl}" class="form-control" id="imageUrl" name="imageUrl">
-			</div>
+        </div>
   		<div class="form-group>
         <label for="dataUrl">Data Url</label>
         <input type="text" value="${image.dataUrl}" class="form-control" id="dataUrl" name="dataUrl">
-			</div>
+        </div>
   		<div class="form-group>
         <label for="markdown">Markdown</label>
         <textarea class="form-control" rows="4" id="markdown" name="markdown"
         		>${image.markdown.replace("\\n", '\n')}</textarea>
-			</div>
+        </div>
+
     </form>
     <br/><br/>
-    <% if (session?.getAttribute('githubUsername') == 'rahulsom') { %>
-      <a class="btn btn-danger" href="${image.deleteUrl}">Delete</a>
-    <% } %>
+    <div class="row">
+
+        <% if (session?.getAttribute('githubUsername')) { %>
+        <div class="col-md-3">
+            <a class="btn btn-default btn-block btn-lg" href="/m/${image.hash}">
+                <span class="glyphicon glyphicon-star"></span> My List
+            </a>
+        </div>
+        <% if (session?.getAttribute('githubUsername') == 'rahulsom') { %>
+        <div class="col-md-3">
+            <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}">
+                <span class="glyphicon glyphicon-trash"></span> Delete
+            </a>
+        </div>
+        <% } %>
+        <% } %>
+    </div>
   </div>
 </div>
 <% if(request.getAttribute('comments')) { %>
