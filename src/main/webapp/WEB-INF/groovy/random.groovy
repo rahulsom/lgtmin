@@ -24,9 +24,9 @@ if (params.username) {
 if (ct) {
     def random = Math.abs(new SecureRandom().nextGaussian() / 2.0)
     log.info "Random: ${random}"
-    def theOffset = Math.floor(random * (ct - 1)).intValue()
+    def theOffset = Math.floor(random * ct).intValue()
     if (theOffset >= ct) {
-        theOffset = 0
+        theOffset = theOffset % ct
     }
 
     log.info "Fetching ${theOffset} of ${ct}"
