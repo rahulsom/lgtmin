@@ -40,10 +40,10 @@
                     <a href="/g">Random</a>
                 </li>
                 <li class="${request.servletPath == '/WEB-INF/pages/upload.gtpl' ? 'active' : ''}">
-                    <a href="/g/upload">Submit</a>
+                    <a href="/upload">Submit</a>
                 </li>
                 <li class="${request.servletPath == '/WEB-INF/pages/browse.gtpl' ? 'active' : ''}">
-                    <a href="/g/browse">Browse</a>
+                    <a href="/browse">Browse</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -56,6 +56,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="/l/${session?.getAttribute('githubUsername')}">My List</a></li>
+                        <li><a href="/g/${session?.getAttribute('githubUsername')}">Random in My List</a></li>
                         <li class="divider"></li>
                         <li><a href="/auth/logout">Logout</a></li>
                     </ul>

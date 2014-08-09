@@ -22,8 +22,8 @@ if (hash) {
                 myList.hashes.add(hash)
             }
 
-            AppUtil.instance.evictCache("/l/${userName}")
             myList.save()
+            AppUtil.instance.evictCache("/l/${userName}")
 
         }
         AppUtil.instance.evictCache("/i/${hash}")

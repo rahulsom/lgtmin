@@ -1,26 +1,35 @@
 import domain.Image
+import services.LgtmService
 import util.AnalyticsUtil
 import util.AppUtil
 
 import java.security.SecureRandom
 import java.util.logging.Level
 
-def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
-    Image.countNotDeleted()
+def ct = LgtmService.instance.count
+List<Image> imageList = LgtmService.instance.imageList
+
+if (params.username) {
+    def myList = LgtmService.instance.getUserList(params.username)
+    if (myList.hashes?.size()) {
+        imageList = LgtmService.instance.imageList.findAll { img ->
+            myList.hashes.contains(img.hash)
+        }.sort(false) { img ->
+            - img.credits
+        }
+        ct = imageList.size();
+    }
 }
 
 if (ct) {
-    def random = Math.abs(new SecureRandom().nextGaussian() / 2.5)
+    def random = Math.abs(new SecureRandom().nextGaussian() / 2.0)
     log.info "Random: ${random}"
     def theOffset = Math.floor(random * (ct - 1)).intValue()
-    if (theOffset > ct - 1) {
+    if (theOffset >= ct) {
         theOffset = 0
     }
 
     log.info "Fetching ${theOffset} of ${ct}"
-    def imageList = AppUtil.instance.getCachedValue(AppUtil.ALL_IMAGES) {
-        Image.listSortedByCredits(ct)
-    }
 
     Image image = null
     image = imageList[theOffset]

@@ -1,7 +1,7 @@
 <% include '/WEB-INF/includes/header.gtpl' %>
   <h1>Upload</h1>
 
-  <form action="/g/save" method="post">
+  <form action="/save" method="post">
   	<div class="form-group>
 
 		<label for="imageUrl">Image Url</label>
