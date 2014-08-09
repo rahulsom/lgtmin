@@ -12,4 +12,10 @@ import groovyx.gaelyk.datastore.Ignore
 class UserList {
     String username
     List<String> hashes
+
+    static UserList findByUsername(String un) {
+        UserList.find {
+            where username == un
+        }
+    }
 }

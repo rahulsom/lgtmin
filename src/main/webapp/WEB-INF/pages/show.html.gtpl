@@ -29,8 +29,9 @@
     <div class="row">
 
         <% if (session?.getAttribute('githubUsername')) { %>
+        <% def favClass = request.getAttribute('favorite') == 'true' ? 'btn-info' : 'btn-default' %>
         <div class="col-md-3">
-            <a class="btn btn-default btn-block btn-lg" href="/m/${image.hash}">
+            <a class="btn ${favClass} btn-block btn-lg" href="/m/${image.hash}">
                 <span class="glyphicon glyphicon-star"></span> My List
             </a>
         </div>

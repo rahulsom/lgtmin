@@ -1,5 +1,6 @@
 import domain.Image
 import domain.UserList
+import services.LgtmService
 import util.AppUtil
 import util.GithubAuthUtil
 
@@ -13,20 +14,17 @@ if (hash) {
         githubAuthUtil.withValidUser("/u/${hash}") {
             def userName = session.getAttribute('githubUsername')
             log.info "Username: ${userName}"
-            def myList = UserList.find {
-                where username == userName
-            }
-            if (!myList) {
-                log.info "Creating list for user ${userName}"
-                myList = new UserList(username: userName, hashes: [])
-                myList.save()
+            UserList myList = LgtmService.instance.getUserList(userName)
+
+            if (myList.hashes.contains(hash)) {
+                myList.hashes.remove(hash)
+            } else {
+                myList.hashes.add(hash)
             }
 
-            /*datastore.withTransaction {
-                image.likes++
-                image.updateCredits()
-                image.save()
-            } */
+            AppUtil.instance.evictCache("/l/${userName}")
+            myList.save()
+
         }
         AppUtil.instance.evictCache("/i/${hash}")
         redirect("/i/${hash}")

@@ -1,14 +1,6 @@
-import domain.Image
-import util.AppUtil
+import services.LgtmService
 
-def ct = AppUtil.instance.getCachedValue(AppUtil.COUNT) {
-    Image.countNotDeleted()
-}
 
-def imageList = AppUtil.instance.getCachedValue(AppUtil.ALL_IMAGES) {
-    Image.listSortedByCredits(ct)
-}
-
+def imageList = LgtmService.instance.imageList
 request.setAttribute 'imageList', imageList
-
 forward '/WEB-INF/pages/browse.gtpl'

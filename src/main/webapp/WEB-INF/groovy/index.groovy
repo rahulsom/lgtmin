@@ -1,11 +1,6 @@
-import util.AppUtil
+import services.LgtmService
 
-import domain.Image
-import static util.AppUtil.TOP_IMAGES
-
-def imageList = AppUtil.instance.getCachedValue(TOP_IMAGES) {
-	Image.listSortedByCredits(12)
-}
+def imageList = LgtmService.instance.topImages
 
 log.info "Images: ${imageList}"
 request.setAttribute 'imageList', imageList

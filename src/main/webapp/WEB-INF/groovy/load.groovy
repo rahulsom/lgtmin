@@ -1,11 +1,14 @@
-import com.google.appengine.api.memcache.Expiration
-import util.AppUtil
+import services.LgtmService
 
 import domain.Image
 
 String hash = params.hash
-Image image = AppUtil.instance.getCachedValue("/i/${hash}", Expiration.byDeltaMillis(AppUtil.DAY)) {
-    Image.findByHash(hash)
+Image image = LgtmService.instance.getImage(hash)
+if (session.getAttribute('githubUsername')) {
+    def myList = LgtmService.instance.getUserList(session.getAttribute('githubUsername'))
+    if (myList.hashes.contains(hash)) {
+        request.setAttribute('favorite', 'true')
+    }
 }
 
 log.info "Image: ${image}"
