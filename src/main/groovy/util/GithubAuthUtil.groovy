@@ -95,17 +95,17 @@ class GithubAuthUtil {
             session.setAttribute GITHUB_USERNAME, userJson.login
             session.setAttribute GITHUB_AVATAR, userJson.avatar_url
 
+            log.info "'${session.getAttribute(GITHUB_USERNAME)}' logged in."
+            if (session.getAttribute(POST_LOGIN_URI)) {
+                def postLoginUri = session.getAttribute(POST_LOGIN_URI)
+                session.removeAttribute POST_LOGIN_URI
+                response.sendRedirect postLoginUri
+            } else {
+                response.sendRedirect "/"
+            }
         } catch (HttpResponseException e) {
+            // TODO Could not log in
             response.sendRedirect '/'
-        }
-
-        log.info "'${session.getAttribute(GITHUB_USERNAME)}' logged in."
-        if (session.getAttribute(POST_LOGIN_URI)) {
-            def postLoginUri = session.getAttribute(POST_LOGIN_URI)
-            session.removeAttribute POST_LOGIN_URI
-            response.sendRedirect postLoginUri
-        } else {
-            response.sendRedirect "/"
         }
 
     }
