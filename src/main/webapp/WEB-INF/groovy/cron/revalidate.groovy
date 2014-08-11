@@ -7,7 +7,8 @@ Image.findAll().each { Image i ->
         i.validate(false)
     } catch (ValidationException e) {
         log.info("Removing ${i}")
-        i.delete()
+        i.isDeleted = true
+        i.save()
     } catch (Exception e) {
         log.warning "Unexpected exception: $e for $i"
     }
