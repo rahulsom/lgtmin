@@ -11,7 +11,7 @@ if (hash) {
     def image = Image.findByHash(hash)
     log.info "Image: ${image}"
     if (image) {
-        githubAuthUtil.withValidUser("/u/${hash}") {
+        githubAuthUtil.withValidUser("/m/${hash}") {
             def userName = session.getAttribute('githubUsername')
             log.info "Username: ${userName}"
             UserList myList = LgtmService.instance.getUserList(userName)
@@ -25,8 +25,8 @@ if (hash) {
             myList.save()
             AppUtil.instance.evictCache("/l/${userName}")
 
+            AppUtil.instance.evictCache("/i/${hash}")
         }
-        AppUtil.instance.evictCache("/i/${hash}")
         redirect("/i/${hash}")
     } else {
         redirect('/')

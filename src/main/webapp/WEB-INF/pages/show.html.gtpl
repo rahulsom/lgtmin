@@ -28,7 +28,6 @@
     <br/><br/>
     <div class="row">
 
-        <% if (session?.getAttribute('githubUsername')) { %>
         <% def favClass = request.getAttribute('favorite') == 'true' ? 'btn-info' : 'btn-default' %>
         <div class="col-md-3">
             <a class="btn ${favClass} btn-block btn-lg" href="/m/${image.hash}">
@@ -41,7 +40,6 @@
                 <span class="glyphicon glyphicon-trash"></span> Delete
             </a>
         </div>
-        <% } %>
         <% } %>
     </div>
   </div>

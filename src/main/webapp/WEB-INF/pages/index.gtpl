@@ -65,14 +65,14 @@
     </p>
       <h2>Quick and Easy</h2>
       <p>
-          This is the javascript in the bookmarklet. Feel free to create your own if you don't like
-          the default implementation.
+          This is the effective javascript in the extension. Feel free to create your own if you don't like
+          the default implementation. The extension source is
+					<a href="https://github.com/rahulsom/lgtm-chrome">here</a>.
       </p>
     <pre>
 \$.getJSON("http://www.lgtm.in/g", function (data) {
-  var old = \$("textarea[name='comment[body]']").val();
-  var msg = data.markdown;
-  \$("textarea[name='comment[body]']").val(old + "\\n\\n" + msg);
+  \$("textarea[name='comment[body]']").
+	 append("\\n\\n" + data.markdown);
 });</pre>
   </div>
   <div class="col-md-6">
