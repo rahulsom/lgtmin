@@ -14,7 +14,7 @@ import java.util.logging.Level
  */
 @Log
 class AnalyticsUtil {
-    static def sendInfo(HttpServletRequest theRequest, String hash = null) {
+    static def sendInfo(HttpServletRequest theRequest, String hash = null, String title = 'Random Fetch') {
 
         def urlString = "https://ssl.google-analytics.com/collect"
 
@@ -33,7 +33,7 @@ class AnalyticsUtil {
                 t: 'pageview',     // Pageview hit type.
                 dh: 'www.lgtm.in',  // Document hostname.
                 dp: hash ?: '/g.json',       // Page.
-                dt: 'Random Fetch',    // Title.
+                dt: title,    // Title.
         ]
 
         log.info(body.toMapString())
