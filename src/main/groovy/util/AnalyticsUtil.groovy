@@ -17,17 +17,24 @@ class AnalyticsUtil {
     static def sendInfo(HttpServletRequest theRequest, String hash = null) {
 
         def urlString = "https://ssl.google-analytics.com/collect"
+
+        log.log Level.WARNING, theRequest.getHeaderNames().toList().toString()
+        def ua = theRequest.getHeader('User-Agent')
         def body = [
                 v: 1,             // Version.
                 tid: AnalyticsUtil.TrackingId,  // Tracking ID / Web property / Property ID.
-                cid: theRequest.remoteAddr,        // Anonymous Client ID.
+                cid: theRequest.session.id,        // Anonymous Client ID.
+
+                uip: theRequest.remoteAddr, // IP Address
+                ua: ua, // User Agent
 
                 t: 'pageview',     // Pageview hit type.
                 dh: 'www.lgtm.in',  // Document hostname.
                 dp: hash ?: '/g.json',       // Page.
                 dt: 'Random Fetch',    // Title.
-
         ]
+
+        log.info(body.toMapString())
         def queryString = body.collect { k, v ->
             "${k.toString()}=${v.toString().replace(' ', '+')}"
         }.join('&')
