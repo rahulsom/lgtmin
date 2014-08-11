@@ -20,6 +20,7 @@ class AnalyticsUtil {
 
         log.log Level.WARNING, theRequest.getHeaderNames().toList().toString()
         def ua = theRequest.getHeader('User-Agent')
+        def ul = theRequest.getHeader('Accept-Language')
         def body = [
                 v: 1,             // Version.
                 tid: AnalyticsUtil.TrackingId,  // Tracking ID / Web property / Property ID.
@@ -27,6 +28,7 @@ class AnalyticsUtil {
 
                 uip: theRequest.remoteAddr, // IP Address
                 ua: ua, // User Agent
+                ul: ul,
 
                 t: 'pageview',     // Pageview hit type.
                 dh: 'www.lgtm.in',  // Document hostname.
