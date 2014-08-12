@@ -24,8 +24,6 @@ if (hash) {
 
             myList.save()
             AppUtil.instance.evictCache("/l/${userName}")
-
-            AppUtil.instance.evictCache("/i/${hash}")
         }
         redirect("/i/${hash}")
     } else {
