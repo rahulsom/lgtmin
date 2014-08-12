@@ -46,13 +46,16 @@ class AnalyticsUtil {
 
                 uip: theRequest.remoteAddr, // IP Address
                 ua: ua, // User Agent
-                ul: ul,
 
                 t: 'pageview',     // Pageview hit type.
                 dh: 'www.lgtm.in',  // Document hostname.
                 dp: hash ?: '/g.json',       // Page.
                 dt: title,    // Title.
         ]
+
+        if (ul) {
+            body.ul = ul
+        }
 
         log.info(body.toMapString())
         def queryString = body.collect { k, v ->
