@@ -12,7 +12,7 @@ Image image = AppUtil.instance.getCachedValue("/i/${hash}", Expiration.byDeltaMi
 log.info "Image: ${image}"
 
 if (image) {
-    AnalyticsUtil.sendInfo(request, "/p/${image.hash}", "Picture Forward")
+    AnalyticsUtil.sendInfo(request, response,  "/p/${image.hash}", "Picture Forward")
     redirect(image.imageUrl)
 } else {
     response.sendError(404)

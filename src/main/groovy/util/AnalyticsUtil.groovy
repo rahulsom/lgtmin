@@ -2,7 +2,9 @@ package util
 
 import groovy.util.logging.Log
 
+import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 import java.util.logging.Level
 
 /**
@@ -14,17 +16,28 @@ import java.util.logging.Level
  */
 @Log
 class AnalyticsUtil {
-    static def sendInfo(HttpServletRequest theRequest, String hash = null, String title = 'Random Fetch') {
+    static def sendInfo(HttpServletRequest theRequest, HttpServletResponse response,  String hash = null, String title = 'Random Fetch') {
 
         def urlString = "https://ssl.google-analytics.com/collect"
 
         log.log Level.WARNING, theRequest.getHeaderNames().toList().toString()
         def ua = theRequest.getHeader('User-Agent')
         def ul = theRequest.getHeader('Accept-Language')
+        log.info theRequest.cookies.collect {"${it.name}=${it.value}(${it.maxAge})"}.join(',')
+        String cid
+        if (theRequest.cookies.find {it.name == 'LongSession'}) {
+            cid = theRequest.cookies.find {it.name == 'LongSession'}.value
+        } else {
+            cid = UUID.randomUUID().toString()
+            response.addCookie(new Cookie('LongSession', cid).with {
+                maxAge = 60 * 60 * 24 * 365 * 2
+                it
+            })
+        }
         def body = [
                 v: 1,             // Version.
                 tid: AnalyticsUtil.TrackingId,  // Tracking ID / Web property / Property ID.
-                cid: theRequest.session.id,        // Anonymous Client ID.
+                cid: cid,        // Anonymous Client ID.
 
                 uip: theRequest.remoteAddr, // IP Address
                 ua: ua, // User Agent

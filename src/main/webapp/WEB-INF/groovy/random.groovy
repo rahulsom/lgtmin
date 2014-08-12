@@ -59,7 +59,7 @@ response.setHeader("Access-Control-Allow-Credentials", "true")
 if (request.getHeader('Accept')?.contains('application/json')) {
     response.setHeader("Content-Type", "application/json")
     Image image = request.getAttribute('image')
-    AnalyticsUtil.sendInfo(request, "/i/${image.hash}")
+    AnalyticsUtil.sendInfo(request,response, "/i/${image.hash}")
     out.write(image.toJson())
 } else {
     response.setHeader("Content-Type", "text/html")
