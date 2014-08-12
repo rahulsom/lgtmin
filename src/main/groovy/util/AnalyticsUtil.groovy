@@ -16,13 +16,16 @@ import java.util.logging.Level
  */
 @Log
 class AnalyticsUtil {
+
+    public static final int SecondsInDay = 60 * 60 * 24
+
     static def sendInfo(HttpServletRequest theRequest, HttpServletResponse response,  String hash = null, String title = 'Random Fetch') {
 
         def urlString = "https://ssl.google-analytics.com/collect"
 
         log.log Level.WARNING, theRequest.getHeaderNames().toList().toString()
         def ua = theRequest.getHeader('User-Agent')
-        def ul = theRequest.getHeader('Accept-Language')
+        def ul = theRequest.getHeader('Accept-Language')?.split(',')?.getAt(0)
         log.info theRequest.cookies.collect {"${it.name}=${it.value}(${it.maxAge})"}.join(',')
         String cid
         if (theRequest.cookies.find {it.name == 'LongSession'}) {
@@ -30,7 +33,7 @@ class AnalyticsUtil {
         } else {
             cid = UUID.randomUUID().toString()
             response.addCookie(new Cookie('LongSession', cid).with {
-                maxAge = 60 * 60 * 24 * 365 * 2
+                maxAge = SecondsInDay * 365 * 2
                 it
             })
         }
