@@ -8,19 +8,22 @@ import javax.servlet.http.HttpServletResponse
 import java.util.logging.Level
 
 /**
- * Created with IntelliJ IDEA.
- * User: rahulsomasunderam
- * Date: 5/8/13
- * Time: 9:25 PM
- * To change this template use File | Settings | File Templates.
+ * Adds support for GA when there isn't any javascript running on the page.
+ * @author rahulsomasunderam
  */
 @Log
 class AnalyticsUtil {
 
     public static final int SecondsInDay = 60 * 60 * 24
 
-    static def sendInfo(HttpServletRequest theRequest, HttpServletResponse response,  String hash = null, String title = 'Random Fetch') {
+    public static final String DoNotTrackHeader = "DNT"
+    public static final String DoNotTrackValue = "1"
 
+    static void sendInfo(HttpServletRequest theRequest, HttpServletResponse response,  String hash, String title) {
+
+        if (theRequest.getHeader(DoNotTrackHeader) == DoNotTrackValue) {
+            log.warning "User requested to not track them"
+        }
         def urlString = "https://ssl.google-analytics.com/collect"
 
         log.info "Headers: ${theRequest.getHeaderNames().toList().toString()}"
@@ -74,8 +77,8 @@ class AnalyticsUtil {
         connection.connect()
 
         try {
-            def recaptchaResponse = new InputStreamReader(connection.inputStream).text
-            println(recaptchaResponse)
+            def analyticsResponse = new InputStreamReader(connection.inputStream).text
+            log.info analyticsResponse
         } catch (Exception e) {
             log.log(Level.WARNING, "Exception occurred while sending analytics to GA", e)
         }
