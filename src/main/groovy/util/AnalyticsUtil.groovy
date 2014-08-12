@@ -28,7 +28,9 @@ class AnalyticsUtil {
         def ul = theRequest.getHeader('Accept-Language')?.split(',')?.getAt(0)
         log.info "Cookies: ${theRequest.cookies.collect {"${it.name}=${it.value}(${it.maxAge})"}.join(',')}"
         String cid
-        if (theRequest.cookies.find {it.name == 'LongSession'}) {
+        if (theRequest.cookies.find {it.name == '_ga'}) {
+            cid = theRequest.cookies.find {it.name == '_ga'}.value
+        } else if (theRequest.cookies.find {it.name == 'LongSession'}) {
             cid = theRequest.cookies.find {it.name == 'LongSession'}.value
         } else {
             cid = UUID.randomUUID().toString()
