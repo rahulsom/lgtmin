@@ -23,10 +23,10 @@ class AnalyticsUtil {
 
         def urlString = "https://ssl.google-analytics.com/collect"
 
-        log.log Level.WARNING, theRequest.getHeaderNames().toList().toString()
+        log.info "Headers: ${theRequest.getHeaderNames().toList().toString()}"
         def ua = theRequest.getHeader('User-Agent')
         def ul = theRequest.getHeader('Accept-Language')?.split(',')?.getAt(0)
-        log.info theRequest.cookies.collect {"${it.name}=${it.value}(${it.maxAge})"}.join(',')
+        log.info "Cookies: ${theRequest.cookies.collect {"${it.name}=${it.value}(${it.maxAge})"}.join(',')}"
         String cid
         if (theRequest.cookies.find {it.name == 'LongSession'}) {
             cid = theRequest.cookies.find {it.name == 'LongSession'}.value
