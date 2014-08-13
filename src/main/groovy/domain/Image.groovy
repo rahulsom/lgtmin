@@ -101,9 +101,11 @@ class Image implements Serializable {
      */
     @Ignore
     String getMarkdown() {
-        """[![LGTM]($trackableImageUrl)]($dataUrl)
+        """\
+        [![LGTM]($trackableImageUrl)]($dataUrl)
 
-[:+1:]($upvoteUrl) [:-1:]($reportUrl)"""
+        [:+1:]($upvoteUrl) [:-1:]($reportUrl)
+        """.stripIndent()
     }
 
     /**
