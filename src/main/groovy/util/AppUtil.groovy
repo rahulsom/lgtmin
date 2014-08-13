@@ -32,6 +32,13 @@ class AppUtil {
         app.env.name.toString() == 'Development' ? 'http://localhost:8080' : 'http://www.lgtm.in'
     }
 
+    /**
+     * Root usable for SSL Urls
+     */
+    String getSslRoot() {
+        app.env.name.toString() == 'Development' ? 'http://localhost:8080' : 'https://lgtmin.appspot.com'
+    }
+
     public static final String TOP_IMAGES = "TopImages"
     public static final String ALL_IMAGES = "AllImages"
     public static final String COUNT = "Count"

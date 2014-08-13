@@ -47,6 +47,15 @@ class Image implements Serializable {
     }
 
     /**
+     * The ssl friendly root of the server
+     * @return the root
+     */
+    @Ignore
+    private String getSslRoot() {
+        AppUtil.instance.sslRoot
+    }
+
+    /**
      * The url for data on the image
      * @return the url (string)
      */
@@ -84,7 +93,7 @@ class Image implements Serializable {
 
     @Ignore
     String getTrackableImageUrl() {
-        "${root}/p/${hash}"
+        "${sslRoot}/p/${hash}"
     }
     /**
      * The markdown for embedding the image in Github
