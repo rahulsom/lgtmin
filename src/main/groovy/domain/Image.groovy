@@ -93,7 +93,7 @@ class Image implements Serializable {
 
     @Ignore
     String getTrackableImageUrl() {
-        "${sslRoot}/p/${hash}"
+        "${root}/p/${hash}"
     }
     /**
      * The markdown for embedding the image in Github
