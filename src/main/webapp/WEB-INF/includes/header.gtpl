@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="/images/gaelyk-small-favicon.png?q=1" type="image/png" />
     <link rel="icon" href="/images/gaelyk-small-favicon.png?q=1" type="image/png" />
     <link rel="author" href="/humans.txt" />
-    <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Cabin+Sketch'/>
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Cabin+Sketch'/>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/app.css"/>
     <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/fagoekogpjjhmdnmpgpnahioapbeaajp" />
