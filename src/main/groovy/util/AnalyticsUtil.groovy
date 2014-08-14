@@ -28,7 +28,7 @@ class AnalyticsUtil {
 
         log.info "Headers: ${theRequest.getHeaderNames().toList().toString()}"
         def ua = theRequest.getHeader('User-Agent')
-        def ul = theRequest.getHeader('Accept-Language')?.split(',')?.getAt(0)
+        def ul = theRequest.getHeader('Accept-Language')?.toLowerCase()?.split(',')?.getAt(0)
         log.info "Cookies: ${theRequest.cookies.collect {"${it.name}=${it.value}(${it.maxAge})"}.join(',')}"
         String cid
         if (theRequest.cookies.find {it.name == '_ga'}) {
