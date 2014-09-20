@@ -111,6 +111,20 @@
             <a href="https://github.com/yukihr/lgtmin-github-bookmarklet">yukihr</a>
         </li>
     </ul>
+
+<!--
+<script type="text/javascript">
+	( function() {
+		if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+		var unit = {"calltype":"async[2]","publisher":"rahulsom","width":468,"height":180,"sid":"Chitika Default","color_text":"666666","color_bg":"EEEEEE","color_button":"DDDDDD","color_button_text":"666666"};
+		var placement_id = window.CHITIKA.units.length;
+		window.CHITIKA.units.push(unit);
+		document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
+}());
+</script>
+<script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
+-->
+
     <h2>On Twitter</h2>
     <a class="twitter-timeline" href="https://twitter.com/search?q=LGTM.in" data-widget-id="439281581404852225">Tweets about "LGTM.in"</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
