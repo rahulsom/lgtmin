@@ -23,11 +23,3 @@ h1,h2,h3,h4,h5,h6,a.navbar-brand {
 .github {
     margin-top: -2px;
 }
-
-.chitikaAdContainer {
-    text-align:center;
-}
-
-.chitikaAdContainer iframe {
-    margin: 0 auto !important;
-}
