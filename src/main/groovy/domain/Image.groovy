@@ -9,6 +9,7 @@ import groovy.json.JsonBuilder
 import groovy.transform.ToString
 import groovyx.gaelyk.datastore.Entity
 import groovyx.gaelyk.datastore.Ignore
+import groovyx.gaelyk.datastore.Unindexed
 import util.AppUtil
 import util.MyInit
 import util.Shortener
@@ -21,9 +22,9 @@ import util.Shortener
 @ToString
 class Image implements Serializable {
     String imageUrl
-    long impressions = 0
-    long likes = 0
-    long dislikes = 0
+    @Unindexed long impressions = 0
+    @Unindexed long likes = 0
+    @Unindexed long dislikes = 0
     long credits = 100
     Boolean isDeleted = false
 

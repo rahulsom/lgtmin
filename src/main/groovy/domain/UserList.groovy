@@ -2,6 +2,7 @@ package domain
 
 import groovy.transform.ToString
 import groovyx.gaelyk.datastore.Entity
+import groovyx.gaelyk.datastore.Unindexed
 
 /**
  * Created by rahulsomasunderam on 8/9/14.
@@ -10,7 +11,7 @@ import groovyx.gaelyk.datastore.Entity
 @ToString
 class UserList implements Serializable {
     String username
-    List<String> hashes
+    @Unindexed List<String> hashes
 
     static UserList findByUsername(String un) {
         UserList.find {
