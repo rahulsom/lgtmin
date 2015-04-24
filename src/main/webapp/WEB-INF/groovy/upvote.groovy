@@ -17,7 +17,6 @@ if (hash) {
             }
         }
         AppUtil.instance.evictCache("/i/${hash}")
-        memcache["/i/${hash}"] = image
         redirect("/i/${hash}")
     } else {
         redirect('/')
