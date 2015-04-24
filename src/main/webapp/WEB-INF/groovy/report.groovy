@@ -16,6 +16,7 @@ if (hash) {
                 image.save()
             }
             AppUtil.instance.evictCache("/i/${hash}")
+            memcache["/i/${hash}"] = image
             redirect("/i/${hash}")
         }
     } else {
