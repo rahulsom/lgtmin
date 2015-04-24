@@ -13,8 +13,8 @@ def newImage = new Image(imageUrl: imageUrl)
 try {
     newImage.validate()
     newImage.save()
-    AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
-    AppUtil.instance.evictCache(AppUtil.COUNT)
+    // AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
+    // AppUtil.instance.evictCache(AppUtil.COUNT)
     request.setAttribute 'image', newImage
     request.setAttribute 'dataUrl', newImage.dataUrl
     response.setHeader("Content-Type", "text/html");
