@@ -29,7 +29,7 @@ class AppUtil {
      * @return
      */
     String getRoot() {
-        app.env.name.toString() == 'Development' ? 'http://localhost:8080' : 'http://www.lgtm.in'
+        app.env.name.toString() == 'Development' ? 'http://localhost:8080' : 'http://lgtm.in'
     }
 
     /**

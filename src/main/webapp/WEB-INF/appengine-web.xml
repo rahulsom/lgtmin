@@ -42,7 +42,7 @@
     </static-files>
 
     <sessions-enabled>true</sessions-enabled>
-    <async-session-persistence enabled="true" />
+    <!--<async-session-persistence enabled="true" />-->
 
     <!--
     <pagespeed>
