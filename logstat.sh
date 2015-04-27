@@ -4,7 +4,8 @@ if [ ! -f /tmp/logs.txt ]; then
 fi
 cat /tmp/logs.txt \
     | sed -e "s/.*GET//g" | sed -e "s/.*POST//g" \
-    | cut -d " " -f 2 | sort \
+    | cut -d " " -f 2 \
+    | sort \
     | sed -e "s/\/u\/.*/\/u\/hash/g" \
     | sed -e "s/\/r\/.*/\/r\/hash/g" \
     | sed -e "s/\/i\/.*/\/i\/hash/g" \
