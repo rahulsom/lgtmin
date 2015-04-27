@@ -42,9 +42,8 @@
     </static-files>
 
     <sessions-enabled>true</sessions-enabled>
-    <async-session-persistence enabled="true" />
+    <!--<async-session-persistence enabled="true" />-->
 
-    <!--
     <pagespeed>
         <domain-to-rewrite>i.imgur.com</domain-to-rewrite>
         <domain-to-rewrite>cdn.memegenerator.net</domain-to-rewrite>
@@ -53,6 +52,5 @@
         <domain-to-rewrite>*.media.tumblr.com</domain-to-rewrite>
         <enabled-rewriter>CollapseWhitespace</enabled-rewriter>
     </pagespeed>
-    -->
 
 </appengine-web-app>

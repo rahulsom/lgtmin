@@ -2,7 +2,7 @@
 <cronentries>
     <cron>
         <url>/cron/revalidate</url>
-        <description>Repopulate the cache every 2 minutes</description>
-        <schedule>every 12 hours</schedule>
+        <description>Revalidate the data every 24 hours</description>
+        <schedule>every 24 hours</schedule>
     </cron>
 </cronentries>

@@ -3,6 +3,7 @@ package util
 import com.google.appengine.api.memcache.AsyncMemcacheService
 import com.google.appengine.api.memcache.ErrorHandlers
 import com.google.appengine.api.memcache.Expiration
+import com.google.appengine.api.memcache.MemcacheService
 import com.google.appengine.api.memcache.MemcacheServiceFactory
 import groovy.util.logging.Log
 import groovyx.gaelyk.GaelykBindings
@@ -29,7 +30,7 @@ class AppUtil {
      * @return
      */
     String getRoot() {
-        app.env.name.toString() == 'Development' ? 'http://localhost:8080' : 'http://www.lgtm.in'
+        app.env.name.toString() == 'Development' ? 'http://localhost:8080' : 'http://lgtm.in'
     }
 
     /**
@@ -55,20 +56,19 @@ class AppUtil {
             Expiration expiration = Expiration.byDeltaMillis(HOUR),
             Closure<T> closure
     ) {
-        AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService()
-        asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
-        Future<Object> futureValue = asyncCache.get(cacheName); // read from cache
-
+        MemcacheService theCache = MemcacheServiceFactory.memcacheService
+        theCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
         T value
         try {
-            value = futureValue.get()
+            value = theCache.get(cacheName) as T; // read from cache
         } catch (Exception e) {
+            log.warning("Caught $e trying to get value from cache")
             value = null
         }
         if (value == null) {
-            log.fine("Missed cache for ${cacheName}")
+            log.info("Missed cache for ${cacheName}")
             value = closure.call()
-            asyncCache.put(cacheName, value, expiration)
+            theCache.put(cacheName, value, expiration)
         }
 
         value
@@ -79,7 +79,7 @@ class AppUtil {
      * @param cacheName name of cached value
      */
     void evictCache(String cacheName) {
-        AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService()
+        AsyncMemcacheService asyncCache = MemcacheServiceFactory.asyncMemcacheService
         asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
 
         asyncCache.delete(cacheName)
