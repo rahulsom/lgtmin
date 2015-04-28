@@ -60,6 +60,9 @@ idea {
             gradleSettings.appendNode('option', [name: 'SDK_HOME', value: gradle.gradleHomeDir])
         }
     }
+    module {
+        sourceDirs += file('src/main/dsl')
+    }
 }
 
 eclipse {

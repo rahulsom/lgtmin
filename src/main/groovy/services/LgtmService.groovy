@@ -11,6 +11,7 @@ import com.google.appengine.api.memcache.Expiration
  * Created by rahulsomasunderam on 8/9/14.
  */
 @Singleton
+@SuppressWarnings("GrMethodMayBeStatic")
 class LgtmService {
     int getCount() {
         AppUtil.instance.getCachedValue(AppUtil.COUNT) {
