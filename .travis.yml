@@ -18,4 +18,4 @@ before_script:
 script: "./build.sh"
 before_install:
 - openssl aes-256-cbc -K $encrypted_e5eaaca705ea_key -iv $encrypted_e5eaaca705ea_iv
-  -in .appcfg_oauth2_tokens_java.enc -out $HOME/.appcfg_oauth2_tokens_java -d
+  -in .appcfg_oauth2_tokens_java.enc -out .appcfg_oauth2_tokens_java -d

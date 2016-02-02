@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+mv .appcfg_oauth2_tokens_java $HOME/
+
 cat > src/main/resources/oauth.properties << EOF
 clientId=${LGTMIN_CLIENT_ID}
 clientSecret=${LGTM_SECRET}
