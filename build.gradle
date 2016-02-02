@@ -28,13 +28,13 @@ repositories {
 }
 
 dependencies {
-    def gaeVersion = '1.9.19'
-    def groovyVersion = '2.1.10'
-    compile "org.codehaus.groovy:groovy-all:${groovyVersion}", {force = true}
+    def gaeVersion = '1.9.31'
+    def groovyVersion = '2.4.5'
+    // compile "org.codehaus.groovy:groovy-all:${groovyVersion}", {force = true}
 
     compile "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion",
             "com.google.appengine:appengine-api-labs:$gaeVersion"
-    compile 'org.gaelyk:gaelyk:2.1.1'
+    compile 'org.gaelyk:gaelyk:2.2.0'
     compile 'com.google.http-client:google-http-client-appengine:1.17.0-rc'
 
 
