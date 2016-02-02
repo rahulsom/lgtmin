@@ -1,9 +1,9 @@
 <div class="navsystem">
     <% if (request.getAttribute('next')) { %>
-        <a href="${util.AppUtil.instance.root}/browse?page=${request.getAttribute('next')}" class="next">Next</a>
+        <a href="?page=${request.getAttribute('next')}" class="next">Next</a>
     <% } %>
     <% if (request.getAttribute('prev') != null) { %>
-        <a href="${util.AppUtil.instance.root}/browse?page=${request.getAttribute('prev')}" class="prev">Prev</a>
+        <a href="?page=${request.getAttribute('prev')}" class="prev">Prev</a>
     <% } %>
 </div>
 <% def imageList = request.getAttribute('imageList') %>
