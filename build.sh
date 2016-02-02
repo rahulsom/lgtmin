@@ -11,8 +11,8 @@ if [ "$TRAVIS_PULL_REQUEST" = false ]; then
     # gradle clean check && gradle appengineUpdateAll
     ./gradlew clean test && ./gradlew appengineUpdateAll
   else
-    gradle clean check
+    ./gradlew clean check
   fi
 else
-  gradle clean check
+  ./gradlew clean check
 fi

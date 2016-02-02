@@ -34,7 +34,7 @@
                 <span class="glyphicon glyphicon-star"></span> My List
             </a>
         </div>
-        <% if (session?.getAttribute('githubUsername') == 'rahulsom') { %>
+        <% if (request.getAttribute('allowDelete')) { %>
         <div class="col-md-3">
             <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}">
                 <span class="glyphicon glyphicon-trash"></span> Delete
