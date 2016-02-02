@@ -22,6 +22,7 @@ import util.Shortener
 @ToString
 class Image implements Serializable {
     String imageUrl
+    @Unindexed String uploader
     @Unindexed long impressions = 0
     @Unindexed long likes = 0
     @Unindexed long dislikes = 0

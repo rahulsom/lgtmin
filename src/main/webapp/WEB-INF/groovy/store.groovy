@@ -2,6 +2,7 @@ import domain.Image
 import domain.UniqueConstraintViolatedException
 import domain.ValidationException
 import util.AppUtil
+import util.GithubAuthUtil
 
 log.info "Setting attributes"
 
@@ -9,17 +10,15 @@ log.info "Params: ${params}"
 String imageUrl = params.imageUrl
 log.info "Image Url saved will be ${imageUrl}"
 
-def newImage = new Image(imageUrl: imageUrl)
+def githubAuthUtil = new GithubAuthUtil(request, response)
+def newImage = new Image(imageUrl: imageUrl, uploader: githubAuthUtil.username)
 try {
     newImage.validate()
     newImage.save()
-    // AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
-    // AppUtil.instance.evictCache(AppUtil.COUNT)
     request.setAttribute 'image', newImage
     request.setAttribute 'dataUrl', newImage.dataUrl
     response.setHeader("Content-Type", "text/html");
     redirect "/i/${newImage.hash}"
-
 } catch (UniqueConstraintViolatedException e) {
     request.setAttribute('message', 'That image was already uploaded.')
     redirect "/i/${e.hash}"
