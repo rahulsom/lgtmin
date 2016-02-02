@@ -96,8 +96,8 @@ eclipse {
 def env = System.getenv()
 appengine {
 	appcfg {
-		email = env['GAE_USER']
-		password = env['GAE_PASS']
+		// email = env['GAE_USER']
+		// password = env['GAE_PASS']
 
 		app {
 			id = 'lgtmin'
