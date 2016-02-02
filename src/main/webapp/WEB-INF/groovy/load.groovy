@@ -1,11 +1,13 @@
 import services.LgtmService
-
+import util.AuthorizedUsers
 import domain.Image
 
 String hash = params.hash
 Image image = LgtmService.instance.getImage(hash)
-if (session.getAttribute('githubUsername')) {
-    def myList = LgtmService.instance.getUserList(session.getAttribute('githubUsername'))
+def githubUsername = session.getAttribute('githubUsername')
+
+if (githubUsername) {
+    def myList = LgtmService.instance.getUserList(githubUsername)
     if (myList.hashes.contains(hash)) {
         request.setAttribute('favorite', 'true')
     }
@@ -15,6 +17,7 @@ log.info "Image: ${image}"
 
 if (image) {
     request.setAttribute 'image', image
+    request.setAttribute 'allowDelete', (githubUsername in AuthorizedUsers.allowDelete)
     response.setHeader("Access-Control-Allow-Origin", "*");
     response.setHeader("Access-Control-Allow-Methods", "GET");
     response.setHeader("Access-Control-Allow-Credentials", "true");
