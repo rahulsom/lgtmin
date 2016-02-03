@@ -98,6 +98,7 @@ appengine {
 	appcfg {
 		// email = env['GAE_USER']
 		// password = env['GAE_PASS']
+        oauth2 = true
 
 		app {
 			id = 'lgtmin'
