@@ -21,13 +21,13 @@ Running
 * Run
 
 ```bash
-gradle gaeRun
+gradle appengineRun
 ```
 
 Contributing
 ----
 
-* Send a Pull Request. (What else?)
+* Send a Pull Request.
 * Check status on Travis (link below).
 * Wait for any reviewers to *LGTM* your code. (Very meta)
 * Wait for your code to be merged.
@@ -35,4 +35,3 @@ Contributing
 ----
 
 [![Build Status](https://travis-ci.org/rahulsom/lgtmin.png?branch=master)](https://travis-ci.org/rahulsom/lgtmin)
-
