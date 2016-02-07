@@ -15,7 +15,7 @@ $('#imageList').infinitescroll({
     navSelector: '.navsystem',
     nextSelector: 'a.next',
     itemSelector: '.browseImage'
-}, onNewImages);
+}/*, onNewImages*/);
 
 $(function () {
     Modernizr.Detectizr.detect({detectScreen:false});
