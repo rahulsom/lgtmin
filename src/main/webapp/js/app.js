@@ -2,12 +2,14 @@ var onNewImages = function(elems) {
     var imageList = $('#imageList');
     var prevLen = imageList.find('.browseImage').size();
     if (prevLen > 32 * 3) {
-        console.log("Old: ");
         var oldImages = _.chain(imageList.find('.browseImage')).take(32).value();
         oldImages.forEach(function(it){
             $(it).remove();
         });
     }
+    $('html, body').animate({
+        scrollTop: $(elems[0]).offset().top
+    }, 2000);
 };
 $('#imageList').infinitescroll({
     navSelector: '.navsystem',
