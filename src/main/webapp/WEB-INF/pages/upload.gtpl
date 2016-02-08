@@ -1,4 +1,3 @@
-<% include '/WEB-INF/includes/header.gtpl' %>
   <h1>Upload</h1>
 
   <form action="/save" method="post">
@@ -18,5 +17,4 @@
       log.info "outputing the datetime attribute"
     %>
   </p>
-<% include '/WEB-INF/includes/footer.gtpl' %>
 

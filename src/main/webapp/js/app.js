@@ -36,7 +36,6 @@ $(function () {
         protip1.find('.close').click(function () {
             jQuery.cookie('protip1', 'true');
         });
-
     }
 
 });

@@ -1,4 +1,3 @@
-<% include '/WEB-INF/includes/header.gtpl' %>
 <div class="row">
 	<% def imageList = request.getAttribute('imageList') %>
 	<% imageList.each { %>
@@ -118,5 +117,3 @@
 
   </div>
 </div>
-
-<% include '/WEB-INF/includes/footer.gtpl' %>

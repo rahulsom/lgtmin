@@ -1,4 +1,3 @@
-<% include '/WEB-INF/includes/header.gtpl' %>
 <% def image = request.getAttribute('image') %>
 <div class="row">
     <div class="col-md-12">
@@ -9,5 +8,4 @@
         </div>
     </div>
 </div>
-<% include '/WEB-INF/includes/footer.gtpl' %>
 

@@ -30,6 +30,11 @@
     </servlet>
 
     <filter>
+        <filter-name>SitemeshFilter</filter-name>
+        <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+    </filter>
+
+    <filter>
         <filter-name>RoutesFilter</filter-name>
         <filter-class>groovyx.gaelyk.routes.RoutesFilter</filter-class>
     </filter>
@@ -42,6 +47,15 @@
         <servlet-name>TemplateServlet</servlet-name>
         <url-pattern>*.gtpl</url-pattern>
     </servlet-mapping>
+
+    <filter-mapping>
+        <filter-name>SitemeshFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
 
     <filter-mapping>
         <filter-name>RoutesFilter</filter-name>
