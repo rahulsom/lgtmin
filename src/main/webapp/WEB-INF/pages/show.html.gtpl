@@ -50,6 +50,7 @@
                 <li><a href="https://github.com/${image.uploader}">Github</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="${image.deleteUrl}?ban=true">Delete image and ban user</a></li>
+                <li><a href="mailto:${image.uploaderEmail}">Message User</a></li>
               </ul>
             </div>
           <% } %>

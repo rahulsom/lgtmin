@@ -23,6 +23,7 @@ import util.Shortener
 class Image implements Serializable {
     String imageUrl
     @Unindexed String uploader
+    @Unindexed String uploaderEmail
     @Unindexed long impressions = 0
     @Unindexed long likes = 0
     @Unindexed long dislikes = 0
@@ -118,7 +119,7 @@ class Image implements Serializable {
     String toJson() {
         def hiddenProperties = [
                 'metaClass', '$key', 'class', 'datastoreIndexedProperties', 'datastoreUnindexedProperties',
-                'datastoreKey', 'datastoreParent'
+                'datastoreKey', 'datastoreParent', 'uploader', 'uploaderEmail'
         ]
         def props = this.properties.findAll { k, v -> !(k in hiddenProperties) }
         props.actualImageUrl = props.imageUrl
