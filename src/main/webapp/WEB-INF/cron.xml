@@ -5,4 +5,9 @@
         <description>Revalidate the data every 24 hours</description>
         <schedule>every 24 hours</schedule>
     </cron>
+    <cron>
+        <url>/cron/clearsessions</url>
+        <description>Clear dead sessions every hour</description>
+        <schedule>every 60 minutes</schedule>
+    </cron>
 </cronentries>
