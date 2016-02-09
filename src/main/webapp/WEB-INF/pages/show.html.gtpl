@@ -35,16 +35,23 @@
         </div>
         <% if (request.getAttribute('allowDelete')) { %>
         <div class="col-md-3">
-            <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}">
-                <span class="glyphicon glyphicon-trash"></span> Delete
-            </a>
+          <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}">
+            <span class="glyphicon glyphicon-trash"></span> Delete
+          </a>
         </div>
         <div class="col-md-5">
-            <% if (image.uploader) { %>
-            <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}?ban=true">
-                <span class="glyphicon glyphicon-remove"></span> Delete and ban ${image.uploader}
-            </a>
-            <% } %>
+          <% if (image.uploader) { %>
+            <div class="btn-group">
+              <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                @${image.uploader} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="https://github.com/${image.uploader}">Github</a></li>
+                <li><a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}?ban=true">Delete image and ban user</a></li>
+              </ul>
+            </div>
+          <% } %>
         </div>
         <% } %>
     </div>
