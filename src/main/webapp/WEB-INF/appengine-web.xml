@@ -1,6 +1,7 @@
-<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://appengine.google.com/ns/1.0 https://googleappengine.googlecode.com/svn/trunk/java/src/main/com/google/appengine/tools/development/appengine-web.xsd">
     <application>lgtmin</application>
-    
+
     <version>1</version>
 
     <!-- Enable concurrent requests by default to serve requests in parallel -->
@@ -11,7 +12,7 @@
     <system-properties>
         <property name="file.encoding" value="UTF-8"/>
         <property name="groovy.source.encoding" value="UTF-8"/>
-        <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
+        <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>
 
     <!-- Uncomment this section if you want your application to be able to receive XMPP messages -->
@@ -29,31 +30,22 @@
     <!-- as per the release of SDK 1.2.8, -->
     <!-- this should speed up cold startups of applications by 10% -->
     <precompilation-enabled>true</precompilation-enabled>
-    
+
     <static-files>
-      <include path="/**.png" expiration="7d">
-        <http-header name="Cache-control" value="public"/>
-      </include>
-      <include path="/**.css" expiration="7d">
-        <http-header name="Cache-control" value="public"/>
-      </include>
-      <include path="/**.js" expiration="7d">
-        <http-header name="Cache-control" value="public"/>
-      </include>
-      <exclude path="/WEB-INF/**.groovy" />
-      <exclude path="**.gtpl" />
+        <include path="/**.png" expiration="7d">
+            <http-header name="Cache-control" value="public"/>
+        </include>
+        <include path="/**.css" expiration="7d">
+            <http-header name="Cache-control" value="public"/>
+        </include>
+        <include path="/**.js" expiration="7d">
+            <http-header name="Cache-control" value="public"/>
+        </include>
+        <exclude path="/WEB-INF/**.groovy"/>
+        <exclude path="**.gtpl"/>
     </static-files>
 
     <sessions-enabled>true</sessions-enabled>
     <!--<async-session-persistence enabled="true" />-->
-
-    <pagespeed>
-        <domain-to-rewrite>i.imgur.com</domain-to-rewrite>
-        <domain-to-rewrite>cdn.memegenerator.net</domain-to-rewrite>
-        <domain-to-rewrite>f.cloud.github.com</domain-to-rewrite>
-        <domain-to-rewrite>i.qkme.me</domain-to-rewrite>
-        <domain-to-rewrite>*.media.tumblr.com</domain-to-rewrite>
-        <enabled-rewriter>CollapseWhitespace</enabled-rewriter>
-    </pagespeed>
 
 </appengine-web-app>
