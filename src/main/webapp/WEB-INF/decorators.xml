@@ -2,6 +2,9 @@
     <excludes>
         <pattern>/adminajax/*</pattern>
     </excludes>
+    <excludes>
+        <pattern>/_ah/*</pattern>
+    </excludes>
     <decorator name="main" page="main.jsp">
         <pattern>/*</pattern>
     </decorator>
