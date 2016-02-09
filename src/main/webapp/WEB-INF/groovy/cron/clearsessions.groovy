@@ -3,7 +3,7 @@ import com.google.appengine.api.datastore.Query
 
 log.info "Clearing sessions"
 def query = new Query('_ah_SESSION')
-query.setFilter(new Query.FilterPredicate('_expires', Query.FilterOperator.GREATER_THAN, new Date().time))
+query.setFilter(new Query.FilterPredicate('_expires', Query.FilterOperator.LESS_THAN, new Date().time))
 def results = datastore.prepare(query)
 
 try {
