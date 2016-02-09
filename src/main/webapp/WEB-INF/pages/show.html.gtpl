@@ -38,9 +38,13 @@
             <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}">
                 <span class="glyphicon glyphicon-trash"></span> Delete
             </a>
-            <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}">
-                <span class="glyphicon glyphicon-trash"></span> Delete and ban ${image.uploader}
+        </div>
+        <div class="col-md-5">
+            <% if (image.uploader) { %>
+            <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}?ban=true">
+                <span class="glyphicon glyphicon-remove"></span> Delete and ban ${image.uploader}
             </a>
+            <% } %>
         </div>
         <% } %>
     </div>
