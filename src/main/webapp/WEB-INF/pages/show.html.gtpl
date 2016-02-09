@@ -38,6 +38,9 @@
             <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}">
                 <span class="glyphicon glyphicon-trash"></span> Delete
             </a>
+            <a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}">
+                <span class="glyphicon glyphicon-trash"></span> Delete and ban ${image.uploader}
+            </a>
         </div>
         <% } %>
     </div>
