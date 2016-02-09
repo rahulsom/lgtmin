@@ -7,7 +7,7 @@ query.setFilter(new Query.FilterPredicate('_expires', Query.FilterOperator.LESS_
 def results = datastore.prepare(query)
 
 try {
-  results.asIterable(new FetchOptions().limit(25)).each {
+  results.asIterable(FetchOptions.Builder.withLimit(1000)).each {
     datastore.delete(it.key)
   }
 } catch (Throwable e) {

@@ -2,12 +2,12 @@
 <cronentries>
     <cron>
         <url>/cron/revalidate</url>
-        <description>Revalidate the data every 24 hours</description>
+        <description>Revalidate the data</description>
         <schedule>every 24 hours</schedule>
     </cron>
     <cron>
         <url>/cron/clearsessions</url>
-        <description>Clear dead sessions every hour</description>
+        <description>Clear dead sessions</description>
         <schedule>every 60 minutes</schedule>
     </cron>
 </cronentries>
