@@ -48,7 +48,8 @@
               </button>
               <ul class="dropdown-menu">
                 <li><a href="https://github.com/${image.uploader}">Github</a></li>
-                <li><a class="btn btn-danger btn-block btn-lg" href="${image.deleteUrl}?ban=true">Delete image and ban user</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="${image.deleteUrl}?ban=true">Delete image and ban user</a></li>
               </ul>
             </div>
           <% } %>
