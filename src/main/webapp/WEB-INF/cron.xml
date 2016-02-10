@@ -8,6 +8,6 @@
     <cron>
         <url>/cron/clearsessions</url>
         <description>Clear dead sessions</description>
-        <schedule>every 60 minutes</schedule>
+        <schedule>every 10 minutes</schedule>
     </cron>
 </cronentries>
