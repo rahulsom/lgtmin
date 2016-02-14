@@ -50,8 +50,50 @@
                 <li><a href="https://github.com/${image.uploader}">Github</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="${image.deleteUrl}?ban=true">Delete image and ban user</a></li>
-                <li><a href="mailto:${image.uploaderEmail}">Message User</a></li>
+                <li><a href="mailto:${image.uploaderEmail}" data-toggle="modal" data-target="#myModal">Message User</a></li>
               </ul>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Send Message to User</h4>
+                  </div>
+                  <form action="/mailUser" method="post">
+                  <div class="modal-body">
+                    <p>From: admin@lgtm.in</p>
+                    <input type="hidden" name="email" value="${image.uploaderEmail}">
+                    <input type="hidden" name="username" value="${image.uploader}">
+                    <p>To: ${image.uploaderEmail}</p>
+                    <p>Subject: lgtm.in Fair Use Policy</p>
+                    <textarea style="width: 100%; height: 200px;" name="message">
+Hi @${image.uploader}
+
+lgtm.in is an app that makes it possible for users of sites like github to show their approval of a pull request.
+It is being used in other contexts too, and we are glad for all the support from our users. A good number of our
+users use this app from work, or for work.
+
+We prefer to keep porn/hatespeech/<whatever else that could make this community look bad> out of here.
+
+It appears that this image you've uploaded fits in one of those categories - ${image.dataUrl}.
+
+We request that you refrain from uploading such content.
+
+Thank you!
+
+lgtm.in
+                    </textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-primary" value="Send"></input>
+                  </div>
+                  </form>
+                </div>
+              </div>
             </div>
           <% } %>
         </div>
