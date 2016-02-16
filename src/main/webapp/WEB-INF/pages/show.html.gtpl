@@ -1,4 +1,7 @@
 <% def image = request.getAttribute('image') %>
+<% if (image.isDeleted) { %>
+  <div class="alert alert-warning">This image has been deleted.</div>
+<% } %>
 <div class="row">
   <div class="col-md-4">
         <div class="thumbnail">
