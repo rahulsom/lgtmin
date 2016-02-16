@@ -34,9 +34,8 @@
             <%=session.getAttribute("githubUsername")%>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <% String username = (String) session.getAttribute("githubUsername"); %>
-            <li><a href="/l/${username}">My List</a></li>
-            <li><a href="/g/${username}">Random in My List</a></li>
+            <li><a href="/l/<%=session.getAttribute("githubUsername")%>">My List</a></li>
+            <li><a href="/g/<%=session.getAttribute("githubUsername")%>">Random in My List</a></li>
             <li class="divider"></li>
             <li><a href="/auth/logout">Logout</a></li>
           </ul>
