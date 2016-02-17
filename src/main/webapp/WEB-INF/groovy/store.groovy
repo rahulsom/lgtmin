@@ -3,6 +3,7 @@ import domain.UniqueConstraintViolatedException
 import domain.UserList
 import domain.ValidationException
 import services.LgtmService
+import util.AppUtil
 import util.GithubAuthUtil
 
 log.info "Setting attributes"
@@ -30,6 +31,7 @@ if (githubAuthUtil.isAuthenticated()) {
       myList.hashes.add(newImage.hash)
     }
     myList.save()
+    AppUtil.instance.evictCache("/l/${username}")
 
     response.setHeader "Content-Type", "text/html";
     redirect "/i/${newImage.hash}"
