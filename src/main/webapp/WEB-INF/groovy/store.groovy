@@ -1,6 +1,8 @@
 import domain.Image
 import domain.UniqueConstraintViolatedException
+import domain.UserList
 import domain.ValidationException
+import services.LgtmService
 import util.GithubAuthUtil
 
 log.info "Setting attributes"
@@ -11,9 +13,10 @@ log.info "Image Url saved will be ${imageUrl}"
 
 def githubAuthUtil = new GithubAuthUtil(request, response)
 if (githubAuthUtil.isAuthenticated()) {
+  def username = session.getAttribute(GithubAuthUtil.GITHUB_USERNAME) as String
   def newImage = new Image(
       imageUrl: imageUrl,
-      uploader: session.getAttribute(GithubAuthUtil.GITHUB_USERNAME),
+      uploader: username,
       uploaderEmail: session.getAttribute(GithubAuthUtil.GITHUB_EMAIL_PRIMARY)
   )
   try {
@@ -21,6 +24,13 @@ if (githubAuthUtil.isAuthenticated()) {
     newImage.save()
     request.setAttribute 'image', newImage
     request.setAttribute 'dataUrl', newImage.dataUrl
+
+    UserList myList = LgtmService.instance.getUserList(username)
+    if (!myList.hashes.contains(newImage.hash)) {
+      myList.hashes.add(newImage.hash)
+    }
+    myList.save()
+
     response.setHeader "Content-Type", "text/html";
     redirect "/i/${newImage.hash}"
   } catch (UniqueConstraintViolatedException e) {
