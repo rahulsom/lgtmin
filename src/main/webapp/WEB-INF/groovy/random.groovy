@@ -45,23 +45,23 @@ if (ct) {
         log.log(Level.WARNING, "Exception updating impressions on image", e)
     }
 
-    request.setAttribute 'image', image
+    response.sendRedirect(image.dataUrl)
 
 } else {
     def image = new Image(imageUrl: 'https://f.cloud.github.com/assets/193047/406777/c9e3e3a2-aaba-11e2-8e03-4720321204f7.png')
     request.setAttribute 'image', image
+
+    response.setHeader("Access-Control-Allow-Origin", "*")
+    response.setHeader("Access-Control-Allow-Methods", "GET")
+    response.setHeader("Access-Control-Allow-Credentials", "true")
+
+    if (request.getHeader('Accept')?.contains('application/json')) {
+        response.setHeader("Content-Type", "application/json")
+        AnalyticsUtil.sendInfo(request,response, "/i/${image.hash}", 'Random Fetch')
+        out.write(image.toJson())
+    } else {
+        response.setHeader("Content-Type", "text/html")
+        forward '/WEB-INF/pages/show.html.gtpl'
+    }
 }
 
-response.setHeader("Access-Control-Allow-Origin", "*")
-response.setHeader("Access-Control-Allow-Methods", "GET")
-response.setHeader("Access-Control-Allow-Credentials", "true")
-
-if (request.getHeader('Accept')?.contains('application/json')) {
-    response.setHeader("Content-Type", "application/json")
-    Image image = request.getAttribute('image')
-    AnalyticsUtil.sendInfo(request,response, "/i/${image.hash}", 'Random Fetch')
-    out.write(image.toJson())
-} else {
-    response.setHeader("Content-Type", "text/html")
-    forward '/WEB-INF/pages/show.html.gtpl'
-}
