@@ -21,20 +21,27 @@ if (githubAuthUtil.isAuthenticated()) {
       uploaderEmail: session.getAttribute(GithubAuthUtil.GITHUB_EMAIL_PRIMARY)
   )
   try {
-    newImage.validate()
-    newImage.save()
-    request.setAttribute 'image', newImage
-    request.setAttribute 'dataUrl', newImage.dataUrl
-
     UserList myList = LgtmService.instance.getUserList(username)
-    if (!myList.hashes.contains(newImage.hash)) {
-      myList.hashes.add(newImage.hash)
-    }
-    myList.save()
-    AppUtil.instance.evictCache("/l/${username}")
 
-    response.setHeader "Content-Type", "text/html";
-    redirect "/i/${newImage.hash}"
+    if (myList.bannedFromUpload) {
+      request.setAttribute 'message', "You're not allowed to upload images"
+      redirect '/'
+    } else {
+
+      newImage.validate()
+      newImage.save()
+      request.setAttribute 'image', newImage
+      request.setAttribute 'dataUrl', newImage.dataUrl
+
+      if (!myList.hashes.contains(newImage.hash)) {
+        myList.hashes.add(newImage.hash)
+      }
+      myList.save()
+      AppUtil.instance.evictCache("/l/${username}")
+
+      response.setHeader "Content-Type", "text/html";
+      redirect "/i/${newImage.hash}"
+    }
   } catch (UniqueConstraintViolatedException e) {
     request.setAttribute 'message', 'That image was already uploaded.'
     redirect "/i/${e.hash}"

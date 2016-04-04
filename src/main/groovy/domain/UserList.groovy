@@ -13,6 +13,9 @@ import groovyx.gaelyk.datastore.Unindexed
 @ToString
 class UserList implements Serializable {
   String username
+
+  Boolean bannedFromUpload = Boolean.FALSE
+
   @Unindexed
   List<String> hashes
 

@@ -1,3 +1,5 @@
+import domain.UserList
+import services.LgtmService
 import util.AppUtil
 
 import domain.Image
@@ -11,6 +13,13 @@ if (session?.getAttribute('githubUsername') in AuthorizedUsers.allowDelete) {
     log.info "Image: ${image}"
 
     if (image) {
+
+        if (params.ban == "true" && image.uploader) {
+            def ul = LgtmService.instance.getUserList(userName)
+            ul.bannedFromUpload = Boolean.TRUE
+            ul.save()
+        }
+
         image.isDeleted = true
         image.save()
         AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
