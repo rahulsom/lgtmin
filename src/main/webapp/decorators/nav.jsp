@@ -25,7 +25,7 @@
           <a href="/browse">Browse</a>
         </li>
         <% if (session != null && session.getAttribute("githubUsername") != null
-            && session.getAttribute("isAdmin") == Boolean.TRUE) { %>
+            && session.getAttribute("isAdmin").equals(Boolean.TRUE)) { %>
           <li class="${request.servletPath == '/WEB-INF/pages/users.gtpl' ? 'active' : ''}">
             <a href="/banned">Banned Users</a>
           </li>
