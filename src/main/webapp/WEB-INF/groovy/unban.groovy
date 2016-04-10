@@ -1,11 +1,13 @@
 import domain.UserList
+import services.LgtmService
 import util.AuthorizedUsers
 import util.GithubAuthUtil
 
 def githubAuthUtil = new GithubAuthUtil(request, response)
 githubAuthUtil.withValidUser('/banned', AuthorizedUsers.allowDelete) {
-  def ul = UserList.findBanned()
-  request.setAttribute "userList", ul
-  log.info "UL: $ul"
-  forward '/WEB-INF/pages/users.gtpl'
+  def ul = LgtmService.instance.getUserList(params.username)
+  ul.bannedFromUpload = Boolean.FALSE
+  ul.save()
+
+  redirect "/banned"
 }

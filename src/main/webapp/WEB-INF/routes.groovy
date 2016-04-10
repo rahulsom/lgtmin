@@ -34,3 +34,4 @@ all "/auth/logout",        forward: "/auth/logout.groovy"
 // Admin Actions
 post "/mailUser",          forward: "/mailUser.groovy"
 get "/banned",             forward: "/banned.groovy"
+get "/unban/@username",    forward: "/unban.groovy?username=@username"
