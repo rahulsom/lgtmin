@@ -24,6 +24,12 @@
         <li class="${request.servletPath == '/WEB-INF/pages/browse.gtpl' ? 'active' : ''}">
           <a href="/browse">Browse</a>
         </li>
+        <% if (session != null && session.getAttribute("githubUsername") != null
+            && session.getAttribute("isAdmin") == Boolean.TRUE) { %>
+          <li class="${request.servletPath == '/WEB-INF/pages/users.gtpl' ? 'active' : ''}">
+            <a href="/banned">Banned Users</a>
+          </li>
+        <% } %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if (session != null && session.getAttribute("githubUsername") != null) { %>

@@ -24,4 +24,9 @@ class UserList implements Serializable {
       where username == un
     }
   }
+  static List<UserList> findBanned() {
+    UserList.findAll {
+      where bannedFromUpload == Boolean.TRUE
+    }
+  }
 }

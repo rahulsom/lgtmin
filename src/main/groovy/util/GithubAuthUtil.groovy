@@ -69,6 +69,15 @@ class GithubAuthUtil {
     }
   }
 
+  void withValidUser(String uri, List<String> acceptedUsers, Closure c) {
+    if (isAuthenticated() && acceptedUsers.contains(username)) {
+      c.call()
+    } else {
+      session.setAttribute POST_LOGIN_URI, uri
+      forceAuthentication()
+    }
+  }
+
   def isValidOAuthRequest() {
     params.state == session?.getAttribute(GITHUB_STATE)
   }
@@ -88,6 +97,7 @@ class GithubAuthUtil {
       log.info "User was: ${new JsonBuilder(userJson)}"
       session.setAttribute GITHUB_USERNAME, userJson.login
       session.setAttribute GITHUB_AVATAR, userJson.avatar_url
+      session.setAttribute "isAdmin", AuthorizedUsers.allowDelete.contains(userJson.login)
 
       def userEmails = getEmails(requestFactory, oAuthJson.access_token as String)
       session.setAttribute GITHUB_EMAIL_PRIMARY, userEmails.find {it.primary}.email

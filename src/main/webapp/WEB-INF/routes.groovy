@@ -1,22 +1,36 @@
+// Global Pages
 all "/",                   forward: "/index.groovy"
+all "/browse",             forward: "/browse.groovy"
 all "/g",                  forward: "/random.groovy"
-all "/g/@username",        forward: "/random.groovy?username=@username"
 all "/upload",             forward: "/upload.groovy"
-post "/mailUser",          forward: "/mailUser.groovy"
 post "/save",              forward: "/store.groovy"
-get "/browse",             forward: "/browse.groovy"
+
+// Image Pages
 all "/i/@hash",            forward: "/load.groovy?hash=@hash"
 all "/u/@hash",            forward: "/upvote.groovy?hash=@hash"
 all "/m/@hash",            forward: "/mylist.groovy?hash=@hash"
-all "/l/@username",        forward: "/userlist.groovy?username=@username"
 all "/r/@hash",            forward: "/report.groovy?hash=@hash"
 all "/p/@hash",            forward: "/picture.groovy?hash=@hash"
 all "/d/@hash",            forward: "/delete.groovy?hash=@hash"
+
+// User Pages
+all "/g/@username",        forward: "/random.groovy?username=@username"
+all "/l/@username",        forward: "/userlist.groovy?username=@username"
+
+// SE and Browser Pages
 all "/favicon.ico",        redirect: "/images/gaelyk-small-favicon.png"
 all "/robots.txt/",        redirect: "/robots.txt"
 all "/humans.txt/",        redirect: "/humans.txt"
+
+// Cron Jobs
 all "/cron/revalidate",    forward: "/cron/revalidate.groovy"
 all "/cron/clearsessions", forward: "/cron/clearsessions.groovy"
+
+// Auth Pages
 all "/auth/github",        forward: "/auth/github.groovy"
 all "/auth/me",            forward: "/auth/me.groovy"
 all "/auth/logout",        forward: "/auth/logout.groovy"
+
+// Admin Actions
+post "/mailUser",          forward: "/mailUser.groovy"
+get "/banned",             forward: "/banned.groovy"
