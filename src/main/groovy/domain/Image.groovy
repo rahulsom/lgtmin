@@ -49,14 +49,6 @@ class Image implements Serializable {
         AppUtil.instance.root
     }
 
-    /**
-     * The ssl friendly root of the server
-     * @return the root
-     */
-    @Ignore
-    private String getSslRoot() {
-        AppUtil.instance.sslRoot
-    }
 
     /**
      * The url for data on the image
