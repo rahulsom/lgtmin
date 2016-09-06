@@ -35,3 +35,7 @@ all "/auth/logout",        forward: "/auth/logout.groovy"
 post "/mailUser",          forward: "/mailUser.groovy"
 get "/banned",             forward: "/banned.groovy"
 get "/unban/@username",    forward: "/unban.groovy?username=@username"
+
+get "/letsencrypt/challenges",                    forward: "/letsencrypt/challenges.groovy"
+post "/letsencrypt/save",                         forward: "/letsencrypt/save.groovy"
+get "/.well-known/acme-challenge/@challengeText", forward: "/letsencrypt/get.groovy?challengeText=@challengeText"

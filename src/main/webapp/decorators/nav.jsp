@@ -29,6 +29,9 @@
           <li class="${request.servletPath == '/WEB-INF/pages/users.gtpl' ? 'active' : ''}">
             <a href="/banned">Banned Users</a>
           </li>
+          <li class="${request.servletPath == '/WEB-INF/pages/letsencrypt/challenges.gtpl' ? 'active' : ''}">
+            <a href="/letsencrypt/challenges">Lets Encrypt Challenges</a>
+          </li>
         <% } %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
