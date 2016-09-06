@@ -44,7 +44,7 @@ class AppUtil {
      * @param closure The eval for cached value
      * @return The value
      */
-    public <T> T getCachedValue(
+    public static <T> T getCachedValue(
             String cacheName,
             Expiration expiration = Expiration.byDeltaMillis(HOUR),
             Closure<T> closure
@@ -71,7 +71,7 @@ class AppUtil {
      * Evicts value from cache
      * @param cacheName name of cached value
      */
-    void evictCache(String cacheName) {
+    static void evictCache(String cacheName) {
         AsyncMemcacheService asyncCache = MemcacheServiceFactory.asyncMemcacheService
         asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
 
