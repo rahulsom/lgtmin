@@ -1,6 +1,6 @@
 <h1>Challenges</h1>
 <% def challenges = request.getAttribute('challenges') %>
-<table>
+<table class="tables">
     <tr>
         <th>Challenge</th>
         <th>Response</th>
@@ -13,6 +13,7 @@
 <% } %>
 </table>
 
+<h1>New Challenge</h1>
 <form action="/letsencrypt/save" method="post">
         <label>Challenge</label>
         <input placeholder="Challenge Text" class="form-control" name="challengeText">

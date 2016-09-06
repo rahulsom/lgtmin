@@ -32,7 +32,7 @@ class AppUtil {
     String getRoot() {
         app.env.name.toString() == 'Development' ? 'http://localhost:8080' : 'https://lgtm.in'
     }
-    
+
     public static final String TOP_IMAGES = "TopImages"
     public static final String ALL_IMAGES = "AllImages"
     public static final String COUNT = "Count"
