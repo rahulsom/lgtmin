@@ -26,11 +26,19 @@
         </li>
         <% if (session != null && session.getAttribute("githubUsername") != null
             && session.getAttribute("isAdmin").equals(Boolean.TRUE)) { %>
-          <li class="${request.servletPath == '/WEB-INF/pages/users.gtpl' ? 'active' : ''}">
-            <a href="/banned">Banned Users</a>
-          </li>
-          <li class="${request.servletPath == '/WEB-INF/pages/letsencrypt/challenges.gtpl' ? 'active' : ''}">
-            <a href="/letsencrypt/challenges">Lets Encrypt Challenges</a>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Administration
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="${request.servletPath == '/WEB-INF/pages/users.gtpl' ? 'active' : ''}">
+                <a href="/banned">Banned Users</a>
+              </li>
+              <li class="${request.servletPath == '/WEB-INF/pages/letsencrypt/challenges.gtpl' ? 'active' : ''}">
+                <a href="/letsencrypt/challenges">Lets Encrypt Challenges</a>
+              </li>
+            </ul>
           </li>
         <% } %>
       </ul>
@@ -41,6 +49,7 @@
             <img src="<%=session.getAttribute("githubAvatar")%>" height="50px"
                  style="margin-top: -18px;margin-bottom: -16px;"/>
             <%=session.getAttribute("githubUsername")%>
+            <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="/l/<%=session.getAttribute("githubUsername")%>">My List</a></li>
