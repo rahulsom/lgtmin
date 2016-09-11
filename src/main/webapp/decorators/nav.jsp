@@ -24,25 +24,25 @@
         <li class="${request.servletPath == '/WEB-INF/pages/browse.gtpl' ? 'active' : ''}">
           <a href="/browse">Browse</a>
         </li>
-        <% if (session != null && session.getAttribute("githubUsername") != null
-            && session.getAttribute("isAdmin").equals(Boolean.TRUE)) { %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Administration
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li class="${request.servletPath == '/WEB-INF/pages/users.gtpl' ? 'active' : ''}">
-                <a href="/banned">Banned Users</a>
-              </li>
-              <li class="${request.servletPath == '/WEB-INF/pages/letsencrypt/challenges.gtpl' ? 'active' : ''}">
-                <a href="/letsencrypt/challenges">Lets Encrypt Challenges</a>
-              </li>
-            </ul>
-          </li>
-        <% } %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <% if (session != null && session.getAttribute("githubUsername") != null
+            && session.getAttribute("isAdmin").equals(Boolean.TRUE)) { %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Administration
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="${request.servletPath == '/WEB-INF/pages/users.gtpl' ? 'active' : ''}">
+              <a href="/banned">Banned Users</a>
+            </li>
+            <li class="${request.servletPath == '/WEB-INF/pages/letsencrypt/challenges.gtpl' ? 'active' : ''}">
+              <a href="/letsencrypt/challenges">LetsEncrypt Challenges</a>
+            </li>
+          </ul>
+        </li>
+        <% } %>
         <% if (session != null && session.getAttribute("githubUsername") != null) { %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
