@@ -1,4 +1,13 @@
 <% def image = request.getAttribute('image') %>
+<html>
+    <head>
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@lgtmin" />
+        <meta name="twitter:title" content="Looks good to me" />
+        <meta name="twitter:description" content="View the image on LGTM.in." />
+        <meta name="twitter:image" content="${image.imageUrl}" />
+    </head>
+    <body>
 <% if (image.isDeleted) { %>
   <div class="alert alert-warning">This image has been deleted.</div>
 <% } %>
@@ -125,3 +134,5 @@ lgtm.in
 </div>
 <% } %>
 
+    </body>
+</html>
