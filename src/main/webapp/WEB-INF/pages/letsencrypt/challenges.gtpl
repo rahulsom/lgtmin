@@ -1,23 +1,28 @@
-<h1>Challenges</h1>
 <% def challenges = request.getAttribute('challenges') %>
-<table class="tables">
+<table class="table">
     <tr>
         <th>Challenge</th>
         <th>Response</th>
     </tr>
-<% challenges.each { %>
+    <% challenges.each { %>
+    <tbody>
     <tr>
         <td>${it.challengeText}</td>
         <td>${it.responseText}</td>
     </tr>
-<% } %>
+    </tbody>
+    <% } %>
+    <tbody>
+        <form action="/letsencrypt/save" method="post" class="form-inline">
+        <tr>
+            <td>
+                <input placeholder="Challenge Text" class="form-control" name="challengeText">
+            </td>
+            <td>
+                <input placeholder="Response Text" class="form-control" name="responseText">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </td>
+        </tr>
+        </form>
+    </tbody>
 </table>
-
-<h1>New Challenge</h1>
-<form action="/letsencrypt/save" method="post">
-        <label>Challenge</label>
-        <input placeholder="Challenge Text" class="form-control" name="challengeText">
-        <label>Response</label>
-        <input placeholder="Response Text" class="form-control" name="responseText">
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
