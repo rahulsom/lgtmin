@@ -6,10 +6,10 @@
     </tr>
     <% challenges.each { %>
     <tbody>
-    <tr>
-        <td>${it.challengeText}</td>
-        <td>${it.responseText}</td>
-    </tr>
+        <tr>
+            <td>${it.challengeText}</td>
+            <td>${it.responseText}</td>
+        </tr>
     </tbody>
     <% } %>
     <tbody>
