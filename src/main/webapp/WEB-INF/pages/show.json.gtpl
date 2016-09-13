@@ -1,4 +1,1 @@
-<%
-  def image = request.getAttribute("image");
-  log.info("image: ${image.toJson()}");
-%><%=image.toJson()%>
+<%=request.getAttribute("image").toJson()%>
