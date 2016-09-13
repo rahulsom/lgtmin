@@ -1,3 +1,19 @@
-<div class="row" id="imageList">
-    <% include '/WEB-INF/pages/browse.gtpl' %>
-</div>
+<html>
+    <head>
+        <% def username = request.getAttribute('username') %>
+        <% if (username) { %>
+            <title>$username</title>
+
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@lgtmin" />
+            <meta name="twitter:title" content="Looks good to me" />
+            <meta name="twitter:description" content="View the image on LGTM.in." />
+            <meta name="twitter:image" content="https://github.com/${username}.png" />
+        <% } %>
+    </head>
+    <body>
+        <div class="row" id="imageList">
+            <% include '/WEB-INF/pages/browse.gtpl' %>
+        </div>
+    </body>
+</html>
