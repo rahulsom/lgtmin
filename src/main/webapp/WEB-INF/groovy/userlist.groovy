@@ -6,7 +6,7 @@ UserList myList = LgtmService.instance.getUserList(userName)
 def imageList = LgtmService.instance.imageList.findAll { img -> myList.hashes && myList.hashes.contains(img.hash) }
 
 def PAGESIZE = 32
-def page = params.page ? params.int('page') : 1
+def page = params.page ? Integer.parseInt(params.page) : 1
 def start = (page - 1) * PAGESIZE
 def stop = Math.min(start + PAGESIZE - 1, imageList.size() - 1)
 request.setAttribute 'imageList', imageList[start..stop]
