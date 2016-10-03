@@ -82,21 +82,21 @@
                             <p>To: ${image.uploaderEmail}</p>
                             <p>Subject: lgtm.in Fair Use Policy</p>
                             <textarea style="width: 100%; height: 200px;" name="message">
-        Hi @${image.uploader}
+Hi @${image.uploader}
 
-        lgtm.in is an app that makes it possible for users of sites like github to show their approval of a pull request.
-        It is being used in other contexts too, and we are glad for all the support from our users. A good number of our
-        users use this app from work, or for work.
+lgtm.in is an app that makes it possible for users of sites like github to show their approval of a pull request.
+It is being used in other contexts too, and we are glad for all the support from our users. A good number of our
+users use this app from work, or for work.
 
-        We prefer to keep porn/hatespeech/<whatever else that could make this community look bad> out of here.
+We prefer to keep porn/hatespeech/<whatever else that could make this community look bad> out of here.
 
-        It appears that this image you've uploaded fits in one of those categories - ${image.dataUrl}.
+It appears that this image you've uploaded fits in one of those categories - ${image.dataUrl}.
 
-        We request that you refrain from uploading such content.
+We request that you refrain from uploading such content.
 
-        Thank you!
+Thank you!
 
-        lgtm.in
+lgtm.in
                             </textarea>
                           </div>
                           <div class="modal-footer">
