@@ -6,6 +6,11 @@
         <meta name="twitter:title" content="Looks good to me" />
         <meta name="twitter:description" content="View the image on LGTM.in." />
         <meta name="twitter:image" content="${image.imageUrl}" />
+
+        <meta name="og:type" content="in.lgtm:image" />
+        <meta name="og:title" content="Looks good to me" />
+        <meta name="og:url" content="${image.dataUrl}" />
+        <meta name="og:image" content="${image.imageUrl}" />
     </head>
     <body>
         <% if (image.isDeleted) { %>
