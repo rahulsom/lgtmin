@@ -10,7 +10,11 @@ final int page = params.page ? Integer.parseInt(params.page) : 1
 final int start = (page - 1) * PAGESIZE
 final int stop = Math.min(start + PAGESIZE - 1, imageList.size() - 1)
 log.info "Start: $start, Stop: $stop, ilS: ${imageList.size()}"
-request.setAttribute 'imageList', imageList[start..stop]
+if (start <= stop) {
+  request.setAttribute 'imageList', imageList[start..stop]
+} else {
+  request.setAttribute 'imageList', []
+}
 request.setAttribute 'username', userName
 if (stop + 1 < imageList.size()) {
   request.setAttribute 'next', page + 1
