@@ -8,12 +8,14 @@
             <tr>
                 <th>Challenge</th>
                 <th>Response</th>
+                <th>&nbsp;</th>
             </tr>
             <% challenges.each { %>
             <tbody>
                 <tr>
                     <td>${it.challengeText}</td>
                     <td>${it.responseText}</td>
+                    <td><a href="/letsencrypt/delete/${it.id}">Delete</a></td>
                 </tr>
             </tbody>
             <% } %>
@@ -25,8 +27,9 @@
                     </td>
                     <td>
                         <input placeholder="Response Text" class="form-control" name="responseText">
-                        <button type="submit" class="btn btn-default">Submit</button>
+
                     </td>
+                    <td><button type="submit" class="btn btn-default">Submit</button></td>
                 </tr>
                 </form>
             </tbody>

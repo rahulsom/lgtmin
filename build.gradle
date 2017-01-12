@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    def gaeVersion = '1.9.42'
+    def gaeVersion = '1.9.48'
     def groovyVersion = '2.4.5'
     // compile "org.codehaus.groovy:groovy-all:${groovyVersion}", {force = true}
 
@@ -93,12 +93,9 @@ eclipse {
     }
 }
 
-def env = System.getenv()
 appengine {
 	appcfg {
-		// email = env['GAE_USER']
-		// password = env['GAE_PASS']
-        oauth2 = true
+    oauth2 = true
 
 		app {
 			id = 'lgtmin'
