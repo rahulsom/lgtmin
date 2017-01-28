@@ -1,4 +1,5 @@
 import domain.Image
+import domain.UserList
 import util.AppUtil
 import util.GithubAuthUtil
 
@@ -10,10 +11,8 @@ if (hash) {
     log.info "Image: ${image}"
     if (image) {
         githubAuthUtil.withValidUser("/u/${hash}") {
-            datastore.withTransaction {
-                image.likes++
-                image.updateCredits()
-                image.save()
+            if (addToUsersLikes(githubAuthUtil.username, image)) {
+                updateImageLikes(image)
             }
         }
         AppUtil.instance.evictCache("/i/${hash}")
@@ -21,4 +20,29 @@ if (hash) {
     } else {
         redirect('/')
     }
+}
+
+private void updateImageLikes(Image image) {
+    datastore.withTransaction {
+        image.likes++
+        image.updateCredits()
+        image.save()
+    }
+}
+
+private boolean addToUsersLikes(String username, Image image) {
+    boolean added = false
+    datastore.withTransaction {
+        def user = UserList.findByUsername(username)
+        log.info "User: $user"
+        if (user.likes == null) {
+            user.likes = []
+        }
+        if (!user.likes.contains(image.hash)) {
+            user.likes.add(image.hash)
+            user.save()
+            added = true
+        }
+    }
+    added
 }

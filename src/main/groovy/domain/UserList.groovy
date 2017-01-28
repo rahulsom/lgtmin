@@ -12,12 +12,12 @@ import groovyx.gaelyk.datastore.Unindexed
 @Entity(unindexed = false)
 @ToString
 class UserList implements Serializable {
+
   String username
-
   Boolean bannedFromUpload = Boolean.FALSE
-
-  @Unindexed
-  List<String> hashes
+  @Unindexed List<String> hashes
+  @Unindexed List<String> likes
+  @Unindexed List<String> dislikes
 
   static UserList findByUsername(String un) {
     UserList.find {

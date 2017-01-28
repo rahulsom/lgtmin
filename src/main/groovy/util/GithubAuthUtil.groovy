@@ -62,7 +62,7 @@ class GithubAuthUtil {
 
   void withValidUser(String uri, Closure c) {
     if (isAuthenticated()) {
-      c.call()
+      c.call(username)
     } else {
       session.setAttribute POST_LOGIN_URI, uri
       forceAuthentication()
