@@ -114,6 +114,10 @@
                     <a href="http://lgtmin-gh-bmlt.herokuapp.com/">LGTMin GH BMLT</a> by
                     <a href="https://github.com/yukihr/lgtmin-github-bookmarklet">yukihr</a>
                 </li>
+                <li>
+                    <a href="https://chrome.google.com/webstore/detail/lgtm-reloaded/hefidgcceobmmaiekccmbjpdcmbjklej">LGTM Reloaded</a>(Chrome Extension) by
+                    <a href="https://github.com/mediavrog/lgtm">AIR_enjapan</a>
+                </li>
             </ul>
             <h2>On Twitter</h2>
             <a class="twitter-timeline" href="https://twitter.com/search?q=LGTM.in" data-widget-id="439281581404852225">Tweets about "LGTM.in"</a>
