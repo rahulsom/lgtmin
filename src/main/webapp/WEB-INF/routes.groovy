@@ -38,5 +38,7 @@ get "/unban/@username",    forward: "/unban.groovy?username=@username"
 
 get "/letsencrypt/challenges",                    forward: "/letsencrypt/challenges.groovy"
 post "/letsencrypt/save",                         forward: "/letsencrypt/save.groovy"
-get "/letsencrypt/delete/@id",                   forward: "/letsencrypt/deleteChallenge.groovy?id=@id"
+get "/letsencrypt/delete/@id",                    forward: "/letsencrypt/deleteChallenge.groovy?id=@id"
 get "/.well-known/acme-challenge/@challengeText", forward: "/letsencrypt/get.groovy?challengeText=@challengeText"
+
+get '/jwt/generate', forward: '/tokens/gentoken.groovy'

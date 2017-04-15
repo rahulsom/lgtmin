@@ -5,6 +5,9 @@ cat > src/main/resources/oauth.properties << EOF
 clientId=${LGTMIN_CLIENT_ID}
 clientSecret=${LGTM_SECRET}
 EOF
+cat > src/main/resources/jwt.properties << EOF
+key=${JWT_SIGNING_KEY}
+EOF
 
 if [ "$TRAVIS_PULL_REQUEST" = false ]; then
   if [ "$TRAVIS_BRANCH" = "master" ]; then

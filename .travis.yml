@@ -4,6 +4,7 @@ env:
   global:
   - secure: JNoctVCwvPYibVT4pijsVrEHPbW8PlhX1ASWCxERhKc7u9s0pWYXCecIszKmupyjUyf4yhe6uXbDarYcsP3COpzuxmCq0BLdQ9KfnVcCaxNwvHgcRcMf4SZSX3k2nP3GO3TEte+6xJ+RpZHbdF4WAfu35tUxmr5G34+rrZFiyKM=
   - secure: ZAJ6714sXlImCR3f0/StKnkGckJvqRZATC7fwBWOLyZBfwZxnDVULqkI7qo253zdY3lsWHYZwMO4mIqzMCHPnKj8FtNY5OA8Z+QeczwPvBsi+mo5EEMskix1PeZC14qE0MCFef/+HyXCdq1d/nTQ4V/kvjk7QzdA274MBpXQZS0=
+  - secure: Qsa0pBV3i4R7O6VgYI4GrDbux6Gdzooa0j2F6kuUXe5+SRSRUhGWPTYZIKH4W1DK0dc6FOg76EjhsWKlnnIRod58Pu47n0RShsWK9L3dnj/fXAhCOZCW4OYidRy+Y4/87ZNL5OEZPGdF+L45Qf4Y+/QAeMTrQgA/kjEJiPDIKoE=
 cache:
   directories:
   - "$HOME/.m2"
@@ -15,4 +16,5 @@ before_script:
 - sh -e /etc/init.d/xvfb start
 script: "./build.sh"
 before_install:
-- openssl aes-256-cbc -K $encrypted_e5eaaca705ea_key -iv $encrypted_e5eaaca705ea_iv -in .appcfg_oauth2_tokens_java.enc -out .appcfg_oauth2_tokens_java -d
+- openssl aes-256-cbc -K $encrypted_e5eaaca705ea_key -iv $encrypted_e5eaaca705ea_iv
+  -in .appcfg_oauth2_tokens_java.enc -out .appcfg_oauth2_tokens_java -d
