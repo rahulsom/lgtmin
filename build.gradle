@@ -1,8 +1,6 @@
 apply plugin: 'war'
 apply plugin: 'gaelyk'
 apply plugin: 'appengine-geb'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'groovy'
 
 def compatibilityVersion = 1.7
@@ -48,51 +46,6 @@ dependencies {
     functionalTestCompile 'org.gebish:geb-spock:0.9.2'
 
     appengineSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
-}
-
-idea {
-    project {
-        jdkName = compatibilityVersion
-
-        ipr.withXml { provider ->
-            def node = provider.asNode()
-
-            // Set Gradle home
-            def gradleSettings = node.appendNode('component', [name: 'GradleSettings'])
-            gradleSettings.appendNode('option', [name: 'SDK_HOME', value: gradle.gradleHomeDir])
-        }
-    }
-    module {
-        sourceDirs += file('src/main/dsl')
-    }
-}
-
-eclipse {
-    project {
-        name 'gaelyk-project'
-        file {
-            whenMerged { project ->
-                project.natures << 'com.google.appengine.eclipse.core.gaeNature'
-                project.natures << 'com.google.gdt.eclipse.core.webAppNature'
-                project.buildCommands << [name: 'com.google.appengine.eclipse.core.enhancerbuilder']
-                project.buildCommands << [name: 'com.google.appengine.eclipse.core.projectValidator']
-                project.buildCommands << [name: 'com.google.gdt.eclipse.core.webAppProjectValidator']
-            }
-        }
-    }
-    classpath {
-        file {
-            withXml { xml ->
-                xml.asNode().classpathentry.find { it.@kind == 'output' && it.@path == 'bin' }.@path = 'src/main/webapp/WEB-INF/classes'
-                xml.asNode().appendNode('classpathentry', [kind: 'con', path: 'com.google.appengine.eclipse.core.GAE_CONTAINER'])
-                            .appendNode('attributes')
-                            .appendNode('attribute', [name: 'org.eclipse.jst.component.nondependency', value: '/src/main/webapp/WEB-INF/lib'])
-                xml.asNode().appendNode('classpathentry', [exported: 'true', kind: 'con', path: 'GROOVY_SUPPORT'])
-                            .appendNode('attributes')
-                            .appendNode('attribute', [name: 'org.eclipse.jst.component.nondependency', value: '/src/main/webapp/WEB-INF/lib'])
-            }
-        }
-    }
 }
 
 appengine {
