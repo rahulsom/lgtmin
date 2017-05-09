@@ -1,5 +1,6 @@
 LGTMin
 ======
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/rahulsom/lgtmin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The code powering [LGTM.in](http://lgtm.in/)
 
