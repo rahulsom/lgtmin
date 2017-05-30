@@ -1,5 +1,6 @@
 import domain.UserList
 import services.LgtmService
+import util.AppUtil
 
 String userName = params.username
 UserList myList = LgtmService.instance.getUserList(userName)
@@ -16,6 +17,7 @@ if (start <= stop) {
   request.setAttribute 'imageList', []
 }
 request.setAttribute 'username', userName
+request.setAttribute 'appUtil', AppUtil.instance
 if (stop + 1 < imageList.size()) {
   request.setAttribute 'next', page + 1
 }

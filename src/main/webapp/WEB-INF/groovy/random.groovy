@@ -45,7 +45,7 @@ if (ct) {
         log.log(Level.WARNING, "Exception updating impressions on image", e)
     }
 
-    response.sendRedirect(image.dataUrl)
+    response.sendRedirect(AppUtil.instance.patchUrl(image.dataUrl, request))
 
 } else {
     def image = new Image(imageUrl: 'https://f.cloud.github.com/assets/193047/406777/c9e3e3a2-aaba-11e2-8e03-4720321204f7.png')

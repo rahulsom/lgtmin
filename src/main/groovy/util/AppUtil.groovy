@@ -5,9 +5,13 @@ import com.google.appengine.api.memcache.ErrorHandlers
 import com.google.appengine.api.memcache.Expiration
 import com.google.appengine.api.memcache.MemcacheService
 import com.google.appengine.api.memcache.MemcacheServiceFactory
+import groovy.transform.CompileStatic
 import groovy.util.logging.Log
 import groovyx.gaelyk.GaelykBindings
+import org.apache.http.HttpRequest
 
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletRequestWrapper
 import java.util.concurrent.Future
 import java.util.logging.Level
 
@@ -76,6 +80,11 @@ class AppUtil {
         asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
 
         asyncCache.delete(cacheName)
+    }
+
+    String patchUrl(String input, def request) {
+        def newContext = (request.getRequestURL() - request.getRequestURI())
+        input.replace(root, newContext)
     }
 
 }

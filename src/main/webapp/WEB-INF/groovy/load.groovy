@@ -1,4 +1,5 @@
 import services.LgtmService
+import util.AppUtil
 import util.AuthorizedUsers
 import domain.Image
 
@@ -18,12 +19,13 @@ log.info "Image: ${image}"
 if (image) {
     request.setAttribute 'image', image
     request.setAttribute 'allowDelete', (githubUsername in AuthorizedUsers.allowDelete)
+    request.setAttribute 'appUtil', AppUtil.instance
     response.setHeader("Access-Control-Allow-Origin", "*");
     response.setHeader("Access-Control-Allow-Methods", "GET");
     response.setHeader("Access-Control-Allow-Credentials", "true");
     if (request.getHeader('Accept')?.contains('application/json')) {
         response.setHeader("Content-Type", "application/json");
-        out.write(image.toJson())
+        out.write(AppUtil.instance.patchUrl(image.toJson(), request))
     } else {
         response.setHeader("Content-Type", "text/html");
         request.setAttribute('comments', true)
