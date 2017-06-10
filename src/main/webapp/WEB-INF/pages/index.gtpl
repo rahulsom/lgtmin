@@ -118,6 +118,10 @@
                     <a href="https://github.com/yukihr/lgtmin-github-bookmarklet">yukihr</a>
                 </li>
                 <li>
+                    <a href="https://rubygems.org/gems/lgtm_hd">Ruby CLI gem for generating or converting LGTM pic with live preview on terminal</a> by
+                    <a href="https://github.com/phradion/lgtm_hd">phradion</a>
+                </li>
+                <li>
                     <a href="https://chrome.google.com/webstore/detail/lgtm-reloaded/hefidgcceobmmaiekccmbjpdcmbjklej">LGTM Reloaded</a>(Chrome Extension) by
                     <a href="https://github.com/mediavrog/lgtm">AIR_enjapan</a>
                 </li>
