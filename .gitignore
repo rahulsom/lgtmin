@@ -17,3 +17,7 @@ data-backup
 
 .appcfg_oauth2_tokens_java
 out/
+
+*.key
+*.crt
+*.csr
