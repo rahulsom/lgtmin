@@ -42,7 +42,8 @@ else
     if [ "$TRAVIS_BRANCH" = "master" ]; then
       # gradle clean check && gradle appengineUpdateAll
       cat .appcfg_oauth2_tokens_java | sed -e "s/rahul/$(whoami)/g" > $HOME/.appcfg_oauth2_tokens_java
-      ./gradlew clean test && ./gradlew appengineUpdateAll
+      ./gradlew clean check
+      ./gradlew appengineUpdateAll
     else
       ./gradlew clean check
     fi

@@ -1,16 +1,22 @@
 import geb.spock.GebSpec
+import io.github.bonigarcia.wdm.FirefoxDriverManager
+import geb.spock.GebReportingSpec
 
-class SmokeSpec extends GebSpec {
+class SmokeSpec extends GebReportingSpec {
+
+    void setupSpec() {
+        FirefoxDriverManager.getInstance().setup()
+    }
+
     void "main page title should be 'LGTM.in/g'"() {
         when:
         go ''
 
         then:
-        title == 'LGTM.in/g'
+        title == 'LGTM.in » Home'
     }
 
-
-    void "try submitting an image"() {
+    /*void "try submitting an image"() {
         when:
         go '/g/upload'
 
@@ -62,6 +68,5 @@ class SmokeSpec extends GebSpec {
                 'http://i.imgur.com/caopBHC.jpg'
         ]
 
-
-    }
+    }*/
 }
