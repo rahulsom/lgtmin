@@ -40,14 +40,13 @@ if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
 else
   if [ "$TRAVIS_PULL_REQUEST" = false ]; then
     if [ "$TRAVIS_BRANCH" = "master" ]; then
-      # gradle clean check && gradle appengineUpdateAll
       cat .appcfg_oauth2_tokens_java | sed -e "s/rahul/$(whoami)/g" > $HOME/.appcfg_oauth2_tokens_java
-      ./gradlew clean check
+      ./gradlew check
       ./gradlew appengineUpdateAll
     else
-      ./gradlew clean check
+      ./gradlew check
     fi
   else
-    ./gradlew clean check
+    ./gradlew check
   fi
 fi
