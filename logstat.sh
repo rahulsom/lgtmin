@@ -1,6 +1,9 @@
 #!/bin/bash
 if [ ! -f /tmp/logs.txt ]; then
-    ~/.gradle/appengine-sdk/appengine-java-sdk-1.9.1/bin/appcfg.sh request_logs build/exploded-app /tmp/logs.txt
+    APPENGINE_DIR=$(ls -1 /Users/rahul/.gradle/appengine-sdk | tail -1)
+    chmod u+x ~/.gradle/appengine-sdk/$APPENGINE_DIR/bin/appcfg.sh
+    chmod u+x ~/.gradle/appengine-sdk/$APPENGINE_DIR/bin/run_java.sh
+    ~/.gradle/appengine-sdk/$APPENGINE_DIR/bin/appcfg.sh request_logs build/exploded-app /tmp/logs.txt
 fi
 cat /tmp/logs.txt \
     | sed -e "s/.*GET//g" | sed -e "s/.*POST//g" \
