@@ -1,16 +1,18 @@
 buildscript {
     ext {
         gaeVersion = '1.9.53'
-        groovyVersion = '2.4.5'
+        groovyVersion = '2.4.12'
     }
     repositories {
         jcenter()
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 
     dependencies {
         classpath 'org.gradle.api.plugins:gradle-gaelyk-plugin:0.6'
         classpath 'org.gradle.api.plugins:gradle-appengine-geb-plugin:0.4'
+        classpath "gradle.plugin.net.ossindex:ossindex-gradle-plugin:0.1.1"
     }
 }
 
@@ -18,6 +20,7 @@ apply plugin: 'war'
 apply plugin: 'gaelyk'
 apply plugin: 'appengine-geb'
 apply plugin: 'groovy'
+apply plugin: "net.ossindex.audit"
 
 def compatibilityVersion = 1.7
 sourceCompatibility = compatibilityVersion
@@ -30,12 +33,14 @@ repositories {
 }
 
 dependencies {
-    // compile "org.codehaus.groovy:groovy-all:${groovyVersion}", {force = true}
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}", {force = true}
 
     compile "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion",
             "com.google.appengine:appengine-api-labs:$gaeVersion"
     compile 'org.gaelyk:gaelyk:2.2.0'
     compile 'com.google.http-client:google-http-client-appengine:1.22.0'
+    compile 'org.apache.httpcomponents:httpclient:4.5.3'
+
     compile 'opensymphony:sitemesh:2.4.2'
 
     compile 'io.jsonwebtoken:jjwt:0.7.0'
@@ -58,3 +63,5 @@ appengine {
         }
     }
 }
+
+compileGroovy.dependsOn 'audit'

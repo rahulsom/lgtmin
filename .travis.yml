@@ -1,5 +1,7 @@
 sudo: false
 language: groovy
+jdk:
+- oraclejdk8
 env:
   global:
   - secure: JNoctVCwvPYibVT4pijsVrEHPbW8PlhX1ASWCxERhKc7u9s0pWYXCecIszKmupyjUyf4yhe6uXbDarYcsP3COpzuxmCq0BLdQ9KfnVcCaxNwvHgcRcMf4SZSX3k2nP3GO3TEte+6xJ+RpZHbdF4WAfu35tUxmr5G34+rrZFiyKM=
@@ -7,8 +9,9 @@ env:
   - secure: Qsa0pBV3i4R7O6VgYI4GrDbux6Gdzooa0j2F6kuUXe5+SRSRUhGWPTYZIKH4W1DK0dc6FOg76EjhsWKlnnIRod58Pu47n0RShsWK9L3dnj/fXAhCOZCW4OYidRy+Y4/87ZNL5OEZPGdF+L45Qf4Y+/QAeMTrQgA/kjEJiPDIKoE=
 cache:
   directories:
-  - "$HOME/.m2"
+  - "$HOME/.gradle/wrapper"
   - "$HOME/.gradle/caches"
+  - "$HOME/.m2"
 addons:
   firefox: '28.0'
 before_script:
