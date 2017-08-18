@@ -2,7 +2,11 @@ package services
 
 import domain.Image
 import domain.UserList
+import groovy.util.logging.Log
+import groovy.util.logging.Slf4j
 import util.AppUtil
+
+import java.security.SecureRandom
 
 import static util.AppUtil.TOP_IMAGES
 import com.google.appengine.api.memcache.Expiration
@@ -12,6 +16,7 @@ import com.google.appengine.api.memcache.Expiration
  */
 @Singleton
 @SuppressWarnings("GrMethodMayBeStatic")
+@Log
 class LgtmService {
     int getCount() {
         AppUtil.instance.getCachedValue(AppUtil.COUNT) {
@@ -32,13 +37,14 @@ class LgtmService {
     }
 
     Image getImage(String hash) {
-        AppUtil.instance.getCachedValue("/i/${hash}", Expiration.byDeltaMillis(AppUtil.DAY)) {
+        AppUtil.instance.getCachedValue("/i/${hash}".toString(), Expiration.byDeltaMillis(AppUtil.DAY)) {
             Image.findByHash(hash)
         }
     }
 
     UserList getUserList(String userName) {
-        AppUtil.instance.getCachedValue("/l/${userName}", Expiration.byDeltaMillis(AppUtil.DAY)) {
+        log.info "getUserList('$userName')"
+        AppUtil.instance.getCachedValue("/l/${userName}".toString(), Expiration.byDeltaMillis(AppUtil.DAY)) {
             UserList myList = UserList.findByUsername(userName)
             if (!myList) {
                 myList = new UserList(username: userName, hashes: [])
@@ -46,10 +52,24 @@ class LgtmService {
             }
 
             if (!myList.hashes) {
-                myList.hashes = [];
+                myList.hashes = []
             }
 
+            log.info "getUserList('$userName') -> $myList"
             myList
         }
+    }
+
+    def <T> T getRandom(List<T> list, int ct) {
+        def random = Math.abs(new SecureRandom().nextGaussian() / 2.0)
+        log.info "Random: ${random}"
+        def theOffset = Math.floor(random * ct).intValue()
+        if (theOffset >= ct) {
+            theOffset = theOffset % ct
+        }
+
+        log.info "Fetching ${theOffset} of ${ct}"
+
+        return list[theOffset]
     }
 }

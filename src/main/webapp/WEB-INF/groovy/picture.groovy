@@ -5,7 +5,7 @@ import util.AppUtil
 import domain.Image
 
 String hash = params.hash
-Image image = AppUtil.instance.getCachedValue("/i/${hash}", Expiration.byDeltaMillis(AppUtil.DAY)) {
+Image image = AppUtil.instance.getCachedValue("/i/${hash}".toString(), Expiration.byDeltaMillis(AppUtil.DAY)) {
     Image.findByHash(hash)
 }
 

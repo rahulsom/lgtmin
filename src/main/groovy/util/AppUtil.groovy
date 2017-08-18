@@ -55,12 +55,12 @@ class AppUtil {
     ) {
         MemcacheService theCache = MemcacheServiceFactory.memcacheService
         theCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
-        T value
+        T value = null
         try {
             value = theCache.get(cacheName) as T; // read from cache
+            log.info "Retrieved value from cache: ${value.class}"
         } catch (Exception e) {
             log.warning("Caught $e trying to get value from cache")
-            value = null
         }
         if (value == null) {
             log.info("Missed cache for ${cacheName}")

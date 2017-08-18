@@ -8,32 +8,22 @@ import java.util.logging.Level
 
 def ct = LgtmService.instance.count
 List<Image> imageList = LgtmService.instance.imageList
+Image image = null
 
 if (params.username) {
+    log.info "Random for ${params.username}"
     def myList = LgtmService.instance.getUserList(params.username)
+    log.info "Mylist computed ${params.username}"
     if (myList.hashes?.size()) {
-        imageList = LgtmService.instance.imageList.findAll { img ->
-            myList.hashes.contains(img.hash)
-        }.sort(false) { img ->
-            - img.credits
-        }
-        ct = imageList.size();
+        def hash = LgtmService.instance.getRandom(myList.hashes, myList.hashes.size())
+        image = LgtmService.instance.getImage(hash)
+        log.info "Image picked"
     }
+} else {
+    image = LgtmService.instance.getRandom(imageList, ct)
 }
 
-if (ct) {
-    def random = Math.abs(new SecureRandom().nextGaussian() / 2.0)
-    log.info "Random: ${random}"
-    def theOffset = Math.floor(random * ct).intValue()
-    if (theOffset >= ct) {
-        theOffset = theOffset % ct
-    }
-
-    log.info "Fetching ${theOffset} of ${ct}"
-
-    Image image = null
-    image = imageList[theOffset]
-
+if (image) {
     try {
         datastore.withTransaction {
             def image1 = Image.findByHash(image.hash)
@@ -48,7 +38,7 @@ if (ct) {
     response.sendRedirect(AppUtil.instance.patchUrl(image.dataUrl, request))
 
 } else {
-    def image = new Image(imageUrl: 'https://f.cloud.github.com/assets/193047/406777/c9e3e3a2-aaba-11e2-8e03-4720321204f7.png')
+    image = new Image(imageUrl: 'https://f.cloud.github.com/assets/193047/406777/c9e3e3a2-aaba-11e2-8e03-4720321204f7.png')
     request.setAttribute 'image', image
 
     response.setHeader("Access-Control-Allow-Origin", "*")
@@ -57,7 +47,7 @@ if (ct) {
 
     if (request.getHeader('Accept')?.contains('application/json')) {
         response.setHeader("Content-Type", "application/json")
-        AnalyticsUtil.sendInfo(request,response, "/i/${image.hash}", 'Random Fetch')
+        AnalyticsUtil.sendInfo(request, response, "/i/${image.hash}", 'Random Fetch')
         out.write(image.toJson())
     } else {
         response.setHeader("Content-Type", "text/html")
