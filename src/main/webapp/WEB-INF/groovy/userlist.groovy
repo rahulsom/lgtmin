@@ -12,7 +12,9 @@ final int stop = Math.min(start + PAGESIZE - 1, myList.hashes.size() - 1)
 log.info "Start: $start, Stop: $stop, ilS: ${myList.hashes.size()}"
 if (start <= stop) {
     def renderedHashes = myList.hashes[start..stop]
-    def images = renderedHashes.collect { LgtmService.instance.getImage(it) }
+    def images = renderedHashes.
+            collect { LgtmService.instance.getImage(it) }.
+            findAll { !it.isDeleted }
     request.setAttribute 'imageList', images
 } else {
     request.setAttribute 'imageList', []
