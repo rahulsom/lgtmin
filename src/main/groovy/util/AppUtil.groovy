@@ -1,18 +1,10 @@
 package util
 
-import com.google.appengine.api.memcache.AsyncMemcacheService
-import com.google.appengine.api.memcache.ErrorHandlers
-import com.google.appengine.api.memcache.Expiration
-import com.google.appengine.api.memcache.MemcacheService
-import com.google.appengine.api.memcache.MemcacheServiceFactory
-import groovy.transform.CompileStatic
+import com.google.appengine.api.memcache.*
 import groovy.util.logging.Log
 import groovyx.gaelyk.GaelykBindings
-import org.apache.http.HttpRequest
 
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletRequestWrapper
-import java.util.concurrent.Future
+import java.util.function.Supplier
 import java.util.logging.Level
 
 /**
@@ -48,23 +40,23 @@ class AppUtil {
      * @param closure The eval for cached value
      * @return The value
      */
-    public static <T> T getCachedValue(
+    static <T> T getCachedValue(
             String cacheName,
             Expiration expiration = Expiration.byDeltaMillis(HOUR),
-            Closure<T> closure
+            Supplier<T> closure
     ) {
         MemcacheService theCache = MemcacheServiceFactory.memcacheService
         theCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
         T value = null
         try {
-            value = theCache.get(cacheName) as T; // read from cache
+            value = theCache.get(cacheName) as T
             log.info "Retrieved value from cache: ${value.class}"
         } catch (Exception e) {
             log.warning("Caught $e trying to get value from cache")
         }
         if (value == null) {
             log.info("Missed cache for ${cacheName}")
-            value = closure.call()
+            value = closure.get()
             theCache.put(cacheName, value, expiration)
         }
 

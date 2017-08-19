@@ -10,6 +10,8 @@ import groovyx.gaelyk.GaelykBindings
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpSession
+import java.util.function.Consumer
+import java.util.function.Supplier
 
 /**
  * Manages Github Authentication
@@ -60,18 +62,18 @@ class GithubAuthUtil {
     response.sendRedirect "https://github.com/login/oauth/authorize?${params.collect { k, v -> "$k=$v" }.join('&')}"
   }
 
-  void withValidUser(String uri, Closure c) {
+  void withValidUser(String uri, Consumer<String> c) {
     if (isAuthenticated()) {
-      c.call(username)
+      c.accept(username)
     } else {
       session.setAttribute POST_LOGIN_URI, uri
       forceAuthentication()
     }
   }
 
-  void withValidUser(String uri, List<String> acceptedUsers, Closure c) {
+  void withValidUser(String uri, List<String> acceptedUsers, Supplier<Void> c) {
     if (isAuthenticated() && acceptedUsers.contains(username)) {
-      c.call()
+      c.get()
     } else {
       session.setAttribute POST_LOGIN_URI, uri
       forceAuthentication()

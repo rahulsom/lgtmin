@@ -48,4 +48,6 @@
     <sessions-enabled>true</sessions-enabled>
     <!--<async-session-persistence enabled="true" />-->
 
+    <runtime>java8</runtime>
+
 </appengine-web-app>
