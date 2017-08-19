@@ -4,21 +4,22 @@ import util.AppUtil
 
 String userName = params.username
 UserList myList = LgtmService.instance.getUserList(userName)
-def imageList = myList.hashes.collect { LgtmService.instance.getImage(it) }
 
 final int PAGESIZE = 32
 final int page = params.page ? Integer.parseInt(params.page) : 1
 final int start = (page - 1) * PAGESIZE
-final int stop = Math.min(start + PAGESIZE - 1, imageList.size() - 1)
-log.info "Start: $start, Stop: $stop, ilS: ${imageList.size()}"
+final int stop = Math.min(start + PAGESIZE - 1, myList.hashes.size() - 1)
+log.info "Start: $start, Stop: $stop, ilS: ${myList.hashes.size()}"
 if (start <= stop) {
-    request.setAttribute 'imageList', imageList[start..stop]
+    def renderedHashes = myList.hashes[start..stop]
+    def images = renderedHashes.collect { LgtmService.instance.getImage(it) }
+    request.setAttribute 'imageList', images
 } else {
     request.setAttribute 'imageList', []
 }
 request.setAttribute 'username', userName
 request.setAttribute 'appUtil', AppUtil.instance
-if (stop + 1 < imageList.size()) {
+if (stop + 1 < myList.hashes.size()) {
     request.setAttribute 'next', page + 1
 }
 if (start > 0) {
