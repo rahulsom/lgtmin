@@ -1,4 +1,5 @@
 import com.google.appengine.api.datastore.Entity
+import com.google.appengine.api.datastore.FetchOptions
 import com.google.appengine.api.datastore.PreparedQuery
 import com.google.appengine.api.datastore.Query
 import domain.Image
@@ -10,7 +11,7 @@ log.info("Starting cron.revalidate")
 def q = new Query('Image').addFilter('isDeleted', Query.FilterOperator.EQUAL, false)
 PreparedQuery preparedQuery = datastore.prepare(q)
 
-preparedQuery.asList(withLimit(100)).
+preparedQuery.asIterable(withLimit(1000)).
         each { Entity entity ->
             Image i = entity as Image
             try {

@@ -153,7 +153,7 @@ class Image implements Serializable {
             if (!ct.startsWith('image')) {
                 throw new ValidationException("Resource at url is not an image.")
             }
-        } catch (HttpResponseException e) {
+        } catch (HttpResponseException | UnknownHostException e) {
             throw new ValidationException("Resource at url not found.")
         }
 
