@@ -2,11 +2,13 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     padding-top: 60px;
 }
+
 #footer {
     position: absolute;
     bottom: 0;
@@ -17,9 +19,10 @@ body {
     padding-top: 9px;
 }
 
-h1,h2,h3,h4,h5,h6,a.navbar-brand {
+h1, h2, h3, h4, h5, h6, a.navbar-brand {
     font-family: 'Cabin Sketch', cursive;
 }
+
 .github {
     margin-top: -2px;
 }

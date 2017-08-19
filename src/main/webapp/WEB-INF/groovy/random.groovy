@@ -3,7 +3,6 @@ import services.LgtmService
 import util.AnalyticsUtil
 import util.AppUtil
 
-import java.security.SecureRandom
 import java.util.logging.Level
 
 def ct = LgtmService.instance.count

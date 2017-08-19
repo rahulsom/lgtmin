@@ -1,7 +1,7 @@
+import domain.Image
 import services.LgtmService
 import util.AppUtil
 import util.AuthorizedUsers
-import domain.Image
 
 String hash = params.hash
 Image image = LgtmService.instance.getImage(hash)

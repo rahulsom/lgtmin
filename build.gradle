@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.codehaus.groovy:groovy-all:${groovyVersion}", {force = true}
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}", { force = true }
 
     compile "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion",
             "com.google.appengine:appengine-api-labs:$gaeVersion"

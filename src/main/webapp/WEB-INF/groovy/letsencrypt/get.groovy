@@ -6,4 +6,4 @@ log.info("params: ${request.getParameterMap()}")
 log.info("challengeText was : $input")
 
 response.setContentType('text/plain')
-response.outputStream.print Challenge.findAll().find {it.challengeText == input}?.responseText
+response.outputStream.print Challenge.findAll().find { it.challengeText == input }?.responseText

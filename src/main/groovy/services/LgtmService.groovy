@@ -1,15 +1,14 @@
 package services
 
+import com.google.appengine.api.memcache.Expiration
 import domain.Image
 import domain.UserList
 import groovy.util.logging.Log
-import groovy.util.logging.Slf4j
 import util.AppUtil
 
 import java.security.SecureRandom
 
 import static util.AppUtil.TOP_IMAGES
-import com.google.appengine.api.memcache.Expiration
 
 /**
  * Created by rahulsomasunderam on 8/9/14.

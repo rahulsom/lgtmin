@@ -5,7 +5,7 @@ def imageList = LgtmService.instance.imageList
 def PAGESIZE = 32
 def page = (params.page ? params.page as int : 1)
 def start = (page - 1) * PAGESIZE
-def stop = Math.min(start+PAGESIZE-1, imageList.size() - 1)
+def stop = Math.min(start + PAGESIZE - 1, imageList.size() - 1)
 request.setAttribute 'imageList', imageList[start..stop]
 request.setAttribute 'appUtil', AppUtil.instance
 if (stop + 1 < imageList.size()) {

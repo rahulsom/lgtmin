@@ -1,9 +1,9 @@
-var onNewImages = function(elems) {
+var onNewImages = function (elems) {
     var imageList = $('#imageList');
     var prevLen = imageList.find('.browseImage').size();
     if (prevLen > 32 * 3) {
         var oldImages = _.chain(imageList.find('.browseImage')).take(32).value();
-        oldImages.forEach(function(it){
+        oldImages.forEach(function (it) {
             $(it).remove();
         });
     }
@@ -18,10 +18,10 @@ $('#imageList').infinitescroll({
 }/*, onNewImages*/);
 
 $(function () {
-    Modernizr.Detectizr.detect({detectScreen:false});
+    Modernizr.Detectizr.detect({detectScreen: false});
 
     if (Modernizr.Detectizr.device.browser === 'chrome' &&
-        Modernizr.Detectizr.device.type === 'desktop') {
+            Modernizr.Detectizr.device.type === 'desktop') {
         $('[data-toggle="tooltip"]').tooltip();
 
         var protipCookie = $.cookie('protip1');

@@ -19,7 +19,7 @@ class AnalyticsUtil {
     public static final String DoNotTrackHeader = "DNT"
     public static final String DoNotTrackValue = "1"
 
-    static void sendInfo(HttpServletRequest theRequest, HttpServletResponse response,  String hash, String title) {
+    static void sendInfo(HttpServletRequest theRequest, HttpServletResponse response, String hash, String title) {
 
         if (theRequest.getHeader(DoNotTrackHeader) == DoNotTrackValue) {
             log.warning "User requested to not track them"
@@ -29,12 +29,12 @@ class AnalyticsUtil {
         log.info "Headers: ${theRequest.getHeaderNames().toList().toString()}"
         def ua = theRequest.getHeader('User-Agent')
         def ul = theRequest.getHeader('Accept-Language')?.toLowerCase()?.split(',')?.getAt(0)
-        log.info "Cookies: ${theRequest.cookies.collect {"${it.name}=${it.value}(${it.maxAge})"}.join(',')}"
+        log.info "Cookies: ${theRequest.cookies.collect { "${it.name}=${it.value}(${it.maxAge})" }.join(',')}"
         String cid
-        if (theRequest.cookies.find {it.name == '_ga'}) {
-            cid = theRequest.cookies.find {it.name == '_ga'}.value
-        } else if (theRequest.cookies.find {it.name == 'LongSession'}) {
-            cid = theRequest.cookies.find {it.name == 'LongSession'}.value
+        if (theRequest.cookies.find { it.name == '_ga' }) {
+            cid = theRequest.cookies.find { it.name == '_ga' }.value
+        } else if (theRequest.cookies.find { it.name == 'LongSession' }) {
+            cid = theRequest.cookies.find { it.name == 'LongSession' }.value
         } else {
             cid = UUID.randomUUID().toString()
             response.addCookie(new Cookie('LongSession', cid).with {
@@ -43,17 +43,17 @@ class AnalyticsUtil {
             })
         }
         def body = [
-                v: 1,             // Version.
+                v  : 1,                         // Version.
                 tid: AnalyticsUtil.TrackingId,  // Tracking ID / Web property / Property ID.
-                cid: cid,        // Anonymous Client ID.
+                cid: cid,                       // Anonymous Client ID.
 
-                uip: theRequest.remoteAddr, // IP Address
-                ua: ua, // User Agent
+                uip: theRequest.remoteAddr,     // IP Address
+                ua : ua,                        // User Agent
 
-                t: 'pageview',     // Pageview hit type.
-                dh: 'www.lgtm.in',  // Document hostname.
-                dp: hash ?: '/g.json',       // Page.
-                dt: title,    // Title.
+                t  : 'pageview',                // Pageview hit type.
+                dh : 'www.lgtm.in',             // Document hostname.
+                dp : hash ?: '/g.json',         // Page.
+                dt : title,                     // Title.
         ]
 
         if (ul) {

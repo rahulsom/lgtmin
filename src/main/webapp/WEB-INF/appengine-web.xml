@@ -1,4 +1,5 @@
-<appengine-web-app xmlns="http://appengine.google.com/ns/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<appengine-web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://appengine.google.com/ns/1.0"
                    xsi:schemaLocation="http://appengine.google.com/ns/1.0 https://googleappengine.googlecode.com/svn/trunk/java/src/main/com/google/appengine/tools/development/appengine-web.xsd">
     <application>lgtmin</application>
 

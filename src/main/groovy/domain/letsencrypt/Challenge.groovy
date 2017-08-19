@@ -12,6 +12,6 @@ import groovyx.gaelyk.datastore.Unindexed
 @Entity(unindexed = false)
 @ToString
 class Challenge {
-  String challengeText
-  @Unindexed String responseText
+    String challengeText
+    @Unindexed String responseText
 }

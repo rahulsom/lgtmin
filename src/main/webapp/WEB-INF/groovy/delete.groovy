@@ -1,8 +1,6 @@
-import domain.UserList
+import domain.Image
 import services.LgtmService
 import util.AppUtil
-
-import domain.Image
 import util.AuthorizedUsers
 
 String hash = params.hash

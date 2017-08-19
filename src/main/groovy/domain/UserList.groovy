@@ -1,6 +1,5 @@
 package domain
 
-import groovy.transform.ToString
 import groovyx.gaelyk.datastore.Entity
 import groovyx.gaelyk.datastore.Unindexed
 

@@ -49,7 +49,6 @@ class Image implements Serializable {
         AppUtil.instance.root
     }
 
-
     /**
      * The url for data on the image
      * @return the url (string)
