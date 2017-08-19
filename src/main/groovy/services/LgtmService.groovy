@@ -45,13 +45,15 @@ class LgtmService {
         log.info "getUserList('$userName')"
         AppUtil.instance.getCachedValue("/l/${userName}".toString(), Expiration.byDeltaMillis(AppUtil.DAY)) {
             UserList myList = UserList.findByUsername(userName)
-            if (!myList) {
+            if (myList) {
+                if (!myList.hashes) {
+                    myList.hashes = []
+                }
+                myList.hashes = imageList.findAll { myList.hashes.contains(it.hash) }*.hash
+                myList.save()
+            } else {
                 myList = new UserList(username: userName, hashes: [])
                 myList.save()
-            }
-
-            if (!myList.hashes) {
-                myList.hashes = []
             }
 
             log.info "getUserList('$userName') -> $myList"
