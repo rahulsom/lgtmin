@@ -20,8 +20,8 @@ if (githubAuthUtil.isAuthenticated()) {
             uploader: username,
             uploaderEmail: session.getAttribute(GithubAuthUtil.GITHUB_EMAIL_PRIMARY)
     )
+    UserList myList = LgtmService.instance.getUserList(username)
     try {
-        UserList myList = LgtmService.instance.getUserList(username)
 
         if (myList.bannedFromUpload) {
             request.setAttribute 'message', "You're not allowed to upload images"
@@ -46,6 +46,7 @@ if (githubAuthUtil.isAuthenticated()) {
         request.setAttribute 'message', 'That image was already uploaded.'
         redirect "/i/${e.hash}"
     } catch (ValidationException e) {
+        request.setAttribute('banned', myList.bannedFromUpload)
         request.setAttribute 'message', e.message
         request.setAttribute 'imageUrl', imageUrl
         response.setHeader "Content-Type", "text/html"
