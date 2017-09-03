@@ -27,7 +27,9 @@ class TokenAuthUtil {
 
     boolean isAuthenticated() {
         def claims = jwt?.body as Claims
-        println claims
+        if (!claims) {
+            return false
+        }
         def now = new Date()
         claims.getNotBefore() < now && claims.getExpiration() > now && claims.getSubject() != null
     }
