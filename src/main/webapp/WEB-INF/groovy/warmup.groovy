@@ -1,0 +1,8 @@
+import com.google.appengine.api.ThreadManager
+import io.reactivex.plugins.RxJavaPlugins
+
+def backgroundThreadFactory = ThreadManager.backgroundThreadFactory()
+
+RxJavaPlugins.createComputationScheduler(backgroundThreadFactory)
+RxJavaPlugins.createIoScheduler(backgroundThreadFactory)
+RxJavaPlugins.createNewThreadScheduler(backgroundThreadFactory)

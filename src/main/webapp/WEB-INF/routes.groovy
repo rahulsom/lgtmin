@@ -42,3 +42,4 @@ get "/letsencrypt/delete/@id",                    forward: "/letsencrypt/deleteC
 get "/.well-known/acme-challenge/@challengeText", forward: "/letsencrypt/get.groovy?challengeText=@challengeText"
 
 get '/jwt/generate',                              forward: '/tokens/gentoken.groovy'
+all "/_ah/warmup",                                forward: '/warmup.groovy'

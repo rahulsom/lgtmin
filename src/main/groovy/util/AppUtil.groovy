@@ -3,9 +3,14 @@ package util
 import com.google.appengine.api.memcache.*
 import groovy.util.logging.Log
 import groovyx.gaelyk.GaelykBindings
+import io.reactivex.Observable
 
+import java.util.concurrent.Future
 import java.util.function.Supplier
 import java.util.logging.Level
+
+import static io.reactivex.Observable.fromFuture
+import static io.reactivex.Observable.just
 
 /**
  * Helps extract the application's root url
@@ -61,6 +66,41 @@ class AppUtil {
         }
 
         value
+    }
+
+    /**
+     * Returns a value from cache if possible, evaluates otherwise
+     * @param cacheName The name for the cached value
+     * @param expiration default cache expiration if evaluating. 1 Hour by default
+     * @param closure The eval for cached value
+     * @return The value
+     */
+    static <T> Observable<T> getCachedObservable(
+            String cacheName,
+            Expiration expiration = Expiration.byDeltaMillis(HOUR),
+            Supplier<T> closure
+    ) {
+        def theCache = MemcacheServiceFactory.asyncMemcacheService
+        theCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
+        Future<T> future = null
+        try {
+            future = theCache.get(cacheName) as Future<T>
+            log.info "Retrieved value from cache: ${future.class}"
+        } catch (Exception e) {
+            log.warning("Caught $e trying to get value from cache")
+        }
+        return (future ? fromFuture(future) : just(null)).
+                onErrorReturnItem(null).
+                map {
+                    if (it == null) {
+                        log.info("Missed cache for ${cacheName}")
+                        def value = closure.get()
+                        theCache.put(cacheName, value, expiration)
+                        value
+                    } else {
+                        it
+                    }
+                }
     }
 
     /**
