@@ -3,7 +3,10 @@ import util.AppUtil
 
 def imageList = LgtmService.instance.imageList
 def PAGESIZE = 32
-def page = (params.page ? params.page as int : 1)
+def page = 1
+if (params.page && params.page.toString().isInteger()) {
+    page = params.page as int
+}
 def start = (page - 1) * PAGESIZE
 def stop = Math.min(start + PAGESIZE - 1, imageList.size() - 1)
 
