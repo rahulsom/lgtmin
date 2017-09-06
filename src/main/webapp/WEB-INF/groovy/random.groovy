@@ -39,6 +39,7 @@ if (image) {
 } else {
     image = new Image(imageUrl: 'https://f.cloud.github.com/assets/193047/406777/c9e3e3a2-aaba-11e2-8e03-4720321204f7.png')
     request.setAttribute 'image', image
+    request.setAttribute 'appUtil', AppUtil.instance
 
     response.setHeader("Access-Control-Allow-Origin", "*")
     response.setHeader("Access-Control-Allow-Methods", "GET")
