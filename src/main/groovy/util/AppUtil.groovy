@@ -1,11 +1,19 @@
 package util
 
-import com.google.appengine.api.memcache.*
+import com.google.appengine.api.memcache.AsyncMemcacheService
+import com.google.appengine.api.memcache.Expiration
+import com.google.appengine.api.memcache.MemcacheService
+import com.google.appengine.api.memcache.MemcacheServiceFactory
 import groovy.util.logging.Log
 import groovyx.gaelyk.GaelykBindings
+import io.reactivex.Maybe
 
+import javax.servlet.http.HttpServletRequest
 import java.util.function.Supplier
-import java.util.logging.Level
+
+import static com.google.appengine.api.memcache.ErrorHandlers.getConsistentLogAndContinue
+import static com.google.appengine.api.memcache.Expiration.byDeltaMillis
+import static java.util.logging.Level.INFO
 
 /**
  * Helps extract the application's root url
@@ -40,27 +48,28 @@ class AppUtil {
      * @param closure The eval for cached value
      * @return The value
      */
-    static <T> T getCachedValue(
-            String cacheName,
-            Expiration expiration = Expiration.byDeltaMillis(HOUR),
-            Supplier<T> closure
-    ) {
+    static <T> Maybe<T> getCachedValue(
+            String cacheName, Expiration expiration = byDeltaMillis(HOUR), Supplier<T> closure) {
         MemcacheService theCache = MemcacheServiceFactory.memcacheService
-        theCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
+        theCache.setErrorHandler(getConsistentLogAndContinue(INFO))
         T value = null
         try {
             value = theCache.get(cacheName) as T
             log.info "Retrieved value from cache: ${value.class}"
         } catch (Exception e) {
-            log.warning("Caught $e trying to get value from cache")
+            log.warning "Caught $e trying to get value from cache"
         }
         if (value == null) {
-            log.info("Missed cache for ${cacheName}")
+            log.info "Missed cache for ${cacheName}"
             value = closure.get()
-            theCache.put(cacheName, value, expiration)
+            theCache.put cacheName, value, expiration
         }
 
-        value
+        if (value) {
+            Maybe.just(value)
+        } else {
+            Maybe.empty()
+        }
     }
 
     /**
@@ -69,14 +78,13 @@ class AppUtil {
      */
     static void evictCache(String cacheName) {
         AsyncMemcacheService asyncCache = MemcacheServiceFactory.asyncMemcacheService
-        asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO))
-
-        asyncCache.delete(cacheName)
+        asyncCache.errorHandler = getConsistentLogAndContinue(INFO)
+        asyncCache.delete cacheName
     }
 
-    String patchUrl(String input, def request) {
-        def newContext = (request.getRequestURL() - request.getRequestURI())
-        input.replace(root, newContext)
+    String patchUrl(String input, HttpServletRequest request) {
+        def newContext = request.requestURL - request.requestURI
+        input.replace root, newContext
     }
 
 }

@@ -4,11 +4,11 @@ import util.AppUtil
 import util.AuthorizedUsers
 
 String hash = params.hash
-Image image = LgtmService.instance.getImage(hash)
+Image image = LgtmService.instance.getImage(hash).blockingGet()
 def githubUsername = session.getAttribute('githubUsername')
 
 if (githubUsername) {
-    def myList = LgtmService.instance.getUserList(githubUsername)
+    def myList = LgtmService.instance.getUserList(githubUsername).blockingGet()
     if (myList.hashes.contains(hash)) {
         request.setAttribute('favorite', 'true')
     }

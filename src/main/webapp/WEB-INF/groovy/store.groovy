@@ -20,7 +20,7 @@ if (githubAuthUtil.isAuthenticated()) {
             uploader: username,
             uploaderEmail: session.getAttribute(GithubAuthUtil.GITHUB_EMAIL_PRIMARY)
     )
-    UserList myList = LgtmService.instance.getUserList(username)
+    UserList myList = LgtmService.instance.getUserList(username).blockingGet()
     try {
 
         if (myList.bannedFromUpload) {

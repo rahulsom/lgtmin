@@ -13,7 +13,7 @@ if (session?.getAttribute('githubUsername') in AuthorizedUsers.allowDelete) {
     if (image) {
 
         if (params.ban == "true" && image.uploader) {
-            def ul = LgtmService.instance.getUserList(image.uploader)
+            def ul = LgtmService.instance.getUserList(image.uploader).blockingGet()
             ul.bannedFromUpload = Boolean.TRUE
             ul.save()
         }

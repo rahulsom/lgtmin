@@ -14,7 +14,7 @@ if (hash) {
         githubAuthUtil.withValidUser("/m/${hash}") {
             def userName = session.getAttribute('githubUsername')
             log.info "Username: ${userName}"
-            UserList myList = LgtmService.instance.getUserList(userName)
+            UserList myList = LgtmService.instance.getUserList(userName).blockingGet()
 
             if (myList.hashes.contains(hash)) {
                 myList.hashes.remove(hash)

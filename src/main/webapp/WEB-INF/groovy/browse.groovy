@@ -1,7 +1,7 @@
 import services.LgtmService
 import util.AppUtil
 
-def imageList = LgtmService.instance.imageList
+def imageList = LgtmService.instance.imageList.blockingGet()
 def PAGESIZE = 32
 def page = 1
 if (params.page && params.page.toString().isInteger()) {

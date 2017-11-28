@@ -5,17 +5,17 @@ import util.AppUtil
 
 import java.util.logging.Level
 
-def ct = LgtmService.instance.count
-List<Image> imageList = LgtmService.instance.imageList
+def ct = LgtmService.instance.count.blockingGet()
+List<Image> imageList = LgtmService.instance.imageList.blockingGet()
 Image image = null
 
 if (params.username) {
     log.info "Random for ${params.username}"
-    def myList = LgtmService.instance.getUserList(params.username)
+    def myList = LgtmService.instance.getUserList(params.username).blockingGet()
     log.info "Mylist computed ${params.username}"
     if (myList.hashes?.size()) {
         def hash = LgtmService.instance.getRandom(myList.hashes, myList.hashes.size())
-        image = LgtmService.instance.getImage(hash)
+        image = LgtmService.instance.getImage(hash).blockingGet()
         log.info "Image picked"
     }
 } else {

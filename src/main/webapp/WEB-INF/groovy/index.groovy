@@ -1,7 +1,7 @@
 import services.LgtmService
 import util.AppUtil
 
-def imageList = LgtmService.instance.topImages
+def imageList = LgtmService.instance.topImages.blockingGet()
 
 log.info "Images: ${imageList}"
 request.setAttribute 'imageList', imageList

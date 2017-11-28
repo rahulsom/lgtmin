@@ -3,7 +3,7 @@ import services.LgtmService
 import util.AppUtil
 
 String userName = params.username
-UserList myList = LgtmService.instance.getUserList(userName)
+UserList myList = LgtmService.instance.getUserList(userName).blockingGet()
 
 final int PAGESIZE = 32
 final int page = params.page ? Integer.parseInt(params.page) : 1
@@ -13,7 +13,7 @@ log.info "Start: $start, Stop: $stop, ilS: ${myList.hashes.size()}"
 if (start <= stop) {
     def renderedHashes = myList.hashes[start..stop]
     def images = renderedHashes.
-            collect { LgtmService.instance.getImage(it) }.
+            collect { LgtmService.instance.getImage(it).blockingGet() }.
             findAll { !it.isDeleted }
     request.setAttribute 'imageList', images
 } else {
