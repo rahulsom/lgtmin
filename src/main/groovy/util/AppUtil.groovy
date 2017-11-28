@@ -2,13 +2,14 @@ package util
 
 import com.google.appengine.api.memcache.AsyncMemcacheService
 import com.google.appengine.api.memcache.Expiration
-import com.google.appengine.api.memcache.MemcacheService
 import com.google.appengine.api.memcache.MemcacheServiceFactory
 import groovy.util.logging.Log
 import groovyx.gaelyk.GaelykBindings
 import io.reactivex.Maybe
 
 import javax.servlet.http.HttpServletRequest
+import java.util.concurrent.Callable
+import java.util.concurrent.Future
 import java.util.function.Supplier
 
 import static com.google.appengine.api.memcache.ErrorHandlers.getConsistentLogAndContinue
@@ -41,6 +42,20 @@ class AppUtil {
     public static final String ALL_IMAGES = "AllImages"
     public static final String COUNT = "Count"
 
+    static class SupplierCallableBridge<T> implements Callable<T> {
+
+        Supplier<T> supplier
+
+        SupplierCallableBridge(Supplier<T> supplier) {
+            this.supplier = supplier
+        }
+
+        @Override
+        T call() throws Exception {
+            supplier.get()
+        }
+    }
+
     /**
      * Returns a value from cache if possible, evaluates otherwise
      * @param cacheName The name for the cached value
@@ -50,26 +65,21 @@ class AppUtil {
      */
     static <T> Maybe<T> getCachedValue(
             String cacheName, Expiration expiration = byDeltaMillis(HOUR), Supplier<T> closure) {
-        MemcacheService theCache = MemcacheServiceFactory.memcacheService
+        def theCache = MemcacheServiceFactory.asyncMemcacheService
         theCache.setErrorHandler(getConsistentLogAndContinue(INFO))
-        T value = null
-        try {
-            value = theCache.get(cacheName) as T
-            log.info "Retrieved value from cache: ${value.class}"
-        } catch (Exception e) {
-            log.warning "Caught $e trying to get value from cache"
-        }
-        if (value == null) {
-            log.info "Missed cache for ${cacheName}"
-            value = closure.get()
-            theCache.put cacheName, value, expiration
-        }
 
-        if (value) {
-            Maybe.just(value)
-        } else {
-            Maybe.empty()
-        }
+        def valueFromCache = Maybe.fromFuture((Future<T>) theCache.get(cacheName)).
+                doOnSuccess { log.info "Retrieved value from cache: ${it.class}" }.
+                doOnError { log.warning "Caught $e trying to get value from cache" }
+
+        def valueFromClosure = Maybe.
+                fromCallable(new SupplierCallableBridge(closure)).
+                doOnSubscribe { log.info "Missed cache for ${cacheName}" }.
+                doOnSuccess { theCache.put(cacheName, it) }
+
+        return valueFromCache.
+                onErrorResumeNext(valueFromClosure).
+                switchIfEmpty(valueFromClosure)
     }
 
     /**
