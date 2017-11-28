@@ -1,6 +1,5 @@
 package services
 
-import com.google.appengine.api.memcache.Expiration
 import domain.Image
 import domain.UserList
 import groovy.util.logging.Log
@@ -9,7 +8,8 @@ import util.AppUtil
 
 import java.security.SecureRandom
 
-import static util.AppUtil.TOP_IMAGES
+import static com.google.appengine.api.memcache.Expiration.byDeltaMillis
+import static util.AppUtil.*
 
 /**
  * Created by rahulsomasunderam on 8/9/14.
@@ -19,47 +19,53 @@ import static util.AppUtil.TOP_IMAGES
 @Log
 class LgtmService {
 
+    private AppUtil appUtil = AppUtil.instance
+
     Maybe<Integer> getCount() {
-        AppUtil.instance.getCachedValue(AppUtil.COUNT) {
+        appUtil.getCachedValue(COUNT) {
             Image.countNotDeleted()
         }
     }
 
     Maybe<List<Image>> getImageList() {
-        AppUtil.instance.getCachedValue(AppUtil.ALL_IMAGES) {
-            Image.listSortedByCredits(getCount().blockingGet())
+        getCount().flatMap { ct ->
+            appUtil.getCachedValue(ALL_IMAGES) {
+                Image.listSortedByCredits(ct)
+            }
         }
     }
 
     Maybe<List<Image>> getTopImages() {
-        AppUtil.instance.getCachedValue(TOP_IMAGES) {
+        appUtil.getCachedValue(TOP_IMAGES) {
             Image.listSortedByCredits(12)
         }
     }
 
     Maybe<Image> getImage(String hash) {
-        AppUtil.instance.getCachedValue("/i/${hash}".toString(), Expiration.byDeltaMillis(AppUtil.DAY)) {
+        appUtil.getCachedValue("/i/${hash}".toString(), byDeltaMillis(DAY)) {
             Image.findByHash(hash)
         }
     }
 
     Maybe<UserList> getUserList(String userName) {
         log.info "getUserList('$userName')"
-        AppUtil.instance.getCachedValue("/l/${userName}".toString(), Expiration.byDeltaMillis(AppUtil.DAY)) {
-            UserList myList = UserList.findByUsername(userName)
-            if (myList) {
-                if (!myList.hashes) {
-                    myList.hashes = []
+        imageList.flatMap { il ->
+            appUtil.getCachedValue("/l/${userName}".toString(), byDeltaMillis(DAY)) {
+                UserList myList = UserList.findByUsername(userName)
+                if (myList) {
+                    if (!myList.hashes) {
+                        myList.hashes = []
+                    }
+                    myList.hashes = il.findAll { myList.hashes.contains(it.hash) }*.hash
+                    myList.save()
+                } else {
+                    myList = new UserList(username: userName, hashes: [])
+                    myList.save()
                 }
-                myList.hashes = imageList.blockingGet().findAll { myList.hashes.contains(it.hash) }*.hash
-                myList.save()
-            } else {
-                myList = new UserList(username: userName, hashes: [])
-                myList.save()
-            }
 
-            log.info "getUserList('$userName') -> $myList"
-            myList
+                log.info "getUserList('$userName') -> $myList"
+                myList
+            }
         }
     }
 

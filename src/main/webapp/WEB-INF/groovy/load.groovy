@@ -4,11 +4,13 @@ import util.AppUtil
 import util.AuthorizedUsers
 
 String hash = params.hash
-Image image = LgtmService.instance.getImage(hash).blockingGet()
+def lgtmService = LgtmService.instance
+
+Image image = lgtmService.getImage(hash).blockingGet()
 def githubUsername = session.getAttribute('githubUsername')
 
 if (githubUsername) {
-    def myList = LgtmService.instance.getUserList(githubUsername).blockingGet()
+    def myList = lgtmService.getUserList(githubUsername).blockingGet()
     if (myList.hashes.contains(hash)) {
         request.setAttribute('favorite', 'true')
     }
@@ -19,18 +21,19 @@ log.info "Image: ${image}"
 if (image) {
     request.setAttribute 'image', image
     request.setAttribute 'allowDelete', (githubUsername in AuthorizedUsers.allowDelete)
-    request.setAttribute 'appUtil', AppUtil.instance
-    response.setHeader("Access-Control-Allow-Origin", "*");
-    response.setHeader("Access-Control-Allow-Methods", "GET");
-    response.setHeader("Access-Control-Allow-Credentials", "true");
+    def appUtil = AppUtil.instance
+    request.setAttribute 'appUtil', appUtil
+    response.setHeader "Access-Control-Allow-Origin", "*";
+    response.setHeader "Access-Control-Allow-Methods", "GET";
+    response.setHeader "Access-Control-Allow-Credentials", "true";
     if (request.getHeader('Accept')?.contains('application/json')) {
-        response.setHeader("Content-Type", "application/json");
-        out.write(AppUtil.instance.patchUrl(image.toJson(), request))
+        response.setHeader "Content-Type", "application/json";
+        out.write(appUtil.patchUrl(image.toJson(), request))
     } else {
-        response.setHeader("Content-Type", "text/html");
-        request.setAttribute('comments', true)
+        response.setHeader 'Content-Type', 'text/html'
+        request.setAttribute 'comments', true
         forward '/WEB-INF/pages/show.html.gtpl'
     }
 } else {
-    redirect('/')
+    redirect '/'
 }

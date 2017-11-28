@@ -1,4 +1,5 @@
 import domain.UserList
+import io.reactivex.Observable
 import services.LgtmService
 import util.AppUtil
 
@@ -11,10 +12,13 @@ final int start = (page - 1) * PAGESIZE
 final int stop = Math.min(start + PAGESIZE - 1, myList.hashes.size() - 1)
 log.info "Start: $start, Stop: $stop, ilS: ${myList.hashes.size()}"
 if (start <= stop) {
-    def renderedHashes = myList.hashes[start..stop]
+    def renderedHashes = Observable.fromIterable(myList.hashes[start..stop])
     def images = renderedHashes.
-            collect { LgtmService.instance.getImage(it).blockingGet() }.
-            findAll { !it.isDeleted }
+            flatMapMaybe { LgtmService.instance.getImage(it) }.
+            filter { !it.isDeleted }.
+            blockingIterable().
+            toList()
+
     request.setAttribute 'imageList', images
 } else {
     request.setAttribute 'imageList', []
