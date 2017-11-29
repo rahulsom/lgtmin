@@ -38,3 +38,4 @@ get "/unban/@username",                           forward: "/unban.groovy?userna
 
 get '/jwt/generate',                              forward: '/tokens/gentoken.groovy'
 
+all "/_ah/warmup",                                forward: "/warmup.groovy"
