@@ -1,3 +1,4 @@
+import domain.ImageHolder
 import domain.UserList
 import io.reactivex.Observable
 import services.LgtmService
@@ -16,6 +17,7 @@ if (start <= stop) {
     def images = renderedHashes.
             flatMapMaybe { LgtmService.instance.getImage(it) }.
             filter { !it.isDeleted }.
+            map { new ImageHolder(it, true) }
             blockingIterable().
             toList()
 
