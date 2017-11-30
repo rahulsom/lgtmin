@@ -19,30 +19,30 @@ import static util.AppUtil.*
 @Log
 class LgtmService {
 
-    private AppUtil appUtil = AppUtil.instance
+    @Delegate private AppUtil appUtil = AppUtil.instance
 
     Maybe<Integer> getCount() {
-        appUtil.getCachedValue(COUNT) {
+        getCachedValue(COUNT) {
             Image.countNotDeleted()
         }
     }
 
     Maybe<List<Image>> getImageList() {
         getCount().flatMap { ct ->
-            appUtil.getCachedValue(ALL_IMAGES) {
+            getCachedValue(ALL_IMAGES) {
                 Image.listSortedByCredits(ct)
             }
         }
     }
 
     Maybe<List<Image>> getTopImages() {
-        appUtil.getCachedValue(TOP_IMAGES) {
+        getCachedValue(TOP_IMAGES) {
             Image.listSortedByCredits(12)
         }
     }
 
     Maybe<Image> getImage(String hash) {
-        appUtil.getCachedValue("/i/${hash}".toString(), byDeltaMillis(DAY)) {
+        getCachedValue("/i/${hash}".toString(), byDeltaMillis(DAY)) {
             Image.findByHash(hash)
         }
     }
@@ -50,7 +50,7 @@ class LgtmService {
     Maybe<UserList> getUserList(String userName) {
         log.info "getUserList('$userName')"
         imageList.flatMap { il ->
-            appUtil.getCachedValue("/l/${userName}".toString(), byDeltaMillis(DAY)) {
+            getCachedValue("/l/${userName}".toString(), byDeltaMillis(DAY)) {
                 UserList myList = UserList.findByUsername(userName)
                 if (myList) {
                     if (!myList.hashes) {
