@@ -87,9 +87,9 @@ class AppUtil {
      * @param cacheName name of cached value
      */
     static void evictCache(String cacheName) {
-        AsyncMemcacheService asyncCache = MemcacheServiceFactory.asyncMemcacheService
-        asyncCache.errorHandler = getConsistentLogAndContinue(INFO)
-        asyncCache.delete cacheName
+        def cache = MemcacheServiceFactory.memcacheService
+        cache.errorHandler = getConsistentLogAndContinue(INFO)
+        cache.delete cacheName
     }
 
     String patchUrl(String input, HttpServletRequest request) {
