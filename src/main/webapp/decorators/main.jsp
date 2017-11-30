@@ -15,7 +15,7 @@
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Cabin+Sketch'/>
     <link rel="stylesheet" type="text/css"
           href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/app.css?v=1"/>
     <link rel="chrome-webstore-item"
           href="https://chrome.google.com/webstore/detail/fagoekogpjjhmdnmpgpnahioapbeaajp"/>
 
@@ -51,7 +51,7 @@
         src="//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.js"></script>
 <script type="text/javascript"
         src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.2.1/lodash.min.js"></script>
-<script type="text/javascript" src="/js/app.js"></script>
+<script type="text/javascript" src="/js/app.js?v=1"></script>
 
 </body>
 </html>
