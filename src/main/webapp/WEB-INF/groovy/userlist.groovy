@@ -17,7 +17,7 @@ if (start <= stop) {
     def images = renderedHashes.
             flatMapMaybe { LgtmService.instance.getImage(it) }.
             filter { !it.isDeleted }.
-            map { new ImageHolder(it, true) }
+            map { new ImageHolder(it, true) }.
             blockingIterable().
             toList()
 

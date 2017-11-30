@@ -31,6 +31,15 @@ h1, h2, h3, h4, h5, h6, a.navbar-brand {
     display: none;
 }
 
-.favorited {
-    border: 1px solid deepskyblue;
+.row.buttons {
+    font-size: 1.5em;
+    padding: 6px;
 }
+
+div.favorited .fa-heart-o {
+    display: none;
+}
+.not-favorited .fa-heart {
+    display: none;
+}
+

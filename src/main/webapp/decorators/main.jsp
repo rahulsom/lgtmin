@@ -15,6 +15,8 @@
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Cabin+Sketch'/>
     <link rel="stylesheet" type="text/css"
           href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/app.css?v=1"/>
     <link rel="chrome-webstore-item"
           href="https://chrome.google.com/webstore/detail/fagoekogpjjhmdnmpgpnahioapbeaajp"/>

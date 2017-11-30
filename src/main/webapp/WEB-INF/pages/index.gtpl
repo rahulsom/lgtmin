@@ -8,37 +8,30 @@
             <% def appUtil = request.getAttribute('appUtil') %>
             <% imageList.each { %>
             <div class="col-md-2 col-sm-3 col-xs-6">
-                <div class="thumbnail ${it.favorited ? 'favorited' : ''}">
+                <div class="thumbnail ${it.favorited ? 'favorited' : 'not-favorited'}">
                     <div class="image" style="height: 162px; overflow-y: hidden; background-color: #F5F5F5;">
                         <a href="${appUtil.patchUrl(it.dataUrl, request)}">
                             <img alt="" src="${appUtil.patchUrl(it.imageUrl, request)}" style="max-height: 200px;">
                         </a>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xs-6 col-sm-6">
-                            <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/moneybag.png"
-                                 alt="Credits" style="height: 16px; width: 16px;" data-toggle="tooltip" title="Credits"/>
-                            ${it.credits}
-                        </div>
-                        <div class="col-md-6 col-xs-6 col-sm-6" style="text-align: right;">
-                            ${it.impressions}
-                            <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/octocat.png"
-                                 alt="Impressions" style="height: 16px; width: 16px;" data-toggle="tooltip" title="Impressions"/>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xs-6 col-sm-6">
+                    <div class="row buttons">
+                        <div class="col-md-3 col-xs-3 col-sm-3">
                             <a href="${it.upvoteUrl.replace(appUtil.root, request.contextPath)}"
                                data-toggle="tooltip" title="Upvote">
-                                <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/+1.png"
-                                     alt="Like" style="height: 16px; width: 16px;"/>
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-xs-3 col-sm-3">
+                            <a href="/m/${it.hash}"
+                               data-toggle="tooltip" title="${it.favorited ? 'Remove from my list' : 'Add to my list'}">
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                <i class="fa fa-heart" aria-hidden="true"></i>
                             </a>
                         </div>
                         <div class="col-md-6 col-xs-6 col-sm-6" style="text-align: right;">
                             <a href="${appUtil.patchUrl(it.reportUrl, request)}"
                                data-toggle="tooltip" title="Report">
-                                <img src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/-1.png"
-                                     alt="Report" style="height: 16px; width: 16px;"/>
+                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
