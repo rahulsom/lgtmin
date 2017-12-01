@@ -1,26 +1,24 @@
-import domain.Image
 import domain.ImageHolder
 import io.reactivex.Maybe
 import services.LgtmService
 import util.AppUtil
 import util.GithubAuthUtil
 
+def authUtil = new GithubAuthUtil(request, response)
+def userList =
+        authUtil.isAuthenticated() ?
+                LgtmService.instance.getUserList(authUtil.username).
+                        map { it.hashes }.
+                        switchIfEmpty(Maybe.just([] as List<String>)) :
+                Maybe.just([] as List<String>)
+
 def imageList =
         LgtmService.instance.imageList.
-                flatMap { List<Image> topImages ->
-                    def authUtil = new GithubAuthUtil(request, response)
-                    if (authUtil.isAuthenticated()) {
-                        LgtmService.instance.getUserList(authUtil.username).
-                                flatMap { ul ->
-                                    Maybe.just(topImages.collect {
-                                        new ImageHolder(it, ul.hashes.contains(it.hash))
-                                    })
-                                }
-                    } else {
-                        Maybe.just(topImages.collect { new ImageHolder(it, false) })
-                    }
+                zipWith(userList) { images, ul ->
+                    images.collect { new ImageHolder(it, ul.contains(it.hash)) }
                 }.
                 blockingGet()
+
 def PAGESIZE = 32
 def page = 1
 if (params.page && params.page.toString().isInteger()) {
