@@ -1,10 +1,18 @@
+import com.google.appengine.api.urlfetch.HTTPHeader
+import com.google.appengine.api.urlfetch.HTTPRequest
+import com.google.appengine.api.urlfetch.HTTPResponse
 import domain.Image
 import domain.UniqueConstraintViolatedException
 import domain.UserList
 import domain.ValidationException
+import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
 import services.LgtmService
 import util.AppUtil
 import util.GithubAuthUtil
+import util.ImgurUtil
+
+import static com.google.appengine.api.urlfetch.HTTPMethod.POST
 
 log.info "Setting attributes"
 
@@ -14,6 +22,9 @@ log.info "Image Url saved will be ${imageUrl}"
 
 def githubAuthUtil = new GithubAuthUtil(request, response)
 if (githubAuthUtil.isAuthenticated()) {
+    if (!imageUrl.startsWith('https://i.imgur.com')) {
+        imageUrl = new ImgurUtil().uploadImage(imageUrl)
+    }
     def username = session.getAttribute(GithubAuthUtil.GITHUB_USERNAME) as String
     def newImage = new Image(
             imageUrl: imageUrl,

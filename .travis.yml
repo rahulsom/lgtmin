@@ -7,6 +7,7 @@ env:
   - secure: JNoctVCwvPYibVT4pijsVrEHPbW8PlhX1ASWCxERhKc7u9s0pWYXCecIszKmupyjUyf4yhe6uXbDarYcsP3COpzuxmCq0BLdQ9KfnVcCaxNwvHgcRcMf4SZSX3k2nP3GO3TEte+6xJ+RpZHbdF4WAfu35tUxmr5G34+rrZFiyKM=
   - secure: ZAJ6714sXlImCR3f0/StKnkGckJvqRZATC7fwBWOLyZBfwZxnDVULqkI7qo253zdY3lsWHYZwMO4mIqzMCHPnKj8FtNY5OA8Z+QeczwPvBsi+mo5EEMskix1PeZC14qE0MCFef/+HyXCdq1d/nTQ4V/kvjk7QzdA274MBpXQZS0=
   - secure: ZthMut9vpyb1f/8WlgMZvVYmpGi9r/vavn8LucFshGSsLJF/CzUFnT/HFgnbUoYaRccpX9OYFZL1zvuA0gOeIOvWA0VaIE6DnjtdNQIyReX0BAuv66r1XKyOSpBy44FrJVWqGVaJ+2g56z1SEe2XTqxwa8oc7keOChDCWMSBemw=
+  - secure: QvkIGpiClPYXkfOLhBGQyXs9IiDjJsvum6BBZuFD8USx3dfj+GNNOvBUXX85jehDELGsOMAoGccJOX64niciJ8v7iSCFKvCDNJIPNSMdK/xWD3pj4IAp1VdkcyR/h/z2qTagEDyTwzXyZCXx0jgcXQVtqqgUjuUwrjYytqmcSYQ=
 cache:
   directories:
   - "$HOME/.gradle/wrapper"

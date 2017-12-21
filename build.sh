@@ -10,6 +10,10 @@ cat > src/main/resources/jwt.properties << EOF
 key=${JWT_SIGNING_KEY}
 EOF
 
+cat > src/main/resources/imgur.properties << EOF
+clientId=${IMGUR_CLIENT_ID}
+EOF
+
 if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
   echo "Cron mode"
   if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then
