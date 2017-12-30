@@ -19,8 +19,6 @@ def imageList =
                 }.
                 blockingGet()
 
-
-
 log.info "Images: ${imageList}"
 request.setAttribute 'imageList', imageList
 request.setAttribute 'appUtil', AppUtil.instance

@@ -1,18 +1,11 @@
-import com.google.appengine.api.urlfetch.HTTPHeader
-import com.google.appengine.api.urlfetch.HTTPRequest
-import com.google.appengine.api.urlfetch.HTTPResponse
 import domain.Image
 import domain.UniqueConstraintViolatedException
 import domain.UserList
 import domain.ValidationException
-import groovy.json.JsonBuilder
-import groovy.json.JsonSlurper
 import services.LgtmService
 import util.AppUtil
 import util.GithubAuthUtil
 import util.ImgurUtil
-
-import static com.google.appengine.api.urlfetch.HTTPMethod.POST
 
 log.info "Setting attributes"
 
@@ -38,26 +31,25 @@ if (githubAuthUtil.isAuthenticated()) {
             request.setAttribute 'message', "You're not allowed to upload images"
             redirect '/'
         } else {
-
             newImage.validate()
             newImage.save()
             request.setAttribute 'image', newImage
             request.setAttribute 'dataUrl', newImage.dataUrl
 
             if (!myList.hashes.contains(newImage.hash)) {
-                myList.hashes.add(newImage.hash)
+                myList.hashes.add newImage.hash
             }
             myList.save()
-            AppUtil.instance.evictCache("/l/${username}")
+            AppUtil.instance.store "/l/${username}", myList
 
-            response.setHeader "Content-Type", "text/html";
+            response.setHeader "Content-Type", "text/html"
             redirect "/i/${newImage.hash}"
         }
     } catch (UniqueConstraintViolatedException e) {
         request.setAttribute 'message', 'That image was already uploaded.'
         redirect "/i/${e.hash}"
     } catch (ValidationException e) {
-        request.setAttribute('banned', myList.bannedFromUpload)
+        request.setAttribute 'banned', myList.bannedFromUpload
         request.setAttribute 'message', e.message
         request.setAttribute 'imageUrl', imageUrl
         response.setHeader "Content-Type", "text/html"

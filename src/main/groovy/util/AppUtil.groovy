@@ -66,7 +66,7 @@ class AppUtil {
     static <T> Maybe<T> getCachedValue(
             String cacheName, Expiration expiration = byDeltaMillis(HOUR), Supplier<T> closure) {
         def theCache = MemcacheServiceFactory.asyncMemcacheService
-        theCache.setErrorHandler(getConsistentLogAndContinue(INFO))
+        theCache.setErrorHandler getConsistentLogAndContinue(INFO)
 
         def valueFromCache = Maybe.fromFuture((Future<T>) theCache.get(cacheName)).
                 doOnSuccess { log.info "Retrieved value from cache: ${it.class}" }.
@@ -75,11 +75,18 @@ class AppUtil {
         def valueFromClosure = Maybe.
                 fromCallable(new SupplierCallableBridge(closure)).
                 doOnSubscribe { log.info "Missed cache for ${cacheName}" }.
-                doOnSuccess { theCache.put(cacheName, it) }
+                doOnSuccess { theCache.put(cacheName, it, expiration) }
 
         return valueFromCache.
                 onErrorResumeNext(valueFromClosure).
                 switchIfEmpty(valueFromClosure)
+    }
+
+    static <T> void store(String cacheName, T t, Expiration expiration = byDeltaMillis(HOUR)) {
+        def theCache = MemcacheServiceFactory.asyncMemcacheService
+        theCache.setErrorHandler getConsistentLogAndContinue(INFO)
+
+        theCache.put cacheName, t, expiration
     }
 
     /**
