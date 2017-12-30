@@ -23,7 +23,7 @@ if (hash) {
             }
 
             myList.save()
-            AppUtil.instance.evictCache("/l/${userName}")
+            AppUtil.instance.store "/l/${userName}", myList
         }
         redirect("/i/${hash}")
     } else {
