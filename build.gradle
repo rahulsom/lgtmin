@@ -12,15 +12,17 @@ buildscript {
     dependencies {
         classpath 'org.gradle.api.plugins:gradle-gaelyk-plugin:0.6'
         classpath 'org.gradle.api.plugins:gradle-appengine-geb-plugin:0.4'
-        classpath "gradle.plugin.net.ossindex:ossindex-gradle-plugin:0.1.1"
     }
 }
 
-apply plugin: 'war'
-apply plugin: 'gaelyk'
+plugins {
+    id "net.ossindex.audit" version "0.1.1"
+    id "war"
+    id "groovy"
+}
+
 apply plugin: 'appengine-geb'
-apply plugin: 'groovy'
-apply plugin: "net.ossindex.audit"
+apply plugin: 'gaelyk'
 
 def compatibilityVersion = 1.7
 sourceCompatibility = compatibilityVersion
