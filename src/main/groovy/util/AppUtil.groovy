@@ -6,6 +6,7 @@ import com.google.appengine.api.memcache.MemcacheServiceFactory
 import groovy.util.logging.Log
 import groovyx.gaelyk.GaelykBindings
 import io.reactivex.Maybe
+import io.reactivex.Single
 
 import javax.servlet.http.HttpServletRequest
 import java.util.concurrent.Callable
@@ -83,20 +84,22 @@ class AppUtil {
     }
 
     static <T> void store(String cacheName, T t, Expiration expiration = byDeltaMillis(HOUR)) {
-        def theCache = MemcacheServiceFactory.asyncMemcacheService
-        theCache.setErrorHandler getConsistentLogAndContinue(INFO)
-
-        theCache.put cacheName, t, expiration
+        cache.put cacheName, t, expiration
     }
 
     /**
      * Evicts value from cache
      * @param cacheName name of cached value
      */
-    static void evictCache(String cacheName) {
-        def cache = MemcacheServiceFactory.memcacheService
-        cache.errorHandler = getConsistentLogAndContinue(INFO)
-        cache.delete cacheName
+    static Single<Boolean> evictCache(String cacheName) {
+        Single.fromFuture cache.delete(cacheName)
+    }
+
+    private static AsyncMemcacheService getCache() {
+        MemcacheServiceFactory.asyncMemcacheService.with {
+            errorHandler = getConsistentLogAndContinue(INFO)
+            it
+        }
     }
 
     String patchUrl(String input, HttpServletRequest request) {

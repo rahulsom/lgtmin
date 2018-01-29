@@ -15,7 +15,7 @@ if (hash) {
                 updateImageLikes(image)
             }
         }
-        AppUtil.instance.evictCache("/i/${hash}")
+        AppUtil.instance.evictCache("/i/${hash}").toFlowable().blockingFirst()
         redirect("/i/${hash}")
     } else {
         redirect('/')

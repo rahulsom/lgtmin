@@ -1,4 +1,5 @@
 import domain.Image
+import io.reactivex.Flowable
 import services.LgtmService
 import util.AppUtil
 import util.AuthorizedUsers
@@ -20,9 +21,11 @@ if (session?.getAttribute('githubUsername') in AuthorizedUsers.allowDelete) {
 
         image.isDeleted = true
         image.save()
-        AppUtil.instance.evictCache(AppUtil.TOP_IMAGES)
-        AppUtil.instance.evictCache(AppUtil.COUNT)
-        AppUtil.instance.evictCache("/i/${hash}")
+        Flowable.combineLatest(
+                AppUtil.instance.evictCache(AppUtil.TOP_IMAGES).toFlowable(),
+                AppUtil.instance.evictCache(AppUtil.COUNT).toFlowable(),
+                AppUtil.instance.evictCache("/i/${hash}").toFlowable()
+        ) { a, b, c -> a && b && c }.blockingFirst()
         redirect('/')
     } else {
         response.sendError(404)

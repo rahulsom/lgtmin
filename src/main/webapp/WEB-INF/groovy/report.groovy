@@ -14,7 +14,7 @@ if (hash) {
             if (addToUsersDislikes(githubAuthUtil.username, image)) {
                 updateImageDislikes(image)
             }
-            AppUtil.instance.evictCache("/i/${hash}")
+            AppUtil.instance.evictCache("/i/${hash}").toFlowable().blockingFirst()
             redirect("/i/${hash}")
         }
     } else {
