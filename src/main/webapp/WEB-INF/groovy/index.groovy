@@ -22,4 +22,5 @@ def imageList =
 log.info "Images: ${imageList}"
 request.setAttribute 'imageList', imageList
 request.setAttribute 'appUtil', AppUtil.instance
+response.setHeader 'Strict-Transport-Security', 'max-age=300; preload'
 forward '/WEB-INF/pages/index.gtpl'

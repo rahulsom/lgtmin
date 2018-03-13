@@ -57,6 +57,7 @@ if (image) {
     response.setHeader("Access-Control-Allow-Origin", "*")
     response.setHeader("Access-Control-Allow-Methods", "GET")
     response.setHeader("Access-Control-Allow-Credentials", "true")
+    response.setHeader 'Strict-Transport-Security', 'max-age=300; preload'
 
     if (request.getHeader('Accept')?.contains('application/json')) {
         response.setHeader("Content-Type", "application/json")

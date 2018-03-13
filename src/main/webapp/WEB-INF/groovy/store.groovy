@@ -14,6 +14,7 @@ String imageUrl = params.imageUrl
 log.info "Image Url saved will be ${imageUrl}"
 
 def githubAuthUtil = new GithubAuthUtil(request, response)
+response.setHeader 'Strict-Transport-Security', 'max-age=300; preload'
 if (githubAuthUtil.isAuthenticated()) {
     if (!imageUrl.startsWith('https://i.imgur.com')) {
         imageUrl = new ImgurUtil().uploadImage(imageUrl)
