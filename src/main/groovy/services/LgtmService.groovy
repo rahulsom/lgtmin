@@ -49,23 +49,20 @@ class LgtmService {
 
     Maybe<UserList> getUserList(String userName) {
         log.info "getUserList('$userName')"
-        imageList.flatMap { il ->
-            getCachedValue("/l/${userName}".toString(), byDeltaMillis(DAY)) {
-                UserList myList = UserList.findByUsername(userName)
-                if (myList) {
-                    if (!myList.hashes) {
-                        myList.hashes = []
-                    }
-                    myList.hashes = il.findAll { myList.hashes.contains(it.hash) }*.hash
-                    myList.save()
-                } else {
-                    myList = new UserList(username: userName, hashes: [])
+        getCachedValue("/l/${userName}".toString(), byDeltaMillis(DAY)) {
+            UserList myList = UserList.findByUsername(userName)
+            if (myList) {
+                if (!myList.hashes) {
+                    myList.hashes = []
                     myList.save()
                 }
-
-                log.info "getUserList('$userName') -> $myList"
-                myList
+            } else {
+                myList = new UserList(username: userName, hashes: [])
+                myList.save()
             }
+
+            log.info "getUserList('$userName') -> $myList"
+            myList
         }
     }
 
