@@ -13,7 +13,18 @@
     <div class="thumbnail ${it.favorited ? 'favorited' : 'not-favorited'}">
         <div class="image" style="height: 162px; overflow-y: hidden; background-color: #F5F5F5;">
             <a href="${appUtil.patchUrl(it.dataUrl, request)}">
+            <% if (it.embedUrl) {%>
+                <iframe src="${it.embedUrl}" width="200" height="220" scrolling="no"
+                        style="border:none; -ms-zoom: 0.75;
+                                                    -moz-transform: scale(0.75);
+                                                    -moz-transform-origin: 0 0;
+                                                    -o-transform: scale(0.75);
+                                                    -o-transform-origin: 0 0;
+                                                    -webkit-transform: scale(0.75);
+                                                    -webkit-transform-origin: 0 0;"></iframe>
+            <% } else {%>
                 <img alt="" src="${appUtil.patchUrl(it.imageUrl, request)}" style="max-height: 200px;">
+            <% } %>
             </a>
         </div>
         <div class="row buttons">

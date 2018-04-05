@@ -89,6 +89,17 @@ class Image implements Serializable {
     String getTrackableImageUrl() {
         "${root}/p/${hash}"
     }
+
+    @Ignore
+    String getEmbedUrl() {
+        if (imageUrl ==~ $/https://i.imgur.com/.+\.gif/$) {
+            def m = imageUrl =~ $/https://i.imgur.com/(.+)\.gif/$
+            println m[0]
+            return "${root}/embed/${m[0][1]}"
+        } else {
+            null
+        }
+    }
     /**
      * The markdown for embedding the image in Github
      * @return The markdown (String)
