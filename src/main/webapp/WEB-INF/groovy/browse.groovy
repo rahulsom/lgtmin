@@ -19,7 +19,7 @@ def imageList =
                 }.
                 blockingGet()
 
-def PAGESIZE = 32
+def PAGESIZE = 128
 def page = 1
 if (params.page && params.page.toString().isInteger()) {
     page = params.page as int
