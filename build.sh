@@ -44,6 +44,14 @@ if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
 else
   if [ "$TRAVIS_PULL_REQUEST" = false ]; then
     if [ "$TRAVIS_BRANCH" = "master" ]; then
+
+      openssl aes-256-cbc \
+          -K $encrypted_e5eaaca705ea_key \
+          -iv $encrypted_e5eaaca705ea_iv \
+          -in .appcfg_oauth2_tokens_java.enc \
+          -out .appcfg_oauth2_tokens_java \
+          -d
+
       cat .appcfg_oauth2_tokens_java | sed -e "s/rahul/$(whoami)/g" > $HOME/.appcfg_oauth2_tokens_java
       ./gradlew check
       ./gradlew appengineUpdateAll
