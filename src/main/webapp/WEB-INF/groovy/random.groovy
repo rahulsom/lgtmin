@@ -47,6 +47,10 @@ if (image) {
         log.log(Level.WARNING, "Exception updating impressions on image", e)
     }
 
+    response.setHeader("Access-Control-Allow-Origin", "*")
+    response.setHeader("Access-Control-Allow-Methods", "GET")
+    response.setHeader("Access-Control-Allow-Credentials", "true")
+    response.setHeader 'Strict-Transport-Security', 'max-age=300; preload'
     response.sendRedirect(AppUtil.instance.patchUrl(image.dataUrl, request))
 
 } else {
