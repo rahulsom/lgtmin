@@ -43,3 +43,6 @@ div.favorited .fa-heart-o {
     display: none;
 }
 
+a.disabled {
+    pointer-events: none;
+}

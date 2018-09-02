@@ -38,6 +38,10 @@ $(function () {
         });
     }
 
+    $('a.disabled').on('click', function(event){
+        event.preventDefault();
+    })
+
 });
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -48,3 +52,4 @@ $(function () {
 ga('create', 'UA-40490747-1', 'lgtm.in');
 ga('require', 'displayfeatures');
 ga('send', 'pageview');
+

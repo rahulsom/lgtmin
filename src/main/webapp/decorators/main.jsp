@@ -35,6 +35,13 @@
     <%@include file="messages.jsp" %>
     <%@include file="protip.jsp" %>
 
+    <div class="alert alert-danger">
+        LGTM.in is shutting down on 2018-10-01.
+        I've been busy with a lot of things, and cannot spend time on this.
+        The source is available on <a href="https://github.com/rahulsom/lgtmin">github.com/rahulsom/lgtmin</a> and can be used to spin up a similar service.
+        If you're interested in purchasing the domain and continuing to run this service, let me know, and we can work something out.
+    </div>
+
     <decorator:body/>
 
 </div>

@@ -20,7 +20,7 @@
                     <a href="/g">Random</a>
                 </li>
                 <li class="${request.servletPath == '/WEB-INF/pages/upload.gtpl' ? 'active' : ''}">
-                    <a href="/upload">Submit</a>
+                    <a href="/upload" class="disabled">Submit</a>
                 </li>
                 <li class="${request.servletPath == '/WEB-INF/pages/browse.gtpl' ? 'active' : ''}">
                     <a href="/browse">Browse</a>
