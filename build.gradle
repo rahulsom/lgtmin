@@ -53,7 +53,7 @@ dependencies {
     testCompile "com.google.appengine:appengine-api-stubs:$gaeVersion",
             "com.google.appengine:appengine-testing:$gaeVersion"
 
-    functionalTestCompile 'io.github.bonigarcia:webdrivermanager:1.7.0'
+    functionalTestCompile 'io.github.bonigarcia:webdrivermanager:1.7.2'
     functionalTestCompile 'org.seleniumhq.selenium:selenium-firefox-driver:3.4.0'
     functionalTestCompile 'org.gebish:geb-spock:1.1.1'
 
