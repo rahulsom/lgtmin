@@ -41,7 +41,7 @@ dependencies {
             "com.google.appengine:appengine-api-labs:$gaeVersion"
     compile 'org.gaelyk:gaelyk:2.2.0'
     compile 'com.google.http-client:google-http-client-appengine:1.22.0'
-    compile 'org.apache.httpcomponents:httpclient:4.5.3'
+    compile 'org.apache.httpcomponents:httpclient:4.5.13'
     compile 'org.apache.httpcomponents:httpclient:4.5.3'
 
     compile 'opensymphony:sitemesh:2.4.2'
