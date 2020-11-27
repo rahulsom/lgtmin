@@ -54,7 +54,7 @@ dependencies {
             "com.google.appengine:appengine-testing:$gaeVersion"
 
     functionalTestCompile 'io.github.bonigarcia:webdrivermanager:1.7.0'
-    functionalTestCompile 'org.seleniumhq.selenium:selenium-firefox-driver:3.4.0'
+    functionalTestCompile 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
     functionalTestCompile 'org.gebish:geb-spock:1.1.1'
 
     appengineSdk "com.google.appengine:appengine-java-sdk:$gaeVersion"
