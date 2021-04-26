@@ -1,7 +1,7 @@
 buildscript {
     ext {
         gaeVersion = '1.9.53'
-        groovyVersion = '2.4.12'
+        groovyVersion = '3.0.8'
     }
     repositories {
         jcenter()
