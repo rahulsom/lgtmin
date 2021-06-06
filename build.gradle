@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        gaeVersion = '1.9.53'
+        gaeVersion = '1.9.89'
         groovyVersion = '2.4.12'
     }
     repositories {
